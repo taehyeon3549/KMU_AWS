@@ -51,6 +51,7 @@
                 "usn": usn,
               }
             }).done(function(msg) {
+                alert("Delete User data faidddddl");
                   //If sign_up success, show up the sign in page
                   if(msg.message == 0){
                     alert("Delete User data success");
@@ -77,6 +78,7 @@
                     alert("Delete User data fail");
                     location.href = "/confirm_idcancellation";
                   }
+
               });
             }
           });

@@ -21,7 +21,7 @@
   <link href="css/sb-admin.css" rel="stylesheet">
 
   <script>
-    
+
     var today = new Date();
       today.setDate(today.getDate() - 1);
 
@@ -30,7 +30,7 @@
 
     sessionStorage['today'] = today;
     sessionStorage['tomorrow'] = tomorrow;
-     
+
   </script>
 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
@@ -46,13 +46,13 @@
         center: { lat: 32.8826247, lng: -117.2367698 },
         zoom: 15,
         mapTypeId: google.maps.MapTypeId.TERRAIN
-      }     
+      }
 
       map = new google.maps.Map(document.getElementById("map_canvas"), options);
 
       // Create markers into DOM
       var json = null;
-      
+
       /*
       $.ajax({
         'async': false,
@@ -65,7 +65,7 @@
           createMarkers(data);
         }
       });
-      */      
+      */
 
       $.ajax({
         method: "POST",
@@ -73,7 +73,7 @@
         data: {
             usn : usn,
             date : "2019-08-11",
-            tomorrow : "2019-08-13"          
+            tomorrow : "2019-08-13"
         }
       }).done(function( msg ) {
           createMarkers(msg);
@@ -81,7 +81,7 @@
           console.log(msg);
       }).fail((msg) => {
           console.log(msg);
-      });      
+      });
     };
     // Instantiate markers in the background and pass it back to the json object
     function createMarkers(markerJson) {
@@ -96,8 +96,8 @@
         //sensormark = JSON.parse(`{${sensormark}}`);
         //sensormark = JSON.parse(sensormark);
 
-        
-        contentString[i] = 
+
+        contentString[i] =
         '<div id="content">' +
           '<div id="showupAQI">' +
           '</div>' +
@@ -123,7 +123,7 @@
           '<tr>' +
           '<th> CO </th>' +
           '<th>'+sensormark['CO']+'</th>' +
-          '<th id = "aq">'+sensormark['AQ_CO']+'</th>' + 
+          '<th id = "aq">'+sensormark['AQ_CO']+'</th>' +
           '</tr>' +
           '<tr>' +
           '<th> NO2 </th>' +
@@ -152,8 +152,8 @@
           '</div>';
 
 
-        
-        
+
+
         infowindow[i] = new google.maps.InfoWindow({
           content: contentString[i]
         });
@@ -172,23 +172,23 @@
         });
 
 
-      
+
         marker[i-1].addListener('click', function () {
           //나머지 색상 원래대로 - 이전 창 자동으로 닫는거 안
-          for(var k = 0; k< length; k++){              
+          for(var k = 0; k< length; k++){
               marker[k].setOptions({
               strokeColor: '#FF0000',
               fillColor: '#FF0000',
             });
           }
           //열고
-          infowindow[i-1].open(map, marker[i-1]);        
+          infowindow[i-1].open(map, marker[i-1]);
           //색상 바꾸고
           marker[i-1].setOptions({
             strokeColor: '#000000',
             fillColor: '#000000',
-          });          
-        });   
+          });
+        });
       }
     }
 
@@ -204,9 +204,9 @@
         method: "POST",
         url: "/location",
         data: {
-            usn : usn,
-            date : today,
-            tomorrow : tomorrow          
+            "usn" : usn,
+            "date" : today,
+            "tomorrow" : tomorrow
         }
       }).done(function( msg ) {
           createMarkers(msg);
@@ -214,7 +214,7 @@
           console.log("변경");
       }).fail((msg) => {
           console.log(msg);
-      }); 
+      });
 
       console.log(object.value);
 
@@ -231,7 +231,7 @@
     //밑에 배열부분에 AQI 값만 오른쪽에 넣고 나머지 요소들은 왼쪽에 다 집어넣으면 됨
     function drawStuff(markerJson) {
       //var sensormark = markerJson[0];
-      
+
       var test ;
 
 
@@ -251,7 +251,7 @@
             ['AQI SO2', 0, 1]
       ]);
 
-     
+
 
 
       var options = {
@@ -374,19 +374,15 @@
     <div id="content-wrapper">
       <div class="container-fluid">
         <!-- Breadcrumbs-->
-        <ol class="breadcrumb">
-          <li class="breadcrumb-item">
-            <a href="#">Farm-ing</a>
-          </li>
-          <li class="breadcrumb-item active">Overview</li>
-        </ol>
+
 
         <!-- Google map-->
         <!-- 구글 맵은 이거 복붙-->
         <div class="card mb-3">
-          <div class="card-header">              
+          <div class="card-header">
             <i class="fas fa-chart-area"></i>
             AQI Map
+
             <div>
                 <!-- <input type="date" id = "datechanger" name = "datechanger" onchange="mapchange(this);"> -->
             </div>
@@ -394,7 +390,7 @@
           <div class="card-body">
             <div id="map_canvas" style="position: relative;overflow: hidden;height: 500px;"></div>
             <script async defer
-              src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDQ43_yOT-bs3fAuvRGhrlvxf9slzYC0j4&language=en&callback=initMap">              
+              src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDQ43_yOT-bs3fAuvRGhrlvxf9slzYC0j4&language=en&callback=initMap">
             </script>
             <div class='myLinkContainer'></div>
           </div>
@@ -402,10 +398,19 @@
 
         <!-- Google Chart-->
         <div class="card mb-3">
-          <div class="card-header">            
+          <div class="card-header">
             <i class="fas fa-chart-area"></i>
             Real-Time Chart
           </div>
+          <div class="form-label-group">
+              <input type="date" name = "start_date" id="start_date" class="form-control" required="required" autofocus="autofocus">
+              <label for="start_date">시작일</label>
+          </div>
+          <div class="form-label-group">
+            <input type="date" name = "end_date" id="end_date" class="form-control" required="required" autofocus="autofocus">
+            <label for="end_date">종료일</label>
+          </div>
+          
           <div class="card-body">
             <!-- 차트 그림은 이거 복붙-->
             <div id="dual_x_div" style="width: 900px; height: 500px;"></div>
