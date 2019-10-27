@@ -29,11 +29,11 @@
 
     function initMap() {
       var options = {
-        //Center : QI(Calit2)
+        //Center : QI(Calit2) -> 나중에 바꿀것
         center: { lat: 32.8826247, lng: -117.2367698 },
         zoom: 15,
         mapTypeId: google.maps.MapTypeId.TERRAIN
-      }     
+      }
 
       map = new google.maps.Map(document.getElementById("map_canvas"), options);
 
@@ -48,7 +48,7 @@
         'success': function (data) {
           createMarkers(data);
         }
-      });      
+      });
     };
 
     // Instantiate markers in the background and pass it back to the json object
@@ -63,8 +63,8 @@
         var sensormark = markerJson[i];
         sensormark = JSON.parse(`{${sensormark}}`);
 
-        
-        contentString[i] = 
+
+        contentString[i] =
         '<div id="content">' +
           '<div id="showupAQI">' +
           '</div>' +
@@ -118,8 +118,8 @@
           '</div>';
 
 
-        
-        
+
+
         infowindow[i] = new google.maps.InfoWindow({
           content: contentString[i]
         });
@@ -133,32 +133,32 @@
           map: map,
           position: { lat: sensormark.location[0], lng: sensormark.location[1] },
           center: { lat: sensormark.location[0], lng: sensormark.location[1] },
-          radius: 100
+          radius: 50
           //html: "<span class='pogo_name'>" + sensormark.name + "</a></span><br />" + sensormark.location[0] + "<br />"
         });
-      
+
+        //클릭 이벤트
         marker[i].addListener('click', function () {
           //나머지 색상 원래대로 - 이전 창 자동으로 닫는거 안됨...
-          for(var k = 0; k< length; k++){              
+          /*for(var k = 0; k< length; k++){
               marker[k].setOptions({
               strokeColor: '#FF0000',
               fillColor: '#FF0000',
             });
-          }
+          }*/
 
           //열고
-          infowindow[i].open(map, marker[i]);        
+          infowindow[i].open(map, marker[i]);
           //색상 바꾸고
-          marker[i].setOptions({
+          /*marker[i].setOptions({
             strokeColor: '#000000',
             fillColor: '#000000',
-          });
-        });   
+          });*/
+        });
       }
     }
   </script>
 </head>
-
 <body id="page-top">
   <!--IF user not login go to login page-->
   <script>
@@ -242,11 +242,7 @@
     <div id="content-wrapper">
       <div class="container-fluid">
         <!-- Breadcrumbs-->
-        <ol class="breadcrumb">
-          <li class="breadcrumb-item">
-            <a href="#">Farm-ing</a>
-          </li>
-        </ol>
+
 
         <!-- Google map-->
         <!-- 구글 맵은 이거 복붙-->
@@ -265,7 +261,7 @@
           </div>
         </div>
 
-      
+
 
       </div>
       <!-- /.container-fluid -->
