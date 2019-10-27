@@ -58,6 +58,7 @@
       var contentString = [];
       var infowindow = [];
       var marker = [];
+      var infoWindowtoggle = true;
 
       for (let i = 0; i < length; i++) {
         var sensormark = markerJson[i];
@@ -149,6 +150,7 @@
 
           //열고
           infowindow[i].open(map, marker[i]);
+
           //색상 바꾸고
           /*marker[i].setOptions({
             strokeColor: '#000000',
