@@ -170,28 +170,34 @@ final class SensorManagementModel extends BaseModel
 		$result = $sth->fetchAll();
 
 		$ssn = [];
+		$data = [];		//data는 이중 배열
 
 		//ssn 배열에 넣음
 		for($i = 0; $i < count($result); $i++){
 			$ssn[$i] = $result[$i];	
-		}
-
-		//print_r(array($ssn[0]['SSN']));
+		}		
 
 		//ssn에 해당하는 AIR 값들 불러와서 Realtime data 에 넣어주기
 		//ssn, wmac, timestamp, temperature, co_aqi, o3_aqi, no2_aqi, pm25_aqi, pm10_aqi, lat, lng, insert_time
 		// insert_time 는 입력하는 시간때
-		$sql = "SELECT a_Temperture, a_latitude, a_longitude, a_time, AQ_PM2_5, AQ_PM10, AQ_O3, AQ_CO, AQ_NO2, AQ_SO2 
+		$sql = "SELECT a_time, a_Temperture, AQ_CO, AQ_O3, AQ_NO2, AQ_PM2_5, AQ_PM10, a_latitude, a_longitude 
 				FROM `teamc-2019summer`.Air_Sensor_value WHERE a_ssn = ? LIMIT 1";
 		$sth = $this->db->prepare($sql);
 		
-		for($i = 0; $i < count($ssn); $i++){
+		for($i = 0; $i < count($ssn); $i++){			
 			$sth->execute(array($ssn[$i]['SSN']));
 			$result = $sth->fetchAll();
-			print_r($result);
+			
+			//반환 받는 값이 비었는지 있는지 체크
+			if($result != NULL){
+				//$data 에 ssn과 결과 값을 넣음
+				$data[$i][0] = $ssn[$i];
+				$data[$i][1] = $result[0];
+			}
 		}
+		print_r($data);
 
-		return $result;
+		return $data;
 
 		/*
 		$ssn = [];

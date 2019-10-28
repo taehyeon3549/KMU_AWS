@@ -300,9 +300,9 @@ final class SensorManagementController extends BaseController
 		}
 		*/
 
-		return $response->withStatus(200)
-		->withHeader('Content-Type', 'application/json')
-		->write(json_encode(NULL, JSON_NUMERIC_CHECK));
+		//return $response->withStatus(200)
+		//->withHeader('Content-Type', 'application/json')
+		//->write(json_encode(NULL, JSON_NUMERIC_CHECK));
 	}
 
 	//////////////////////////////////////////////////////////////
