@@ -31,7 +31,7 @@
 <body class="bg-dark">
   <div class="container">
     <div class="card card-register mx-auto mt-5">
-      <div class="card-header">Sign Up</div>
+      <div class="card-header">회원가입</div>
       <div class="card-body">
         <form>
           <div class="form-group">
@@ -40,7 +40,7 @@
               <?php
                 echo($email);
               ?>
-              <label for="inputEmail">Email address</label>
+              <label for="inputEmail">이메일 주소</label>
             </div>
           </div>
           <div class="form-group">
@@ -48,13 +48,13 @@
               <div class="col-md-6">
                 <div class="form-label-group">
                   <input type="text" name = "firstName" id="firstName" class="form-control" placeholder="First name" required="required" autofocus="autofocus">
-                  <label for="firstName">First name</label>
+                  <label for="firstName">성</label>
                 </div>
               </div>
               <div class="col-md-6">
                 <div class="form-label-group">
                   <input type="text" name = "lastName" id="lastName" class="form-control" placeholder="Last name" required="required">
-                  <label for="lastName">Last name</label>
+                  <label for="lastName">이름</label>
                 </div>
               </div>
             </div>
@@ -64,13 +64,13 @@
               <div class="col-md-6">
                 <div class="form-label-group">
                   <input type="password" name = "inputPassword" id="inputPassword" class="form-control" placeholder="Password" required="required">
-                  <label for="inputPassword">Password</label>
+                  <label for="inputPassword">비밀번호</label>
                 </div>
               </div>
               <div class="col-md-6">
                 <div class="form-label-group">
                   <input type="password" name = "confirmPassword" id="confirmPassword" class="form-control" placeholder="Confirm password" required="required">
-                  <label for="confirmPassword">Confirm password</label>
+                  <label for="confirmPassword">비밀번호 확인</label>
                 </div>
               </div>
             </div>
@@ -84,8 +84,8 @@
               </div>            
               <div class="col-md-6">
                 <div class="form-label-group" style="padding-bottom: 5px; padding-top: 8px;">
-                  <input type="radio" name ="gender" value ='0'>Male
-						      <input type="radio" name ="gender" value ='1'>Female						
+                  <input type="radio" name ="gender" value ='0'>남
+						      <input type="radio" name ="gender" value ='1'>여자						
                 </div>
               </div>
             </div>
@@ -95,16 +95,16 @@
               <div class="col-md-6">
                 <div class="form-label-group">
                   <input type="phone" name = "emergencycall" id="emergencycall" class="form-control" placeholder="Emergency Call" required="required">
-                  <label for="emergencycall">Emergency Call</label>
+                  <label for="emergencycall">전화번호 </label>
                 </div>
               </div>
             </div>
           </div>
-          <a class="btn btn-primary btn-block" id = "registerb">Register</a>
+          <a class="btn btn-primary btn-block" id = "registerb">등록</a>
         </form>
         <div class="text-center">
-          <a class="d-block small mt-3" href="/">Login Page</a>
-          <a class="d-block small" href="/forgot-password">Forgot Password?</a>
+          <a class="d-block small mt-3" href="/">로그인 페이지</a>
+          <a class="d-block small" href="/forgot-password">비밀번호를 잊었나요?</a>
         </div>
 
         <!-- Button Action -->
@@ -120,17 +120,17 @@
             var emergency = $('input[name = emergencycall]').val();
 
             if(firstName == ""){
-              alert("Please, Enter the firstname");
+              alert("성을 입력해 주세요.");
             }else if(lastName == ""){
-              alert("Please, Enter the lastname");
+              alert("이름을 입력해 주세요.");
             }else if(inputPassword == ""){
-              alert("Please, Enter the inputpassword");
+              alert("비밀번호를 입력해 주세요.");
             }else if(confirmPassword == ""){
-              alert("Please, Enter the comfirmpassword");
+              alert("비밀번호 확인을 입력해 주세요.");
             }else if(Birth == ""){
-              alert("Please, Enter the birth");
+              alert("생년월일을 입력해 주세요.");
             }else if(inputPassword != confirmPassword){
-              alert("Please, Enter two passwords are compared.");
+              alert("입력한 비밀번호가 일치하지 않습니다.");
             }else{
               var name = firstName.concat("", lastName);
               
@@ -149,15 +149,15 @@
               }).done(function( msg ) {
                   //If sign_up success, show up the sign in page
                   if(msg.message == 0){
-                    alert("Welcome!! Now you are our member.");
+                    alert("환영합니다!! 지금부터 우리의 회원입니다.");
                     location.href = "/";
                   }
                   if(msg.message == 1){
-                    alert("You are already have a count!!");
+                    alert("당신은 이미 우리의 회원입니다!!");
                     location.href = "/";
                   }
                   if(msg.message == 2){
-                    alert("Sorry, Could you sign up again? Server Error");
+                    alert("죄송합니다. 서버에 장애가 발생했습니다. 다시 회원가입을 진행해 주세요.");
                     location.href = "/sign_up";
                   }
               });         

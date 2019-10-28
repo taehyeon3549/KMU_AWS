@@ -43,24 +43,24 @@ class __TwigTemplate_d14d65f01c58b3720dde430a5f9a2cd1aa7849bb81840cf56ce3b78549b
       <img src=\"http://13.125.112.70/mail_iconn.png\" style=\"height: 200px;background-color: #01dea5;\">
     </div>
     <div class=\"card card-login mx-auto mt-3\" style=\"margin-top: 5px;\">
-      <div class=\"card-header\">Reset Password</div>
+      <div class=\"card-header\">비밀번호 초기화</div>
       <div class=\"card-body\">
         <div class=\"text-center mb-4\">
-          <h4>Forgot your password?</h4>
-          <p>Enter your email address and we will send you instructions on how to reset your password.</p>
+          <h4>비밀번호를 잊으셨나요?</h4>
+          <p>이메일 주소를 입력하면 비밀번호를 재설정하는 방법에 대한 방법을 보내드립니다.</p>
         </div>
         <form>
           <div class=\"form-group\">
             <div class=\"form-label-group\">
               <input type=\"email\" name = \"email\" id=\"inputEmail\" class=\"form-control\" placeholder=\"Enter email address\" required=\"required\" autofocus=\"autofocus\">
-              <label for=\"inputEmail\">Enter email address</label>
+              <label for=\"inputEmail\">이메일 주소</label>
             </div>
             <div class=\"form-label-group\">
                 <input type=\"date\" name = \"birth\" id=\"birth\" class=\"form-control\" required=\"required\" autofocus=\"autofocus\">
-                <label for=\"birth\">Enter your birth</label>
+                <label for=\"birth\">생년월일</label>
             </div>
           </div>
-          <a class=\"btn btn-primary btn-block\" id=\"repassb\">Reset Password</a>
+          <a class=\"btn btn-primary btn-block\" id=\"repassb\">비밀번호 초기화</a>
         </form>
 
         <script type=\"text/javascript\">
@@ -71,9 +71,9 @@ class __TwigTemplate_d14d65f01c58b3720dde430a5f9a2cd1aa7849bb81840cf56ce3b78549b
             var birth = \$('input[name = birth]').val();
 
             if(email == \"\"){
-              alert(\"Please, Enter the email\");
+              alert(\"이메일을 입력해 주세요.\");
             }else if(birth == \"\"){
-              alert(\"Please, Enter the birth\");
+              alert(\"생년월일을 입력해 주세요.\");
             }else{
               //send json
               \$.ajax({
@@ -86,15 +86,15 @@ class __TwigTemplate_d14d65f01c58b3720dde430a5f9a2cd1aa7849bb81840cf56ce3b78549b
               }).done(function( msg ) {
                   //If sign_up success, show up the sign in page
                   if(msg.message == 0){
-                    alert(\"We sent the reset password email to you, please check.\");
+                    alert(\"비밀번호 재설정 이메일을 보냈습니다. 확인해 주세요.\");
                     location.href = \"/\";
                   }
                   if(msg.message == 1){
-                    alert(\"You are not our member!!\");
+                    alert(\"우리의 회원이 아닙니다.!!\");
                     location.href = \"/register_email\";
                   }
                   if(msg.message == 2){
-                    alert(\"Sorry, we can't send a email to you.\\n Could you try one more?\");
+                    alert(\"죄송합ㄴ디ㅏ. 이메일을 보낼 수 없습니다.\\n 다시 하겠습니까?\");
                   }
               });
             }
@@ -102,8 +102,8 @@ class __TwigTemplate_d14d65f01c58b3720dde430a5f9a2cd1aa7849bb81840cf56ce3b78549b
         </script>
 
         <div class=\"text-center\">
-          <a class=\"d-block small mt-3\" href=\"/register_email\">Register an Account</a>
-          <a class=\"d-block small\" href=\"/\">Login Page</a>
+          <a class=\"d-block small mt-3\" href=\"/register_email\">회원가입</a>
+          <a class=\"d-block small\" href=\"/\">로그인 페이지</a>
         </div>
       </div>
     </div>
@@ -159,24 +159,24 @@ class __TwigTemplate_d14d65f01c58b3720dde430a5f9a2cd1aa7849bb81840cf56ce3b78549b
 /*       <img src="http://13.125.112.70/mail_iconn.png" style="height: 200px;background-color: #01dea5;">*/
 /*     </div>*/
 /*     <div class="card card-login mx-auto mt-3" style="margin-top: 5px;">*/
-/*       <div class="card-header">Reset Password</div>*/
+/*       <div class="card-header">비밀번호 초기화</div>*/
 /*       <div class="card-body">*/
 /*         <div class="text-center mb-4">*/
-/*           <h4>Forgot your password?</h4>*/
-/*           <p>Enter your email address and we will send you instructions on how to reset your password.</p>*/
+/*           <h4>비밀번호를 잊으셨나요?</h4>*/
+/*           <p>이메일 주소를 입력하면 비밀번호를 재설정하는 방법에 대한 방법을 보내드립니다.</p>*/
 /*         </div>*/
 /*         <form>*/
 /*           <div class="form-group">*/
 /*             <div class="form-label-group">*/
 /*               <input type="email" name = "email" id="inputEmail" class="form-control" placeholder="Enter email address" required="required" autofocus="autofocus">*/
-/*               <label for="inputEmail">Enter email address</label>*/
+/*               <label for="inputEmail">이메일 주소</label>*/
 /*             </div>*/
 /*             <div class="form-label-group">*/
 /*                 <input type="date" name = "birth" id="birth" class="form-control" required="required" autofocus="autofocus">*/
-/*                 <label for="birth">Enter your birth</label>*/
+/*                 <label for="birth">생년월일</label>*/
 /*             </div>*/
 /*           </div>*/
-/*           <a class="btn btn-primary btn-block" id="repassb">Reset Password</a>*/
+/*           <a class="btn btn-primary btn-block" id="repassb">비밀번호 초기화</a>*/
 /*         </form>*/
 /* */
 /*         <script type="text/javascript">*/
@@ -187,9 +187,9 @@ class __TwigTemplate_d14d65f01c58b3720dde430a5f9a2cd1aa7849bb81840cf56ce3b78549b
 /*             var birth = $('input[name = birth]').val();*/
 /* */
 /*             if(email == ""){*/
-/*               alert("Please, Enter the email");*/
+/*               alert("이메일을 입력해 주세요.");*/
 /*             }else if(birth == ""){*/
-/*               alert("Please, Enter the birth");*/
+/*               alert("생년월일을 입력해 주세요.");*/
 /*             }else{*/
 /*               //send json*/
 /*               $.ajax({*/
@@ -202,15 +202,15 @@ class __TwigTemplate_d14d65f01c58b3720dde430a5f9a2cd1aa7849bb81840cf56ce3b78549b
 /*               }).done(function( msg ) {*/
 /*                   //If sign_up success, show up the sign in page*/
 /*                   if(msg.message == 0){*/
-/*                     alert("We sent the reset password email to you, please check.");*/
+/*                     alert("비밀번호 재설정 이메일을 보냈습니다. 확인해 주세요.");*/
 /*                     location.href = "/";*/
 /*                   }*/
 /*                   if(msg.message == 1){*/
-/*                     alert("You are not our member!!");*/
+/*                     alert("우리의 회원이 아닙니다.!!");*/
 /*                     location.href = "/register_email";*/
 /*                   }*/
 /*                   if(msg.message == 2){*/
-/*                     alert("Sorry, we can't send a email to you.\n Could you try one more?");*/
+/*                     alert("죄송합ㄴ디ㅏ. 이메일을 보낼 수 없습니다.\n 다시 하겠습니까?");*/
 /*                   }*/
 /*               });*/
 /*             }*/
@@ -218,8 +218,8 @@ class __TwigTemplate_d14d65f01c58b3720dde430a5f9a2cd1aa7849bb81840cf56ce3b78549b
 /*         </script>*/
 /* */
 /*         <div class="text-center">*/
-/*           <a class="d-block small mt-3" href="/register_email">Register an Account</a>*/
-/*           <a class="d-block small" href="/">Login Page</a>*/
+/*           <a class="d-block small mt-3" href="/register_email">회원가입</a>*/
+/*           <a class="d-block small" href="/">로그인 페이지</a>*/
 /*         </div>*/
 /*       </div>*/
 /*     </div>*/

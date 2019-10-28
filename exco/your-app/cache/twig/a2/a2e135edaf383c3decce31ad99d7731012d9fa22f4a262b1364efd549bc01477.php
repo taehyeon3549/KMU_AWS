@@ -49,7 +49,7 @@ class __TwigTemplate_39bed4abda6a040347657946f96b97d801e7b670c5d49b4bf82472a28dd
 <body class=\"bg-dark\">
   <div class=\"container\">
     <div class=\"card card-register mx-auto mt-5\">
-      <div class=\"card-header\">Sign Up</div>
+      <div class=\"card-header\">회원가입</div>
       <div class=\"card-body\">
         <form>
           <div class=\"form-group\">
@@ -61,7 +61,7 @@ class __TwigTemplate_39bed4abda6a040347657946f96b97d801e7b670c5d49b4bf82472a28dd
               <?php
                 echo(\$email);
               ?>
-              <label for=\"inputEmail\">Email address</label>
+              <label for=\"inputEmail\">이메일 주소</label>
             </div>
           </div>
           <div class=\"form-group\">
@@ -69,13 +69,13 @@ class __TwigTemplate_39bed4abda6a040347657946f96b97d801e7b670c5d49b4bf82472a28dd
               <div class=\"col-md-6\">
                 <div class=\"form-label-group\">
                   <input type=\"text\" name = \"firstName\" id=\"firstName\" class=\"form-control\" placeholder=\"First name\" required=\"required\" autofocus=\"autofocus\">
-                  <label for=\"firstName\">First name</label>
+                  <label for=\"firstName\">성</label>
                 </div>
               </div>
               <div class=\"col-md-6\">
                 <div class=\"form-label-group\">
                   <input type=\"text\" name = \"lastName\" id=\"lastName\" class=\"form-control\" placeholder=\"Last name\" required=\"required\">
-                  <label for=\"lastName\">Last name</label>
+                  <label for=\"lastName\">이름</label>
                 </div>
               </div>
             </div>
@@ -85,13 +85,13 @@ class __TwigTemplate_39bed4abda6a040347657946f96b97d801e7b670c5d49b4bf82472a28dd
               <div class=\"col-md-6\">
                 <div class=\"form-label-group\">
                   <input type=\"password\" name = \"inputPassword\" id=\"inputPassword\" class=\"form-control\" placeholder=\"Password\" required=\"required\">
-                  <label for=\"inputPassword\">Password</label>
+                  <label for=\"inputPassword\">비밀번호</label>
                 </div>
               </div>
               <div class=\"col-md-6\">
                 <div class=\"form-label-group\">
                   <input type=\"password\" name = \"confirmPassword\" id=\"confirmPassword\" class=\"form-control\" placeholder=\"Confirm password\" required=\"required\">
-                  <label for=\"confirmPassword\">Confirm password</label>
+                  <label for=\"confirmPassword\">비밀번호 확인</label>
                 </div>
               </div>
             </div>
@@ -105,8 +105,8 @@ class __TwigTemplate_39bed4abda6a040347657946f96b97d801e7b670c5d49b4bf82472a28dd
               </div>            
               <div class=\"col-md-6\">
                 <div class=\"form-label-group\" style=\"padding-bottom: 5px; padding-top: 8px;\">
-                  <input type=\"radio\" name =\"gender\" value ='0'>Male
-\t\t\t\t\t\t      <input type=\"radio\" name =\"gender\" value ='1'>Female\t\t\t\t\t\t
+                  <input type=\"radio\" name =\"gender\" value ='0'>남
+\t\t\t\t\t\t      <input type=\"radio\" name =\"gender\" value ='1'>여자\t\t\t\t\t\t
                 </div>
               </div>
             </div>
@@ -116,16 +116,16 @@ class __TwigTemplate_39bed4abda6a040347657946f96b97d801e7b670c5d49b4bf82472a28dd
               <div class=\"col-md-6\">
                 <div class=\"form-label-group\">
                   <input type=\"phone\" name = \"emergencycall\" id=\"emergencycall\" class=\"form-control\" placeholder=\"Emergency Call\" required=\"required\">
-                  <label for=\"emergencycall\">Emergency Call</label>
+                  <label for=\"emergencycall\">전화번호 </label>
                 </div>
               </div>
             </div>
           </div>
-          <a class=\"btn btn-primary btn-block\" id = \"registerb\">Register</a>
+          <a class=\"btn btn-primary btn-block\" id = \"registerb\">등록</a>
         </form>
         <div class=\"text-center\">
-          <a class=\"d-block small mt-3\" href=\"/\">Login Page</a>
-          <a class=\"d-block small\" href=\"/forgot-password\">Forgot Password?</a>
+          <a class=\"d-block small mt-3\" href=\"/\">로그인 페이지</a>
+          <a class=\"d-block small\" href=\"/forgot-password\">비밀번호를 잊었나요?</a>
         </div>
 
         <!-- Button Action -->
@@ -137,7 +137,7 @@ class __TwigTemplate_39bed4abda6a040347657946f96b97d801e7b670c5d49b4bf82472a28dd
             var inputPassword = \$('input[name = inputPassword]').val();
             var confirmPassword = \$('input[name = confirmPassword]').val();
             var Birth = \$('input[name = Birth]').val();
-            var gender = \$('input[name=gender]:checked').val();
+            var gender = \$('input[name=gendeㅂㅁr]:checked').val();
             var emergency = \$('input[name = emergencycall]').val();
 
             if(firstName == \"\"){
@@ -251,7 +251,7 @@ class __TwigTemplate_39bed4abda6a040347657946f96b97d801e7b670c5d49b4bf82472a28dd
 /* <body class="bg-dark">*/
 /*   <div class="container">*/
 /*     <div class="card card-register mx-auto mt-5">*/
-/*       <div class="card-header">Sign Up</div>*/
+/*       <div class="card-header">회원가입</div>*/
 /*       <div class="card-body">*/
 /*         <form>*/
 /*           <div class="form-group">*/
@@ -260,7 +260,7 @@ class __TwigTemplate_39bed4abda6a040347657946f96b97d801e7b670c5d49b4bf82472a28dd
 /*               <?php*/
 /*                 echo($email);*/
 /*               ?>*/
-/*               <label for="inputEmail">Email address</label>*/
+/*               <label for="inputEmail">이메일 주소</label>*/
 /*             </div>*/
 /*           </div>*/
 /*           <div class="form-group">*/
@@ -268,13 +268,13 @@ class __TwigTemplate_39bed4abda6a040347657946f96b97d801e7b670c5d49b4bf82472a28dd
 /*               <div class="col-md-6">*/
 /*                 <div class="form-label-group">*/
 /*                   <input type="text" name = "firstName" id="firstName" class="form-control" placeholder="First name" required="required" autofocus="autofocus">*/
-/*                   <label for="firstName">First name</label>*/
+/*                   <label for="firstName">성</label>*/
 /*                 </div>*/
 /*               </div>*/
 /*               <div class="col-md-6">*/
 /*                 <div class="form-label-group">*/
 /*                   <input type="text" name = "lastName" id="lastName" class="form-control" placeholder="Last name" required="required">*/
-/*                   <label for="lastName">Last name</label>*/
+/*                   <label for="lastName">이름</label>*/
 /*                 </div>*/
 /*               </div>*/
 /*             </div>*/
@@ -284,13 +284,13 @@ class __TwigTemplate_39bed4abda6a040347657946f96b97d801e7b670c5d49b4bf82472a28dd
 /*               <div class="col-md-6">*/
 /*                 <div class="form-label-group">*/
 /*                   <input type="password" name = "inputPassword" id="inputPassword" class="form-control" placeholder="Password" required="required">*/
-/*                   <label for="inputPassword">Password</label>*/
+/*                   <label for="inputPassword">비밀번호</label>*/
 /*                 </div>*/
 /*               </div>*/
 /*               <div class="col-md-6">*/
 /*                 <div class="form-label-group">*/
 /*                   <input type="password" name = "confirmPassword" id="confirmPassword" class="form-control" placeholder="Confirm password" required="required">*/
-/*                   <label for="confirmPassword">Confirm password</label>*/
+/*                   <label for="confirmPassword">비밀번호 확인</label>*/
 /*                 </div>*/
 /*               </div>*/
 /*             </div>*/
@@ -304,8 +304,8 @@ class __TwigTemplate_39bed4abda6a040347657946f96b97d801e7b670c5d49b4bf82472a28dd
 /*               </div>            */
 /*               <div class="col-md-6">*/
 /*                 <div class="form-label-group" style="padding-bottom: 5px; padding-top: 8px;">*/
-/*                   <input type="radio" name ="gender" value ='0'>Male*/
-/* 						      <input type="radio" name ="gender" value ='1'>Female						*/
+/*                   <input type="radio" name ="gender" value ='0'>남*/
+/* 						      <input type="radio" name ="gender" value ='1'>여자						*/
 /*                 </div>*/
 /*               </div>*/
 /*             </div>*/
@@ -315,16 +315,16 @@ class __TwigTemplate_39bed4abda6a040347657946f96b97d801e7b670c5d49b4bf82472a28dd
 /*               <div class="col-md-6">*/
 /*                 <div class="form-label-group">*/
 /*                   <input type="phone" name = "emergencycall" id="emergencycall" class="form-control" placeholder="Emergency Call" required="required">*/
-/*                   <label for="emergencycall">Emergency Call</label>*/
+/*                   <label for="emergencycall">전화번호 </label>*/
 /*                 </div>*/
 /*               </div>*/
 /*             </div>*/
 /*           </div>*/
-/*           <a class="btn btn-primary btn-block" id = "registerb">Register</a>*/
+/*           <a class="btn btn-primary btn-block" id = "registerb">등록</a>*/
 /*         </form>*/
 /*         <div class="text-center">*/
-/*           <a class="d-block small mt-3" href="/">Login Page</a>*/
-/*           <a class="d-block small" href="/forgot-password">Forgot Password?</a>*/
+/*           <a class="d-block small mt-3" href="/">로그인 페이지</a>*/
+/*           <a class="d-block small" href="/forgot-password">비밀번호를 잊었나요?</a>*/
 /*         </div>*/
 /* */
 /*         <!-- Button Action -->*/
@@ -336,7 +336,7 @@ class __TwigTemplate_39bed4abda6a040347657946f96b97d801e7b670c5d49b4bf82472a28dd
 /*             var inputPassword = $('input[name = inputPassword]').val();*/
 /*             var confirmPassword = $('input[name = confirmPassword]').val();*/
 /*             var Birth = $('input[name = Birth]').val();*/
-/*             var gender = $('input[name=gender]:checked').val();*/
+/*             var gender = $('input[name=gendeㅂㅁr]:checked').val();*/
 /*             var emergency = $('input[name = emergencycall]').val();*/
 /* */
 /*             if(firstName == ""){*/

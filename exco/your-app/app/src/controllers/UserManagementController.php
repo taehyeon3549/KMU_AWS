@@ -390,6 +390,10 @@ final class UserManagementController extends BaseController
 		//Hashing the password
 		$certi['password'] = password_hash($password, PASSWORD_DEFAULT);
 
+		//print_r("TESTING");
+		//print_r($certi['usn']);
+		//print_r($certi['password']);
+
 		if($this->UserManagementModel->changePassByusn($certi)){
 			//change success
 			$result['header'] = "Password change success";

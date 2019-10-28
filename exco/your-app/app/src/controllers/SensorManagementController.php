@@ -249,6 +249,64 @@ final class SensorManagementController extends BaseController
 		->write(json_encode($result, JSON_NUMERIC_CHECK));
 	}
 
+	//2019-10-27
+	// 수정
+	//RealData	
+	public function Realdata(Request $request, Response $response, $args)
+	{
+		$senosr = [];
+
+		$sensor['ssn'] = $request->getParsedBody()['ssn'];
+		$sensor['sensor_name'] = $request->getParsedBody()['sensor_name'];
+
+		$data = $this->SensorManagementModel->Realdata($sensor);
+		/*
+		$num = count($data);
+
+		if($num > 0){
+			$result['header'] = "success";
+			$result['message'] = [];
+			
+			$str = explode('_', $sensor['sensor_name']);
+
+			if($str[0] == "Air"){
+				$result['message']['PM2_5'] = $data['a_PM2_5'];
+				$result['message']['PM10'] = $data['a_PM10'];
+				$result['message']['o3'] = $data['a_O3'];
+				$result['message']['co'] = $data['a_CO'];
+				$result['message']['no2'] = $data['a_NO2'];
+				$result['message']['so2'] = $data['a_SO2'];
+				$result['message']['temperture'] = $data['a_Temperture'];
+				$result['message']['latitude'] = $data['a_latitude'];
+				$result['message']['longitude'] = $data['a_longitude'];
+				$result['message']['time'] = $data['a_time'];
+				$result['message']['aq_pm2_5'] = $data['AQ_PM2_5'];
+				$result['message']['aq_o3'] = $data['AQ_O3'];
+				$result['message']['aq_co'] = $data['AQ_CO'];
+				$result['message']['aq_no2'] = $data['AQ_NO2'];
+				$result['message']['aq_so2'] = $data['AQ_SO2'];
+
+				$result['result'] = "0";
+			}else{
+				$result['message']['heartrate'] = $data['p_heartrate'];
+				$result['message']['rr_interval'] = $data['p_RR_interval'];
+				$result['message']['latitude'] = $data['p_longitude'];
+				$result['message']['longitude'] = $data['p_longitude'];
+				$result['message']['time'] = $data['p_time'];
+			}	
+		}else{
+			$result['header'] = "fail";
+			$result['message'] = "1";	
+		}
+		*/
+
+		return $response->withStatus(200)
+		->withHeader('Content-Type', 'application/json')
+		->write(json_encode(NULL, JSON_NUMERIC_CHECK));
+	}
+
+	//////////////////////////////////////////////////////////////
+
 	//showHistodata	
 	public function showHistodata(Request $request, Response $response, $args)
 	{

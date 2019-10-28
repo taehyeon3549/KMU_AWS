@@ -151,6 +151,11 @@ $app->post('/insertPolarSensor', 'App\Controller\SensorManagementController:inse
 $app->post('/showRealdata', 'App\Controller\SensorManagementController:showRealdata')
 ->setName('showRealdata');
 
+// 2019-10-27  DRAW
+//show realtime data_ v2
+$app->post('/Realdata', 'App\Controller\SensorManagementController:Realdata')
+->setName('Realdata');
+
 //Show historical value
 $app->post('/showHistodata', 'App\Controller\SensorManagementController:showHistodata')
 ->setName('showHistodata');

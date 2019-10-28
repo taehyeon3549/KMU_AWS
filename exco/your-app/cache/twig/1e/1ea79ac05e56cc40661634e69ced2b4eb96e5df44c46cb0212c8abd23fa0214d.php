@@ -27,7 +27,7 @@ class __TwigTemplate_7c7fa7cea38cd491fbc0c6de1c5461c7c9d7bddeee63302dec4107377aa
   <meta name=\"description\" content=\"\">
   <meta name=\"author\" content=\"\">
 
-  <title>Sign Up</title>
+  <title>회원가입</title>
 
   <!-- Custom fonts for this template-->
   <link href=\"vendor/fontawesome-free/css/all.min.css\" rel=\"stylesheet\" type=\"text/css\">
@@ -43,10 +43,10 @@ class __TwigTemplate_7c7fa7cea38cd491fbc0c6de1c5461c7c9d7bddeee63302dec4107377aa
       <img src=\"http://teamc-iot.calit2.net/mail_iconn.png\" style=\"height: 200px;background-color: #01dea5;\">
     </div>
     <div class=\"card card-login mx-auto mt-5\" style=\"margin-top: 5px;\">
-      <div class=\"card-header\">Sign Up</div>
+      <div class=\"card-header\">회원가입</div>
       <div class=\"card-body\">
         <div class=\"text-center mb-4\">
-          <p>We send certification url to your email address! Please check your email for sign up!</p>
+          <p>우리는 당신의 이메일 주소로 인증 URL을 보냈습니다! 가입 이메일을 확인하세요.</p>
         </div>
         <form>
           <div class=\"form-group\">
@@ -91,7 +91,7 @@ class __TwigTemplate_7c7fa7cea38cd491fbc0c6de1c5461c7c9d7bddeee63302dec4107377aa
 /*   <meta name="description" content="">*/
 /*   <meta name="author" content="">*/
 /* */
-/*   <title>Sign Up</title>*/
+/*   <title>회원가입</title>*/
 /* */
 /*   <!-- Custom fonts for this template-->*/
 /*   <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">*/
@@ -107,10 +107,10 @@ class __TwigTemplate_7c7fa7cea38cd491fbc0c6de1c5461c7c9d7bddeee63302dec4107377aa
 /*       <img src="http://teamc-iot.calit2.net/mail_iconn.png" style="height: 200px;background-color: #01dea5;">*/
 /*     </div>*/
 /*     <div class="card card-login mx-auto mt-5" style="margin-top: 5px;">*/
-/*       <div class="card-header">Sign Up</div>*/
+/*       <div class="card-header">회원가입</div>*/
 /*       <div class="card-body">*/
 /*         <div class="text-center mb-4">*/
-/*           <p>We send certification url to your email address! Please check your email for sign up!</p>*/
+/*           <p>우리는 당신의 이메일 주소로 인증 URL을 보냈습니다! 가입 이메일을 확인하세요.</p>*/
 /*         </div>*/
 /*         <form>*/
 /*           <div class="form-group">*/

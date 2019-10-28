@@ -160,6 +160,59 @@ final class SensorManagementModel extends BaseModel
 		return $result[0];
 	}
 
+	//RealData 2019-10-27
+	//show realData
+	public function Realdata($sensor){
+		//ssn 다 가져오기
+		$sql = "SELECT SSN FROM Sensor";
+		$sth = $this->db->prepare($sql);
+		$sth->execute();
+		$result = $sth->fetchAll();
+
+		$ssn = [];
+
+		//ssn 배열에 넣음
+		for($i = 0; $i < count($result); $i++){
+			$ssn[$i] = $result[$i];	
+		}
+
+		//print_r(array($ssn[0]['SSN']));
+
+		//ssn에 해당하는 AIR 값들 불러와서 Realtime data 에 넣어주기
+		//ssn, wmac, timestamp, temperature, co_aqi, o3_aqi, no2_aqi, pm25_aqi, pm10_aqi, lat, lng, insert_time
+		// insert_time 는 입력하는 시간때
+		$sql = "SELECT a_Temperture, a_latitude, a_longitude, a_time, AQ_PM2_5, AQ_PM10, AQ_O3, AQ_CO, AQ_NO2, AQ_SO2 
+				FROM `teamc-2019summer`.Air_Sensor_value WHERE a_ssn = ? LIMIT 1";
+		$sth = $this->db->prepare($sql);
+		
+		for($i = 0; $i < count($ssn); $i++){
+			$sth->execute(array($ssn[$i]['SSN']));
+			$result = $sth->fetchAll();
+			print_r($result);
+		}
+
+		return $result;
+
+		/*
+		$ssn = [];
+
+		$str = explode('_', $sensor['sensor_name']);
+
+		if($str[0] == "Air"){
+			$sql = "SELECT * FROM Air_Sensor_value WHERE a_ssn = ? ORDER BY a_no DESC LIMIT 1";
+		}else{
+			$sql = "SELECT * FROM Polar_Sensor_value WHERE p_ssn = ? ORDER BY p_no DESC LIMIT 1";
+		}
+		$sth = $this->db->prepare($sql);
+
+		$sth->execute(array($sensor['ssn']));
+
+		$result = $sth->fetchAll();
+		
+		return $result[0];
+		*/
+	}
+
 	//show histodata
 	public function showHistodata($sensor){
 		$str = explode('_', $sensor['sensor_name']);
@@ -225,8 +278,10 @@ final class SensorManagementModel extends BaseModel
 		// 		group by a_latitude, a_longitude;
 		// 		";
 		
+		//2019-10-27 between으로 변경 성철
+		
 		$sql = "SELECT *, max(AQ_PM2_5) as AQ_PM2_5, MAX(AQ_O3) as AQ_O3, MAX(AQ_CO) as AQ_CO, MAX(AQ_NO2) as AQ_NO2, MAX(AQ_SO2) as AQ_SO2
-		FROM Air_Sensor_value where a_time >= ? and a_time < ? and a_latitude like ? and a_longitude like ? group by a_latitude, a_longitude;";
+		FROM Air_Sensor_value where a_time between ? and ? and a_latitude like ? and a_longitude like ? group by a_latitude, a_longitude;";
 		
 		$sth = $this->db->prepare($sql);
 

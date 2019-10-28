@@ -43,10 +43,10 @@ class __TwigTemplate_580b9942e00b8ac7662fcb608a9774a3664b4ee2e6bc624a9c4c2352226
       <img src=\"http://13.125.112.70/mail_iconn.png\" style=\"height: 200px;background-color: #01dea5;\">
     </div>
     <div class=\"card card-login mx-auto mt-5\" style=\"margin-top: 5px;\">
-      <div class=\"card-header\">Sign Up</div>
+      <div class=\"card-header\">회원가입</div>
       <div class=\"card-body\">
         <div class=\"mb-4\">
-          <p>Enter your email address to check duplication</p>
+          <p>중복 확인을 위해서 이메일 주소를 입력하세요.</p>
         </div>
         <form>
           <div class=\"form-group\">
@@ -54,10 +54,10 @@ class __TwigTemplate_580b9942e00b8ac7662fcb608a9774a3664b4ee2e6bc624a9c4c2352226
           <div class=\"form-group\">
             <div class=\"form-label-group\">
               <input type=\"email\" name= \"email\" id=\"inputEmail\" class=\"form-control\" placeholder=\"Email address\" required=\"required\">
-              <label for=\"inputEmail\">Email address</label>
+              <label for=\"inputEmail\">이메일 주소</label>
             </div>
           </div>
-          <a class=\"btn btn-primary btn-block\" id=\"verifyb\">Verify</a>
+          <a class=\"btn btn-primary btn-block\" id=\"verifyb\">확인</a>
         </form>
 
         <script type=\"text/javascript\">
@@ -79,11 +79,11 @@ class __TwigTemplate_580b9942e00b8ac7662fcb608a9774a3664b4ee2e6bc624a9c4c2352226
               }).done(function( msg ) {
                   //If sign_up success, show up the sign in page
                   if(msg.message == 0){
-                    alert(\"We sent the certification email to you, please check.\");
+                    alert(\"인증 이메일을 보냈습니다. 확인하십시오.\");
                     location.href = \"/register_email_message\";
                   }
                   if(msg.message == 1){
-                    alert(\"You already have account!!\");
+                    alert(\"이미 계정이 있습니다.!!\");
                     location.href = \"/\";
                   }
               });
@@ -92,8 +92,8 @@ class __TwigTemplate_580b9942e00b8ac7662fcb608a9774a3664b4ee2e6bc624a9c4c2352226
         </script>
 
         <div class=\"text-center\">
-          <a class=\"d-block small mt-3\" href=\"/\">Login Page</a>
-          <a class=\"d-block small\" href=\"/forgot-password\">Forgot Password?</a>
+          <a class=\"d-block small mt-3\" href=\"/\">로그인 페이지</a>
+          <a class=\"d-block small\" href=\"/forgot-password\">비밀번호를 잊으셨나요?</a>
         </div>
       </div>
     </div>
@@ -149,10 +149,10 @@ class __TwigTemplate_580b9942e00b8ac7662fcb608a9774a3664b4ee2e6bc624a9c4c2352226
 /*       <img src="http://13.125.112.70/mail_iconn.png" style="height: 200px;background-color: #01dea5;">*/
 /*     </div>*/
 /*     <div class="card card-login mx-auto mt-5" style="margin-top: 5px;">*/
-/*       <div class="card-header">Sign Up</div>*/
+/*       <div class="card-header">회원가입</div>*/
 /*       <div class="card-body">*/
 /*         <div class="mb-4">*/
-/*           <p>Enter your email address to check duplication</p>*/
+/*           <p>중복 확인을 위해서 이메일 주소를 입력하세요.</p>*/
 /*         </div>*/
 /*         <form>*/
 /*           <div class="form-group">*/
@@ -160,10 +160,10 @@ class __TwigTemplate_580b9942e00b8ac7662fcb608a9774a3664b4ee2e6bc624a9c4c2352226
 /*           <div class="form-group">*/
 /*             <div class="form-label-group">*/
 /*               <input type="email" name= "email" id="inputEmail" class="form-control" placeholder="Email address" required="required">*/
-/*               <label for="inputEmail">Email address</label>*/
+/*               <label for="inputEmail">이메일 주소</label>*/
 /*             </div>*/
 /*           </div>*/
-/*           <a class="btn btn-primary btn-block" id="verifyb">Verify</a>*/
+/*           <a class="btn btn-primary btn-block" id="verifyb">확인</a>*/
 /*         </form>*/
 /* */
 /*         <script type="text/javascript">*/
@@ -185,11 +185,11 @@ class __TwigTemplate_580b9942e00b8ac7662fcb608a9774a3664b4ee2e6bc624a9c4c2352226
 /*               }).done(function( msg ) {*/
 /*                   //If sign_up success, show up the sign in page*/
 /*                   if(msg.message == 0){*/
-/*                     alert("We sent the certification email to you, please check.");*/
+/*                     alert("인증 이메일을 보냈습니다. 확인하십시오.");*/
 /*                     location.href = "/register_email_message";*/
 /*                   }*/
 /*                   if(msg.message == 1){*/
-/*                     alert("You already have account!!");*/
+/*                     alert("이미 계정이 있습니다.!!");*/
 /*                     location.href = "/";*/
 /*                   }*/
 /*               });*/
@@ -198,8 +198,8 @@ class __TwigTemplate_580b9942e00b8ac7662fcb608a9774a3664b4ee2e6bc624a9c4c2352226
 /*         </script>*/
 /* */
 /*         <div class="text-center">*/
-/*           <a class="d-block small mt-3" href="/">Login Page</a>*/
-/*           <a class="d-block small" href="/forgot-password">Forgot Password?</a>*/
+/*           <a class="d-block small mt-3" href="/">로그인 페이지</a>*/
+/*           <a class="d-block small" href="/forgot-password">비밀번호를 잊으셨나요?</a>*/
 /*         </div>*/
 /*       </div>*/
 /*     </div>*/

@@ -91,7 +91,7 @@ class __TwigTemplate_0c6eb9c30d1296b4fd0c0ebb66e5d0f0848b4d524df29b40c482fccf27a
   </script>
   <nav class=\"navbar navbar-expand navbar-dark bg-dark static-top\">
       <img src=\"http://teamc-iot.calit2.net/mail_iconn.png\" style=\"height: 48px; width:100px;background-color: #01dea5;\">
-    <a class=\"navbar-brand mr-1\" href=\"/main\">Farm-ing</a>
+    <a class=\"navbar-brand mr-1\" href=\"/maps\">Farm-ing</a>
     <button class=\"btn btn-link btn-sm text-white order-1 order-sm-0\" id=\"sidebarToggle\" href=\"#\">
       <i class=\"fas fa-bars\"></i>
     </button>
@@ -122,7 +122,7 @@ class __TwigTemplate_0c6eb9c30d1296b4fd0c0ebb66e5d0f0848b4d524df29b40c482fccf27a
             </script>
           </a>!!
           <div class=\"dropdown-divider\"></div>
-          <a class=\"dropdown-item\" data-toggle=\"modal\" data-target=\"#logoutModal\">Logout</a>
+          <a class=\"dropdown-item\" data-toggle=\"modal\" data-target=\"#logoutModal\">로그아웃</a>
         </div>
       </li>
     </ul>
@@ -131,35 +131,36 @@ class __TwigTemplate_0c6eb9c30d1296b4fd0c0ebb66e5d0f0848b4d524df29b40c482fccf27a
   <div id=\"wrapper\">
     <!-- Sidebar -->
     <ul class=\"sidebar navbar-nav\">
+        <li class=\"nav-item\">
+            <a class=\"nav-link\" href=\"/maps\">
+              <i class=\"fas fa-fw fa-chart-area\"></i>
+              <span>실시간 데이터 조회</span></a>
+          </li>
       <li class=\"nav-item\">
         <a class=\"nav-link\" href=\"/main\">
           <i class=\"fas fa-fw fa-tachometer-alt\"></i>
-          <span>Main</span>
+          <span>과거 데이터 조회</span>
         </a>
       </li>
       <li class=\"nav-item dropdown active\">
         <a class=\"nav-link dropdown-toggle\" href=\"#\" id=\"pagesDropdown\" role=\"button\" data-toggle=\"dropdown\"
           aria-haspopup=\"true\" aria-expanded=\"false\">
           <i class=\"fas fa-fw fa-folder\"></i>
-          <span>Information</span>
+          <span>회원정보</span>
         </a>
         <div class=\"dropdown-menu\" aria-labelledby=\"pagesDropdown\">
-          <a class=\"dropdown-item\" id=\"myaccountb\" href=\"/myaccount\">My Account</a>
-          <!-- <a class=\"dropdown-item\" href=\"/change_password\">Change Password</a> -->
-          <a class=\"dropdown-item\" id=\"signoutb\" href=\"#\" data-toggle=\"modal\" data-target=\"#logoutModal\">Log Out</a>
-          <a class=\"dropdown-item\" href=\"/change_idcancellation\">ID Cancellation</a>
-        </div>
+            <a class=\"dropdown-item\" id=\"myaccountb\" href=\"/myaccount\">나의 계정</a>
+            <a class=\"dropdown-item\" href=\"/change_password\">비밀번호 변경</a>
+            <a class=\"dropdown-item\" id=\"signoutb\" href=\"#\" data-toggle=\"modal\" data-target=\"#logoutModal\">로그아웃</a>
+            <a class=\"dropdown-item\" href=\"/change_idcancellation\">회원탈퇴</a>
+          </div>
       </li>
-      <li class=\"nav-item\">
+      <!--<li class=\"nav-item\">
         <a class=\"nav-link\" href=\"/charts\">
           <i class=\"fas fa-fw fa-chart-area\"></i>
           <span>Charts</span></a>
-      </li>
-      <li class=\"nav-item\">
-        <a class=\"nav-link\" href=\"/maps\">
-          <i class=\"fas fa-fw fa-chart-area\"></i>
-          <span>Map</span></a>
-      </li>
+      </li>-->
+
     </ul>
 
     <div id=\"content-wrapper\">
@@ -168,7 +169,7 @@ class __TwigTemplate_0c6eb9c30d1296b4fd0c0ebb66e5d0f0848b4d524df29b40c482fccf27a
           <div class=\"portlet light profile-sidebar-portlet bordered\">
 
             <div class=\"profile-usertitle\">
-              <div class=\"profile-usertitle-name\"><br><br>
+              <div class=\"profile-usertitle-name\">
                 <h3>Profile </h3>
               </div>
             </div>
@@ -185,37 +186,37 @@ class __TwigTemplate_0c6eb9c30d1296b4fd0c0ebb66e5d0f0848b4d524df29b40c482fccf27a
                   <div role=\"tabpanel\" class=\"tab-pane active\" id=\"home\">
                     <form>
                       <div class=\"form-group\">
-                        <label for=\"inputName\">Name</label>
+                        <label for=\"inputName\">성명</label>
                         <P><input type=\"text\" id=\"inputName\" class=\"form-control\" value=\"Name\"></P>
                       </div>
                       <div class=\"form-group\">
-                        <label for=\"inputemail\">Email</label>
+                        <label for=\"inputemail\">이메일</label>
                         <p><input type=\"text\" class=\"form-control\" id=\"inputemail\" value=\"email\"></p> 
                       </div>
                       <div class=\"form-group\">
-                        <label for=\"inputPassword\">Password</label>
+                        <label for=\"inputPassword\">비밀번호</label>
                         <input type=\"password\" name=\"inputPassword\" id=\"inputPassword\" class=\"form-control\"
-                          placeholder=\"Password\" required=\"required\">
+                          placeholder=\"비밀번호\" required=\"required\">
                       </div>
                       <div class=\"form-group\">
-                        <label for=\"confirmPassword\">Confirm password</label>
+                        <label for=\"confirmPassword\">비밀번호 확인</label>
                         <input type=\"password\" name=\"confirmPassword\" id=\"confirmPassword\" class=\"form-control\"
-                          placeholder=\"Confirm password\" required=\"required\">
+                          placeholder=\"비밀번호 확인\" required=\"required\">
                       </div>
                       <div class=\"form-group\">
-                        <label for=\"exampleInputEmail1\">Birth</label>
+                        <label for=\"exampleInputEmail1\">생년월일</label>
                         <input type=\"text\" class=\"form-control\" id=\"inputbirth\" placeholder=\"Birth\">
                       </div>
                       <div class=\"form-group\">
-                        <label for=\"emergencycall\">Emergency Call</label>
+                        <label for=\"emergencycall\">전화번호</label>
                         <input type=\"phone\" name=\"emergencycall\" id=\"inputemergency\" class=\"form-control\"
                           placeholder=\"Emergency Call\">
                       </div>
                       <div class=\"form-group\">
-                        <label for=\"exampleInputPassword1\">Gender</label>
+                        <label for=\"exampleInputPassword1\">성별</label>
                         <input type=\"text\" class=\"form-control\" id=\"inputgender\" placeholder=\"Gender\">
                       </div>
-                      <button type=\"submit\" class=\"btn btn-success\">Save</button>
+                      <button type=\"submit\" class=\"btn btn-success\">저장</button>
                     </form>
                   </div>
                   <div role=\"tabpanel\" class=\"tab-pane\" id=\"profile\">Profile</div>
@@ -394,7 +395,7 @@ class __TwigTemplate_0c6eb9c30d1296b4fd0c0ebb66e5d0f0848b4d524df29b40c482fccf27a
 /*   </script>*/
 /*   <nav class="navbar navbar-expand navbar-dark bg-dark static-top">*/
 /*       <img src="http://teamc-iot.calit2.net/mail_iconn.png" style="height: 48px; width:100px;background-color: #01dea5;">*/
-/*     <a class="navbar-brand mr-1" href="/main">Farm-ing</a>*/
+/*     <a class="navbar-brand mr-1" href="/maps">Farm-ing</a>*/
 /*     <button class="btn btn-link btn-sm text-white order-1 order-sm-0" id="sidebarToggle" href="#">*/
 /*       <i class="fas fa-bars"></i>*/
 /*     </button>*/
@@ -425,7 +426,7 @@ class __TwigTemplate_0c6eb9c30d1296b4fd0c0ebb66e5d0f0848b4d524df29b40c482fccf27a
 /*             </script>*/
 /*           </a>!!*/
 /*           <div class="dropdown-divider"></div>*/
-/*           <a class="dropdown-item" data-toggle="modal" data-target="#logoutModal">Logout</a>*/
+/*           <a class="dropdown-item" data-toggle="modal" data-target="#logoutModal">로그아웃</a>*/
 /*         </div>*/
 /*       </li>*/
 /*     </ul>*/
@@ -434,35 +435,36 @@ class __TwigTemplate_0c6eb9c30d1296b4fd0c0ebb66e5d0f0848b4d524df29b40c482fccf27a
 /*   <div id="wrapper">*/
 /*     <!-- Sidebar -->*/
 /*     <ul class="sidebar navbar-nav">*/
+/*         <li class="nav-item">*/
+/*             <a class="nav-link" href="/maps">*/
+/*               <i class="fas fa-fw fa-chart-area"></i>*/
+/*               <span>실시간 데이터 조회</span></a>*/
+/*           </li>*/
 /*       <li class="nav-item">*/
 /*         <a class="nav-link" href="/main">*/
 /*           <i class="fas fa-fw fa-tachometer-alt"></i>*/
-/*           <span>Main</span>*/
+/*           <span>과거 데이터 조회</span>*/
 /*         </a>*/
 /*       </li>*/
 /*       <li class="nav-item dropdown active">*/
 /*         <a class="nav-link dropdown-toggle" href="#" id="pagesDropdown" role="button" data-toggle="dropdown"*/
 /*           aria-haspopup="true" aria-expanded="false">*/
 /*           <i class="fas fa-fw fa-folder"></i>*/
-/*           <span>Information</span>*/
+/*           <span>회원정보</span>*/
 /*         </a>*/
 /*         <div class="dropdown-menu" aria-labelledby="pagesDropdown">*/
-/*           <a class="dropdown-item" id="myaccountb" href="/myaccount">My Account</a>*/
-/*           <!-- <a class="dropdown-item" href="/change_password">Change Password</a> -->*/
-/*           <a class="dropdown-item" id="signoutb" href="#" data-toggle="modal" data-target="#logoutModal">Log Out</a>*/
-/*           <a class="dropdown-item" href="/change_idcancellation">ID Cancellation</a>*/
-/*         </div>*/
+/*             <a class="dropdown-item" id="myaccountb" href="/myaccount">나의 계정</a>*/
+/*             <a class="dropdown-item" href="/change_password">비밀번호 변경</a>*/
+/*             <a class="dropdown-item" id="signoutb" href="#" data-toggle="modal" data-target="#logoutModal">로그아웃</a>*/
+/*             <a class="dropdown-item" href="/change_idcancellation">회원탈퇴</a>*/
+/*           </div>*/
 /*       </li>*/
-/*       <li class="nav-item">*/
+/*       <!--<li class="nav-item">*/
 /*         <a class="nav-link" href="/charts">*/
 /*           <i class="fas fa-fw fa-chart-area"></i>*/
 /*           <span>Charts</span></a>*/
-/*       </li>*/
-/*       <li class="nav-item">*/
-/*         <a class="nav-link" href="/maps">*/
-/*           <i class="fas fa-fw fa-chart-area"></i>*/
-/*           <span>Map</span></a>*/
-/*       </li>*/
+/*       </li>-->*/
+/* */
 /*     </ul>*/
 /* */
 /*     <div id="content-wrapper">*/
@@ -471,7 +473,7 @@ class __TwigTemplate_0c6eb9c30d1296b4fd0c0ebb66e5d0f0848b4d524df29b40c482fccf27a
 /*           <div class="portlet light profile-sidebar-portlet bordered">*/
 /* */
 /*             <div class="profile-usertitle">*/
-/*               <div class="profile-usertitle-name"><br><br>*/
+/*               <div class="profile-usertitle-name">*/
 /*                 <h3>Profile </h3>*/
 /*               </div>*/
 /*             </div>*/
@@ -488,37 +490,37 @@ class __TwigTemplate_0c6eb9c30d1296b4fd0c0ebb66e5d0f0848b4d524df29b40c482fccf27a
 /*                   <div role="tabpanel" class="tab-pane active" id="home">*/
 /*                     <form>*/
 /*                       <div class="form-group">*/
-/*                         <label for="inputName">Name</label>*/
+/*                         <label for="inputName">성명</label>*/
 /*                         <P><input type="text" id="inputName" class="form-control" value="Name"></P>*/
 /*                       </div>*/
 /*                       <div class="form-group">*/
-/*                         <label for="inputemail">Email</label>*/
+/*                         <label for="inputemail">이메일</label>*/
 /*                         <p><input type="text" class="form-control" id="inputemail" value="email"></p> */
 /*                       </div>*/
 /*                       <div class="form-group">*/
-/*                         <label for="inputPassword">Password</label>*/
+/*                         <label for="inputPassword">비밀번호</label>*/
 /*                         <input type="password" name="inputPassword" id="inputPassword" class="form-control"*/
-/*                           placeholder="Password" required="required">*/
+/*                           placeholder="비밀번호" required="required">*/
 /*                       </div>*/
 /*                       <div class="form-group">*/
-/*                         <label for="confirmPassword">Confirm password</label>*/
+/*                         <label for="confirmPassword">비밀번호 확인</label>*/
 /*                         <input type="password" name="confirmPassword" id="confirmPassword" class="form-control"*/
-/*                           placeholder="Confirm password" required="required">*/
+/*                           placeholder="비밀번호 확인" required="required">*/
 /*                       </div>*/
 /*                       <div class="form-group">*/
-/*                         <label for="exampleInputEmail1">Birth</label>*/
+/*                         <label for="exampleInputEmail1">생년월일</label>*/
 /*                         <input type="text" class="form-control" id="inputbirth" placeholder="Birth">*/
 /*                       </div>*/
 /*                       <div class="form-group">*/
-/*                         <label for="emergencycall">Emergency Call</label>*/
+/*                         <label for="emergencycall">전화번호</label>*/
 /*                         <input type="phone" name="emergencycall" id="inputemergency" class="form-control"*/
 /*                           placeholder="Emergency Call">*/
 /*                       </div>*/
 /*                       <div class="form-group">*/
-/*                         <label for="exampleInputPassword1">Gender</label>*/
+/*                         <label for="exampleInputPassword1">성별</label>*/
 /*                         <input type="text" class="form-control" id="inputgender" placeholder="Gender">*/
 /*                       </div>*/
-/*                       <button type="submit" class="btn btn-success">Save</button>*/
+/*                       <button type="submit" class="btn btn-success">저장</button>*/
 /*                     </form>*/
 /*                   </div>*/
 /*                   <div role="tabpanel" class="tab-pane" id="profile">Profile</div>*/
