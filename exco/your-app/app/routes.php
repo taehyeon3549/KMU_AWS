@@ -153,7 +153,7 @@ $app->post('/showRealdata', 'App\Controller\SensorManagementController:showReald
 
 // 2019-10-27  DRAW
 //show realtime data_ v2
-$app->post('/Realdata', 'App\Controller\SensorManagementController:Realdata')
+$app->get('/Realdata', 'App\Controller\SensorManagementController:Realdata')
 ->setName('Realdata');
 
 //Show historical value

@@ -250,7 +250,7 @@ final class SensorManagementController extends BaseController
 	}
 
 	//2019-10-27
-	// 수정
+	// 수정	
 	//RealData	
 	public function Realdata(Request $request, Response $response, $args)
 	{
@@ -260,49 +260,44 @@ final class SensorManagementController extends BaseController
 		$sensor['sensor_name'] = $request->getParsedBody()['sensor_name'];
 
 		$data = $this->SensorManagementModel->Realdata($sensor);
-		/*
-		$num = count($data);
+		
+		//print_r($data);
 
-		if($num > 0){
-			$result['header'] = "success";
-			$result['message'] = [];
-			
-			$str = explode('_', $sensor['sensor_name']);
+		//결과값
+		$result['aqi_data_tier_tuples'] = [];
 
-			if($str[0] == "Air"){
-				$result['message']['PM2_5'] = $data['a_PM2_5'];
-				$result['message']['PM10'] = $data['a_PM10'];
-				$result['message']['o3'] = $data['a_O3'];
-				$result['message']['co'] = $data['a_CO'];
-				$result['message']['no2'] = $data['a_NO2'];
-				$result['message']['so2'] = $data['a_SO2'];
-				$result['message']['temperture'] = $data['a_Temperture'];
-				$result['message']['latitude'] = $data['a_latitude'];
-				$result['message']['longitude'] = $data['a_longitude'];
-				$result['message']['time'] = $data['a_time'];
-				$result['message']['aq_pm2_5'] = $data['AQ_PM2_5'];
-				$result['message']['aq_o3'] = $data['AQ_O3'];
-				$result['message']['aq_co'] = $data['AQ_CO'];
-				$result['message']['aq_no2'] = $data['AQ_NO2'];
-				$result['message']['aq_so2'] = $data['AQ_SO2'];
+		$k = 0;
 
-				$result['result'] = "0";
-			}else{
-				$result['message']['heartrate'] = $data['p_heartrate'];
-				$result['message']['rr_interval'] = $data['p_RR_interval'];
-				$result['message']['latitude'] = $data['p_longitude'];
-				$result['message']['longitude'] = $data['p_longitude'];
-				$result['message']['time'] = $data['p_time'];
-			}	
-		}else{
-			$result['header'] = "fail";
-			$result['message'] = "1";	
+		//갱신 시간과 삽입 시간의 차이가 5시간 이상인 값들은 제외하고 반환
+		for($i = 0; $i < count($data); $i++){
+			$date1 = $data[$i]['insert_time'];
+			$date2 = $data[$i]['timestamp'];
+
+			//시간 정하기
+			if(((strtotime($date1) - strtotime($date2)) / 3600) >= 5){
+				$result['aqi_data_tier_tuples'][$k]['ssn'] = $data[$i]['ssn'];
+				$result['aqi_data_tier_tuples'][$k]['wmac'] = $data[$i]['wmac'];
+				$result['aqi_data_tier_tuples'][$k]['timestamp'] = $data[$i]['timestamp'];
+				$result['aqi_data_tier_tuples'][$k]['temperature'] = $data[$i]['temperature'];
+				$result['aqi_data_tier_tuples'][$k]['co_aqi'] = $data[$i]['co_aqi'];
+				$result['aqi_data_tier_tuples'][$k]['o3_aqi'] = $data[$i]['o3_aqi'];
+				$result['aqi_data_tier_tuples'][$k]['no2_aqi'] = $data[$i]['no2_aqi'];
+				$result['aqi_data_tier_tuples'][$k]['pm25_aqi'] = $data[$i]['pm25_aqi'];
+				$result['aqi_data_tier_tuples'][$k]['pm10_aqi'] = $data[$i]['pm10_aqi'];
+				$result['aqi_data_tier_tuples'][$k]['lat'] = $data[$i]['lat'];
+				$result['aqi_data_tier_tuples'][$k]['lng'] = $data[$i]['lng'];
+			}
+
+			$k += 1;
 		}
-		*/
 
-		//return $response->withStatus(200)
-		//->withHeader('Content-Type', 'application/json')
-		//->write(json_encode(NULL, JSON_NUMERIC_CHECK));
+		$k = 0;
+
+		//print_r($result);
+
+		return $response->withStatus(200)
+		->withHeader('Content-Type', 'application/json')
+		->write(json_encode($result, JSON_NUMERIC_CHECK));
 	}
 
 	//////////////////////////////////////////////////////////////
