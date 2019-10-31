@@ -172,7 +172,7 @@ a:hover {
 }
 
 a:not([href]):not([tabindex]) {
-  color: inherit;
+  color: #ffffff;
   text-decoration: none;
 }
 
@@ -2001,6 +2001,13 @@ pre code {
 .table-responsive {
   display: block;
   width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.table-responsive2 {
+  display: block;
+  width: 400px;
   overflow-x: auto;
   -webkit-overflow-scrolling: touch;
 }
@@ -6985,7 +6992,12 @@ button.bg-light:focus {
 }
 
 .bg-dark {
-  background-color: #01dea5 !important;
+  background-color: #56b275 !important;
+}
+
+.bg-main {
+  /*
+  background-image: linear-gradient(to top, #57b36e, #3c9af1 );*/
 }
 
 a.bg-dark:hover, a.bg-dark:focus,
@@ -10670,7 +10682,7 @@ body {
 
 .sidebar {
   width: 90px !important;
-  background-color: #44e5b0;
+  background-color: #3fb6ca;
   min-height: calc(100vh - 56px);
 }
 
@@ -10815,7 +10827,7 @@ body {
 }
 
 .card-login {
-  max-width: 25rem;
+  max-width: 26rem;
 }
 
 .card-register {

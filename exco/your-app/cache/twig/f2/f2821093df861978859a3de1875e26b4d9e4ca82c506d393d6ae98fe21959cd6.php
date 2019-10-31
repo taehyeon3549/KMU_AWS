@@ -34,15 +34,25 @@ class __TwigTemplate_5c54a6191fe6fe65b010fd066791be196480393b33755972282b624683a
 
   <!-- Custom styles for this template-->
   <link href=\"/css/sb-admin.css\" rel=\"stylesheet\">
+  <style>
+    body{
+      background-image: url(\"http://13.125.112.70/main.png\");
+      background-size: 100% 100%;
+    }
+    </style>
+
 </head>
 
-<body class=\"bg-dark\">
+<body class=\"bg-main\">
+
   <div class=\"container\">
-    <div class=\"card card-login mx-auto mt-5\" style=\"border-color: #01E1A5;\">
-        <img src=\"http://teamc-iot.calit2.net/mail_iconn.png\" style=\"height: 200px;background-color: #01dea5;\">
+    <div class=\"card card-login mx-auto mt-5\" style=\"margin-top: 5px; padding: 30px;\">
+      <!--<div class=\"card-header\">Farm-ing</div>-->
+      <div  style=\"border-color: #ffffff;\">
+          <img src=\"http://13.125.112.70/mail_iconn.png\" style=\"max-width: 100%; height: auto;\">
+          <img src=\"http://13.125.112.70/main_text.png\" style=\"max-width: 100%; height: auto;\">
+       
     </div>
-    <div class=\"card card-login mx-auto mt-5\" style=\"margin-top: 5px;\">
-      <div class=\"card-header\">Farm-ing</div>
       <div class=\"card-body\">
 
         <form>
@@ -129,10 +139,13 @@ class __TwigTemplate_5c54a6191fe6fe65b010fd066791be196480393b33755972282b624683a
             }
           });
         </script>
-        <div class=\"text-center\">
-          <a class=\"d-block small mt-3\" href=\"/register_email\">회원가입</a>
-          <a class=\"d-block small\" href=\"/forgot-password\">비밀번호를 잊으셨나요??</a>
+        <div class=\"text-left\" >
+          <a class=\"d-block small mt-3\" href=\"/register_email\">지금 가입하시겠습니까??</a>
         </div>
+        <div class=\"text-left\" >
+            <a class=\"d-block small\" href=\"/forgot-password\">비밀번호를 잊으셨나요??</a>
+        </div>
+        
       </div>
     </div>
   </div>
@@ -183,15 +196,25 @@ class __TwigTemplate_5c54a6191fe6fe65b010fd066791be196480393b33755972282b624683a
 /* */
 /*   <!-- Custom styles for this template-->*/
 /*   <link href="/css/sb-admin.css" rel="stylesheet">*/
+/*   <style>*/
+/*     body{*/
+/*       background-image: url("http://13.125.112.70/main.png");*/
+/*       background-size: 100% 100%;*/
+/*     }*/
+/*     </style>*/
+/* */
 /* </head>*/
 /* */
-/* <body class="bg-dark">*/
+/* <body class="bg-main">*/
+/* */
 /*   <div class="container">*/
-/*     <div class="card card-login mx-auto mt-5" style="border-color: #01E1A5;">*/
-/*         <img src="http://teamc-iot.calit2.net/mail_iconn.png" style="height: 200px;background-color: #01dea5;">*/
+/*     <div class="card card-login mx-auto mt-5" style="margin-top: 5px; padding: 30px;">*/
+/*       <!--<div class="card-header">Farm-ing</div>-->*/
+/*       <div  style="border-color: #ffffff;">*/
+/*           <img src="http://13.125.112.70/mail_iconn.png" style="max-width: 100%; height: auto;">*/
+/*           <img src="http://13.125.112.70/main_text.png" style="max-width: 100%; height: auto;">*/
+/*        */
 /*     </div>*/
-/*     <div class="card card-login mx-auto mt-5" style="margin-top: 5px;">*/
-/*       <div class="card-header">Farm-ing</div>*/
 /*       <div class="card-body">*/
 /* */
 /*         <form>*/
@@ -278,10 +301,13 @@ class __TwigTemplate_5c54a6191fe6fe65b010fd066791be196480393b33755972282b624683a
 /*             }*/
 /*           });*/
 /*         </script>*/
-/*         <div class="text-center">*/
-/*           <a class="d-block small mt-3" href="/register_email">회원가입</a>*/
-/*           <a class="d-block small" href="/forgot-password">비밀번호를 잊으셨나요??</a>*/
+/*         <div class="text-left" >*/
+/*           <a class="d-block small mt-3" href="/register_email">지금 가입하시겠습니까??</a>*/
 /*         </div>*/
+/*         <div class="text-left" >*/
+/*             <a class="d-block small" href="/forgot-password">비밀번호를 잊으셨나요??</a>*/
+/*         </div>*/
+/*         */
 /*       </div>*/
 /*     </div>*/
 /*   </div>*/

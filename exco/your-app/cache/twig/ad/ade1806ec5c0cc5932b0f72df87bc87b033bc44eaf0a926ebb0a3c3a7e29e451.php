@@ -39,11 +39,12 @@ class __TwigTemplate_5291baa5fc4b93a96bf45e656411f1db89061ebd96573d66910e48fed3d
 
 <body id=\"page-top\">
   <nav class=\"navbar navbar-expand navbar-dark bg-dark static-top\">
-      <img src=\"http://teamc-iot.calit2.net/mail_iconn.png\" style=\"height: 48px; width:100px;background-color: #01dea5;\">
+      <img src=\"http://teamc-iot.calit2.net/mail_iconn.png\" style=\"height: 48px; width:100px;background-color: #56b275;\">
+      <button class=\"btn btn-link btn-sm text-white order-1 order-sm-0\" id=\"sidebarToggle\" href=\"#\">
+        <i class=\"fas fa-bars\"></i>
+      </button>
     <a class=\"navbar-brand mr-1\" href=\"/maps\">Farm-ing</a>
-    <button class=\"btn btn-link btn-sm text-white order-1 order-sm-0\" id=\"sidebarToggle\" href=\"#\">
-      <i class=\"fas fa-bars\"></i>
-    </button>
+
     <form class=\"d-none d-md-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0\">
       <div class=\"input-group\">
         <div class=\"input-group-append\"></div>
@@ -51,17 +52,25 @@ class __TwigTemplate_5291baa5fc4b93a96bf45e656411f1db89061ebd96573d66910e48fed3d
     </form>
     <!-- Navbar -->
     <ul class=\"navbar-nav ml-auto ml-md-0\">
-      <li class=\"nav-item dropdown no-arrow\">
-        <a class=\"nav-link dropdown-toggle\" href=\"#\" id=\"userDropdown\" role=\"button\" data-toggle=\"dropdown\"
-          aria-haspopup=\"true\" aria-expanded=\"false\">
-          <i class=\"fas fa-user-circle fa-fw\"></i>
-        </a>
-        <div class=\"dropdown-menu dropdown-menu-right\" aria-labelledby=\"userDropdown\">
-          <div class=\"dropdown-divider\"></div>
-          <a class=\"dropdown-item\" href=\"#\" data-toggle=\"modal\" data-target=\"#logoutModal\">Logout</a>
-        </div>
-      </li>
-    </ul>
+        <li class=\"nav-item dropdown no-arrow\">
+          <a class=\"nav-link dropdown-toggle\" href=\"#\" id=\"userDropdown\" role=\"button\" data-toggle=\"dropdown\"
+            aria-haspopup=\"true\" aria-expanded=\"false\">
+            <i class=\"fas fa-user-circle fa-fw\"></i>
+          </a>
+  
+          <!-- 회원 아이콘-->
+          <div class=\"dropdown-menu dropdown-menu-right\" aria-labelledby=\"userDropdown\">
+            <a style=\"color: black\">Hi, 
+              <script>
+                var name = sessionStorage.getItem('name');
+                document.write(name);
+              </script>
+            </a>
+            <div class=\"dropdown-divider\"></div>
+            <a  style=\"color: black\" class=\"dropdown-item\" data-toggle=\"modal\" data-target=\"#logoutModal\">로그아웃</a>
+          </div>
+        </li>
+      </ul>
   </nav>
 
   <div id=\"wrapper\">
@@ -122,6 +131,51 @@ class __TwigTemplate_5291baa5fc4b93a96bf45e656411f1db89061ebd96573d66910e48fed3d
         </div>
       </div>
     </div>
+    <!-- Logout Modal-->
+  <div class=\"modal fade\" id=\"logoutModal\" tabindex=\"-1\" role=\"dialog\" aria-labelledby=\"exampleModalLabel\"
+  aria-hidden=\"true\">
+  <div class=\"modal-dialog\" role=\"document\">
+    <div class=\"modal-content\">
+      <div class=\"modal-header\">
+        <h5 class=\"modal-title\" id=\"exampleModalLabel\">Ready to Leave?</h5>
+        <button class=\"close\" type=\"button\" data-dismiss=\"modal\" aria-label=\"Close\">
+          <span aria-hidden=\"true\">×</span>
+        </button>
+      </div>
+      <div class=\"modal-body\">Do you want to quit our 'Farming'?</div>
+      <div class=\"modal-footer\">
+        <button class=\"btn btn-secondary\" type=\"button\" data-dismiss=\"modal\">Cancel</button>
+        <a class=\"btn btn-primary\" id=\"logoutb\">Logout</a>
+        <!-- LogOut btn action -->
+        <script type=\"text/javascript\">
+          document.getElementById(\"logoutb\").addEventListener('click', function () {
+            // Check the value are all filled
+            var usn = sessionStorage.getItem('usn');
+            //send json
+            \$.ajax({
+              method: \"POST\",
+              url: \"/signout_proc\",
+              data: {
+                \"usn\": usn
+              }
+            }).done(function (msg) {
+              if (msg.message == 0) {
+                //logout success
+                //sessionStorage clear
+                sessionStorage.clear();
+                location.href = \"/\";
+              }
+              if (msg.message == 1) {
+                alert(\"Please, try logout again.\");
+              }
+            });
+          });
+        </script>
+      </div>
+    </div>
+  </div>
+</div>
+
     <!-- Bootstrap core JavaScript-->
     <script src=\"/vendor/jquery/jquery.min.js\"></script>
     <script src=\"/vendor/bootstrap/js/bootstrap.bundle.min.js\"></script>
@@ -167,11 +221,12 @@ class __TwigTemplate_5291baa5fc4b93a96bf45e656411f1db89061ebd96573d66910e48fed3d
 /* */
 /* <body id="page-top">*/
 /*   <nav class="navbar navbar-expand navbar-dark bg-dark static-top">*/
-/*       <img src="http://teamc-iot.calit2.net/mail_iconn.png" style="height: 48px; width:100px;background-color: #01dea5;">*/
+/*       <img src="http://teamc-iot.calit2.net/mail_iconn.png" style="height: 48px; width:100px;background-color: #56b275;">*/
+/*       <button class="btn btn-link btn-sm text-white order-1 order-sm-0" id="sidebarToggle" href="#">*/
+/*         <i class="fas fa-bars"></i>*/
+/*       </button>*/
 /*     <a class="navbar-brand mr-1" href="/maps">Farm-ing</a>*/
-/*     <button class="btn btn-link btn-sm text-white order-1 order-sm-0" id="sidebarToggle" href="#">*/
-/*       <i class="fas fa-bars"></i>*/
-/*     </button>*/
+/* */
 /*     <form class="d-none d-md-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0">*/
 /*       <div class="input-group">*/
 /*         <div class="input-group-append"></div>*/
@@ -179,17 +234,25 @@ class __TwigTemplate_5291baa5fc4b93a96bf45e656411f1db89061ebd96573d66910e48fed3d
 /*     </form>*/
 /*     <!-- Navbar -->*/
 /*     <ul class="navbar-nav ml-auto ml-md-0">*/
-/*       <li class="nav-item dropdown no-arrow">*/
-/*         <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown"*/
-/*           aria-haspopup="true" aria-expanded="false">*/
-/*           <i class="fas fa-user-circle fa-fw"></i>*/
-/*         </a>*/
-/*         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">*/
-/*           <div class="dropdown-divider"></div>*/
-/*           <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">Logout</a>*/
-/*         </div>*/
-/*       </li>*/
-/*     </ul>*/
+/*         <li class="nav-item dropdown no-arrow">*/
+/*           <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown"*/
+/*             aria-haspopup="true" aria-expanded="false">*/
+/*             <i class="fas fa-user-circle fa-fw"></i>*/
+/*           </a>*/
+/*   */
+/*           <!-- 회원 아이콘-->*/
+/*           <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">*/
+/*             <a style="color: black">Hi, */
+/*               <script>*/
+/*                 var name = sessionStorage.getItem('name');*/
+/*                 document.write(name);*/
+/*               </script>*/
+/*             </a>*/
+/*             <div class="dropdown-divider"></div>*/
+/*             <a  style="color: black" class="dropdown-item" data-toggle="modal" data-target="#logoutModal">로그아웃</a>*/
+/*           </div>*/
+/*         </li>*/
+/*       </ul>*/
 /*   </nav>*/
 /* */
 /*   <div id="wrapper">*/
@@ -250,6 +313,51 @@ class __TwigTemplate_5291baa5fc4b93a96bf45e656411f1db89061ebd96573d66910e48fed3d
 /*         </div>*/
 /*       </div>*/
 /*     </div>*/
+/*     <!-- Logout Modal-->*/
+/*   <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"*/
+/*   aria-hidden="true">*/
+/*   <div class="modal-dialog" role="document">*/
+/*     <div class="modal-content">*/
+/*       <div class="modal-header">*/
+/*         <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>*/
+/*         <button class="close" type="button" data-dismiss="modal" aria-label="Close">*/
+/*           <span aria-hidden="true">×</span>*/
+/*         </button>*/
+/*       </div>*/
+/*       <div class="modal-body">Do you want to quit our 'Farming'?</div>*/
+/*       <div class="modal-footer">*/
+/*         <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>*/
+/*         <a class="btn btn-primary" id="logoutb">Logout</a>*/
+/*         <!-- LogOut btn action -->*/
+/*         <script type="text/javascript">*/
+/*           document.getElementById("logoutb").addEventListener('click', function () {*/
+/*             // Check the value are all filled*/
+/*             var usn = sessionStorage.getItem('usn');*/
+/*             //send json*/
+/*             $.ajax({*/
+/*               method: "POST",*/
+/*               url: "/signout_proc",*/
+/*               data: {*/
+/*                 "usn": usn*/
+/*               }*/
+/*             }).done(function (msg) {*/
+/*               if (msg.message == 0) {*/
+/*                 //logout success*/
+/*                 //sessionStorage clear*/
+/*                 sessionStorage.clear();*/
+/*                 location.href = "/";*/
+/*               }*/
+/*               if (msg.message == 1) {*/
+/*                 alert("Please, try logout again.");*/
+/*               }*/
+/*             });*/
+/*           });*/
+/*         </script>*/
+/*       </div>*/
+/*     </div>*/
+/*   </div>*/
+/* </div>*/
+/* */
 /*     <!-- Bootstrap core JavaScript-->*/
 /*     <script src="/vendor/jquery/jquery.min.js"></script>*/
 /*     <script src="/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>*/

@@ -137,21 +137,21 @@ class __TwigTemplate_39bed4abda6a040347657946f96b97d801e7b670c5d49b4bf82472a28dd
             var inputPassword = \$('input[name = inputPassword]').val();
             var confirmPassword = \$('input[name = confirmPassword]').val();
             var Birth = \$('input[name = Birth]').val();
-            var gender = \$('input[name=gendeㅂㅁr]:checked').val();
+            var gender = \$('input[name=gender]:checked').val();
             var emergency = \$('input[name = emergencycall]').val();
 
             if(firstName == \"\"){
-              alert(\"Please, Enter the firstname\");
+              alert(\"성을 입력해 주세요.\");
             }else if(lastName == \"\"){
-              alert(\"Please, Enter the lastname\");
+              alert(\"이름을 입력해 주세요.\");
             }else if(inputPassword == \"\"){
-              alert(\"Please, Enter the inputpassword\");
+              alert(\"비밀번호를 입력해 주세요.\");
             }else if(confirmPassword == \"\"){
-              alert(\"Please, Enter the comfirmpassword\");
+              alert(\"비밀번호 확인을 입력해 주세요.\");
             }else if(Birth == \"\"){
-              alert(\"Please, Enter the birth\");
+              alert(\"생년월일을 입력해 주세요.\");
             }else if(inputPassword != confirmPassword){
-              alert(\"Please, Enter two passwords are compared.\");
+              alert(\"입력한 비밀번호가 일치하지 않습니다.\");
             }else{
               var name = firstName.concat(\"\", lastName);
               
@@ -170,15 +170,15 @@ class __TwigTemplate_39bed4abda6a040347657946f96b97d801e7b670c5d49b4bf82472a28dd
               }).done(function( msg ) {
                   //If sign_up success, show up the sign in page
                   if(msg.message == 0){
-                    alert(\"Welcome!! Now you are our member.\");
+                    alert(\"환영합니다!! 지금부터 우리의 회원입니다.\");
                     location.href = \"/\";
                   }
                   if(msg.message == 1){
-                    alert(\"You are already have a count!!\");
+                    alert(\"당신은 이미 우리의 회원입니다!!\");
                     location.href = \"/\";
                   }
                   if(msg.message == 2){
-                    alert(\"Sorry, Could you sign up again? Server Error\");
+                    alert(\"죄송합니다. 서버에 장애가 발생했습니다. 다시 회원가입을 진행해 주세요.\");
                     location.href = \"/sign_up\";
                   }
               });         
@@ -336,21 +336,21 @@ class __TwigTemplate_39bed4abda6a040347657946f96b97d801e7b670c5d49b4bf82472a28dd
 /*             var inputPassword = $('input[name = inputPassword]').val();*/
 /*             var confirmPassword = $('input[name = confirmPassword]').val();*/
 /*             var Birth = $('input[name = Birth]').val();*/
-/*             var gender = $('input[name=gendeㅂㅁr]:checked').val();*/
+/*             var gender = $('input[name=gender]:checked').val();*/
 /*             var emergency = $('input[name = emergencycall]').val();*/
 /* */
 /*             if(firstName == ""){*/
-/*               alert("Please, Enter the firstname");*/
+/*               alert("성을 입력해 주세요.");*/
 /*             }else if(lastName == ""){*/
-/*               alert("Please, Enter the lastname");*/
+/*               alert("이름을 입력해 주세요.");*/
 /*             }else if(inputPassword == ""){*/
-/*               alert("Please, Enter the inputpassword");*/
+/*               alert("비밀번호를 입력해 주세요.");*/
 /*             }else if(confirmPassword == ""){*/
-/*               alert("Please, Enter the comfirmpassword");*/
+/*               alert("비밀번호 확인을 입력해 주세요.");*/
 /*             }else if(Birth == ""){*/
-/*               alert("Please, Enter the birth");*/
+/*               alert("생년월일을 입력해 주세요.");*/
 /*             }else if(inputPassword != confirmPassword){*/
-/*               alert("Please, Enter two passwords are compared.");*/
+/*               alert("입력한 비밀번호가 일치하지 않습니다.");*/
 /*             }else{*/
 /*               var name = firstName.concat("", lastName);*/
 /*               */
@@ -369,15 +369,15 @@ class __TwigTemplate_39bed4abda6a040347657946f96b97d801e7b670c5d49b4bf82472a28dd
 /*               }).done(function( msg ) {*/
 /*                   //If sign_up success, show up the sign in page*/
 /*                   if(msg.message == 0){*/
-/*                     alert("Welcome!! Now you are our member.");*/
+/*                     alert("환영합니다!! 지금부터 우리의 회원입니다.");*/
 /*                     location.href = "/";*/
 /*                   }*/
 /*                   if(msg.message == 1){*/
-/*                     alert("You are already have a count!!");*/
+/*                     alert("당신은 이미 우리의 회원입니다!!");*/
 /*                     location.href = "/";*/
 /*                   }*/
 /*                   if(msg.message == 2){*/
-/*                     alert("Sorry, Could you sign up again? Server Error");*/
+/*                     alert("죄송합니다. 서버에 장애가 발생했습니다. 다시 회원가입을 진행해 주세요.");*/
 /*                     location.href = "/sign_up";*/
 /*                   }*/
 /*               });         */

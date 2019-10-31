@@ -90,6 +90,7 @@ class __TwigTemplate_aafe76df600f41b7c23d367674c9805b29dd99492718c82eb02d24f8162
       }).fail((msg) => {
         console.log(msg);
       });
+      //setTimeout(initMap,1000);
     };
     // Instantiate markers in the background and pass it back to the json object
     function createMarkers(markerJson) {
@@ -118,7 +119,7 @@ class __TwigTemplate_aafe76df600f41b7c23d367674c9805b29dd99492718c82eb02d24f8162
             '<div id=\"content\">' +
             '<div id=\"showupAQI\">' +
             '</div>' +
-            '<h4 id=\"firstHeading\" class=\"firstHeading\">' + 'location' + '</h4>' +
+            '<h4 id=\"firstHeading\" class=\"firstHeading\">' + '위치' + '</h4>' +
             '<h2 id=\"firstHeading\" class=\"firstHeading\">' + '(' + sensormark['latitude'] + ',' + sensormark['longitude'] + ')' + '</h2>' +
             '<div id=\"bodyContent\">' +
             '<p>' +
@@ -126,8 +127,8 @@ class __TwigTemplate_aafe76df600f41b7c23d367674c9805b29dd99492718c82eb02d24f8162
             '<table class = \"mytable\" width=\"100%\" cellspacing=\"0\">' +
             '<thead>' +
             '<tr>' +
-            '<th>Element</th>' +
-            '<th>Value</th>' +
+            '<th>원소</th>' +
+            '<th>측정값</th>' +
             '<th>AQI</th>' +
             '</tr>' +
             '</thead>' +
@@ -252,7 +253,7 @@ class __TwigTemplate_aafe76df600f41b7c23d367674c9805b29dd99492718c82eb02d24f8162
         ]);
 
         var options = {
-          width: 800,
+          //width: 800,
           chart: {
             title: 'Historical data Air Quality',
             subtitle: '현 날짜에 해당하는 데이터 없어서 차트 못그림. 2019-08-11 ~ 2019-08-13 조회 후 맵에 마커 클릭 하면 나옴'
@@ -267,6 +268,11 @@ class __TwigTemplate_aafe76df600f41b7c23d367674c9805b29dd99492718c82eb02d24f8162
               distance: { label: 'parsecs' }, // Bottom x-axis.
               brightness: { side: 'top', label: 'apparent magnitude' } // Top x-axis.
             }
+          },
+          animation:{
+            startup: true,
+            duration : 1000,
+            easing: 'lineraz'
           }
         };
 
@@ -294,7 +300,7 @@ class __TwigTemplate_aafe76df600f41b7c23d367674c9805b29dd99492718c82eb02d24f8162
         ]);
 
         var options = {
-          width: 800,
+         // width: 800,
           chart: {
             title: 'Historical data Air Quality',
             subtitle: 'distance on the left, brightness on the right'
@@ -339,11 +345,12 @@ class __TwigTemplate_aafe76df600f41b7c23d367674c9805b29dd99492718c82eb02d24f8162
     }
   </script>
   <nav class=\"navbar navbar-expand navbar-dark bg-dark static-top\">
-    <img src=\"http://13.125.112.70/mail_iconn.png\" style=\"height: 48px; width:100px;background-color: #01dea5;\">
-    <a class=\"navbar-brand mr-1\" href=\"/maps\">Farm-ing</a>
+    <img src=\"http://13.125.112.70/mail_iconn.png\" style=\"height: 48px; width:100px;background-color: #56b275;\">
     <button class=\"btn btn-link btn-sm text-white order-1 order-sm-0\" id=\"sidebarToggle\" href=\"#\">
-      <i class=\"fas fa-bars\"></i>
-    </button>
+        <i class=\"fas fa-bars\"></i>
+      </button>
+    <a class=\"navbar-brand mr-1\" href=\"/maps\">Farm-ing</a>
+
 
     <!-- Navbar Search -->
     <form class=\"d-none d-md-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0\">
@@ -364,14 +371,14 @@ class __TwigTemplate_aafe76df600f41b7c23d367674c9805b29dd99492718c82eb02d24f8162
 
         <!-- 회원 아이콘-->
         <div class=\"dropdown-menu dropdown-menu-right\" aria-labelledby=\"userDropdown\">
-          <a>Hi,
+          <a style=\"color: black\">Hi, 
             <script>
               var name = sessionStorage.getItem('name');
               document.write(name);
             </script>
           </a>
           <div class=\"dropdown-divider\"></div>
-          <a class=\"dropdown-item\" data-toggle=\"modal\" data-target=\"#logoutModal\">로그아웃</a>
+          <a  style=\"color: black\" class=\"dropdown-item\" data-toggle=\"modal\" data-target=\"#logoutModal\">로그아웃</a>
         </div>
       </li>
     </ul>
@@ -505,7 +512,7 @@ class __TwigTemplate_aafe76df600f41b7c23d367674c9805b29dd99492718c82eb02d24f8162
           </div>
           <div class=\"card-body\">
             <!-- 차트 그림은 이거 복붙-->
-            <div id=\"dual_x_div\" style=\"width: 900px; height: 500px;\"></div>
+            <div id=\"dual_x_div\" style=\"width: 1500px; height: 500px; margin-left: 60px;\"></div>
           </div>
         </div>
 
@@ -739,6 +746,7 @@ class __TwigTemplate_aafe76df600f41b7c23d367674c9805b29dd99492718c82eb02d24f8162
 /*       }).fail((msg) => {*/
 /*         console.log(msg);*/
 /*       });*/
+/*       //setTimeout(initMap,1000);*/
 /*     };*/
 /*     // Instantiate markers in the background and pass it back to the json object*/
 /*     function createMarkers(markerJson) {*/
@@ -767,7 +775,7 @@ class __TwigTemplate_aafe76df600f41b7c23d367674c9805b29dd99492718c82eb02d24f8162
 /*             '<div id="content">' +*/
 /*             '<div id="showupAQI">' +*/
 /*             '</div>' +*/
-/*             '<h4 id="firstHeading" class="firstHeading">' + 'location' + '</h4>' +*/
+/*             '<h4 id="firstHeading" class="firstHeading">' + '위치' + '</h4>' +*/
 /*             '<h2 id="firstHeading" class="firstHeading">' + '(' + sensormark['latitude'] + ',' + sensormark['longitude'] + ')' + '</h2>' +*/
 /*             '<div id="bodyContent">' +*/
 /*             '<p>' +*/
@@ -775,8 +783,8 @@ class __TwigTemplate_aafe76df600f41b7c23d367674c9805b29dd99492718c82eb02d24f8162
 /*             '<table class = "mytable" width="100%" cellspacing="0">' +*/
 /*             '<thead>' +*/
 /*             '<tr>' +*/
-/*             '<th>Element</th>' +*/
-/*             '<th>Value</th>' +*/
+/*             '<th>원소</th>' +*/
+/*             '<th>측정값</th>' +*/
 /*             '<th>AQI</th>' +*/
 /*             '</tr>' +*/
 /*             '</thead>' +*/
@@ -901,7 +909,7 @@ class __TwigTemplate_aafe76df600f41b7c23d367674c9805b29dd99492718c82eb02d24f8162
 /*         ]);*/
 /* */
 /*         var options = {*/
-/*           width: 800,*/
+/*           //width: 800,*/
 /*           chart: {*/
 /*             title: 'Historical data Air Quality',*/
 /*             subtitle: '현 날짜에 해당하는 데이터 없어서 차트 못그림. 2019-08-11 ~ 2019-08-13 조회 후 맵에 마커 클릭 하면 나옴'*/
@@ -916,6 +924,11 @@ class __TwigTemplate_aafe76df600f41b7c23d367674c9805b29dd99492718c82eb02d24f8162
 /*               distance: { label: 'parsecs' }, // Bottom x-axis.*/
 /*               brightness: { side: 'top', label: 'apparent magnitude' } // Top x-axis.*/
 /*             }*/
+/*           },*/
+/*           animation:{*/
+/*             startup: true,*/
+/*             duration : 1000,*/
+/*             easing: 'lineraz'*/
 /*           }*/
 /*         };*/
 /* */
@@ -943,7 +956,7 @@ class __TwigTemplate_aafe76df600f41b7c23d367674c9805b29dd99492718c82eb02d24f8162
 /*         ]);*/
 /* */
 /*         var options = {*/
-/*           width: 800,*/
+/*          // width: 800,*/
 /*           chart: {*/
 /*             title: 'Historical data Air Quality',*/
 /*             subtitle: 'distance on the left, brightness on the right'*/
@@ -988,11 +1001,12 @@ class __TwigTemplate_aafe76df600f41b7c23d367674c9805b29dd99492718c82eb02d24f8162
 /*     }*/
 /*   </script>*/
 /*   <nav class="navbar navbar-expand navbar-dark bg-dark static-top">*/
-/*     <img src="http://13.125.112.70/mail_iconn.png" style="height: 48px; width:100px;background-color: #01dea5;">*/
-/*     <a class="navbar-brand mr-1" href="/maps">Farm-ing</a>*/
+/*     <img src="http://13.125.112.70/mail_iconn.png" style="height: 48px; width:100px;background-color: #56b275;">*/
 /*     <button class="btn btn-link btn-sm text-white order-1 order-sm-0" id="sidebarToggle" href="#">*/
-/*       <i class="fas fa-bars"></i>*/
-/*     </button>*/
+/*         <i class="fas fa-bars"></i>*/
+/*       </button>*/
+/*     <a class="navbar-brand mr-1" href="/maps">Farm-ing</a>*/
+/* */
 /* */
 /*     <!-- Navbar Search -->*/
 /*     <form class="d-none d-md-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0">*/
@@ -1013,14 +1027,14 @@ class __TwigTemplate_aafe76df600f41b7c23d367674c9805b29dd99492718c82eb02d24f8162
 /* */
 /*         <!-- 회원 아이콘-->*/
 /*         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">*/
-/*           <a>Hi,*/
+/*           <a style="color: black">Hi, */
 /*             <script>*/
 /*               var name = sessionStorage.getItem('name');*/
 /*               document.write(name);*/
 /*             </script>*/
 /*           </a>*/
 /*           <div class="dropdown-divider"></div>*/
-/*           <a class="dropdown-item" data-toggle="modal" data-target="#logoutModal">로그아웃</a>*/
+/*           <a  style="color: black" class="dropdown-item" data-toggle="modal" data-target="#logoutModal">로그아웃</a>*/
 /*         </div>*/
 /*       </li>*/
 /*     </ul>*/
@@ -1154,7 +1168,7 @@ class __TwigTemplate_aafe76df600f41b7c23d367674c9805b29dd99492718c82eb02d24f8162
 /*           </div>*/
 /*           <div class="card-body">*/
 /*             <!-- 차트 그림은 이거 복붙-->*/
-/*             <div id="dual_x_div" style="width: 900px; height: 500px;"></div>*/
+/*             <div id="dual_x_div" style="width: 1500px; height: 500px; margin-left: 60px;"></div>*/
 /*           </div>*/
 /*         </div>*/
 /* */
