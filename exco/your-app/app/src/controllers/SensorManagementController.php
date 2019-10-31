@@ -282,6 +282,7 @@ final class SensorManagementController extends BaseController
 				$result['aqi_data_tier_tuples'][$k]['co_aqi'] = $data[$i]['co_aqi'];
 				$result['aqi_data_tier_tuples'][$k]['o3_aqi'] = $data[$i]['o3_aqi'];
 				$result['aqi_data_tier_tuples'][$k]['no2_aqi'] = $data[$i]['no2_aqi'];
+				$result['aqi_data_tier_tuples'][$k]['so2_aqi'] = $data[$i]['so2_aqi'];
 				$result['aqi_data_tier_tuples'][$k]['pm25_aqi'] = $data[$i]['pm25_aqi'];
 				$result['aqi_data_tier_tuples'][$k]['pm10_aqi'] = $data[$i]['pm10_aqi'];
 				$result['aqi_data_tier_tuples'][$k]['lat'] = $data[$i]['lat'];
