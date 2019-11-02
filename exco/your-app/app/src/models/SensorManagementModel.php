@@ -119,10 +119,16 @@ final class SensorManagementModel extends BaseModel
 
 	//Insert airdata
 	public function insertAirdata($sensor){   
-		$sql = "INSERT INTO Air_Sensor_value (a_ssn, a_PM2_5, a_O3, a_CO, a_NO2, a_SO2, a_Temperture, a_latitude, a_longitude, a_time, a_usn, AQ_PM2_5, AQ_O3, AQ_CO, AQ_NO2, AQ_SO2) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+		$sql = "INSERT INTO Air_Sensor_value 
+				(a_ssn, a_PM2_5, a_PM10, a_O3, a_CO, a_NO2, a_SO2, a_humidity, a_Temperture, 
+				a_latitude, a_longitude, a_time, a_usn, AQ_PM2_5, AQ_PM10, AQ_O3, 
+				AQ_CO, AQ_NO2, AQ_SO2) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 		$sth = $this->db->prepare($sql);
 		
-		if($sth->execute(array($sensor['ssn'], $sensor['pm2_5'], $sensor['o3'], $sensor['co'], $sensor['no2'], $sensor['so2'], $sensor['temperture'], $sensor['latitude'], $sensor['longitude'], $sensor['time'], $sensor['usn'], $sensor['aq_pm2_5'], $sensor['aq_o3'], $sensor['aq_co'], $sensor['aq_no2'],$sensor['aq_so2']))){
+		if($sth->execute(array($sensor['ssn'], $sensor['pm2_5'], $sensor['pm10'], $sensor['o3'], $sensor['co'], 
+						$sensor['no2'], $sensor['so2'], $sensor['humidity'], $sensor['temperture'], $sensor['latitude'], 
+						$sensor['longitude'], $sensor['time'], $sensor['usn'], $sensor['aq_pm2_5'], 
+						$sensor['aq_pm10'], $sensor['aq_o3'], $sensor['aq_co'], $sensor['aq_no2'],$sensor['aq_so2']))){
 			return TRUE;
 		}else{
 			return FALSE;
@@ -178,10 +184,10 @@ final class SensorManagementModel extends BaseModel
 		}		
 
 		//ssn에 해당하는 AIR 값들 불러와서 Realtime data 에 넣어주기
-		//ssn, wmac, timestamp, temperature, co_aqi, o3_aqi, no2_aqi, pm25_aqi, pm10_aqi, lat, lng, insert_time
+		//ssn, wmac, timestamp, a_humidity, temperature, co_aqi, o3_aqi, no2_aqi, pm25_aqi, pm10_aqi, lat, lng, insert_time
 		// insert_time 는 입력하는 시간때
-		$sql = "SELECT a_time, a_Temperture, AQ_CO, AQ_O3, AQ_NO2, AQ_SO2, AQ_PM2_5, AQ_PM10, a_latitude, a_longitude 
-				FROM `teamc-2019summer`.Air_Sensor_value WHERE a_ssn = ? LIMIT 1";
+		$sql = "SELECT a_time, a_Temperture, a_humidity, AQ_CO, AQ_O3, AQ_NO2, AQ_SO2, AQ_PM2_5, AQ_PM10, a_latitude, a_longitude 
+				FROM `teamc-2019summer`.Air_Sensor_value WHERE a_ssn = ? GROUP BY a_time DESC LIMIT 1";
 		$sth = $this->db->prepare($sql);
 		
 		for($i = 0; $i < count($ssn); $i++){			
@@ -217,12 +223,12 @@ final class SensorManagementModel extends BaseModel
 				//갱신
 				//print_r("있음");
 					
-				$sql = "UPDATE Realtime_data SET wmac = 'TTTTTT', timestamp = ?, temperature = ?, co_aqi = ?, o3_aqi = ?, 
+				$sql = "UPDATE Realtime_data SET wmac = 'TTTTTT', timestamp = ?, temperature = ?, humidity = ?, co_aqi = ?, o3_aqi = ?, 
 						no2_aqi = ?, so2_aqi = ?, pm25_aqi = ?, pm10_aqi = ?, lat = ?, lng = ?, insert_time = ?
 						WHERE ssn = ?";
 				$sth = $this->db->prepare($sql);
 					
-				$sth->execute(array($data[$k][1]['a_time'], $data[$k][1]['a_Temperture'], $data[$k][1]['AQ_CO'], 
+				$sth->execute(array($data[$k][1]['a_time'], $data[$k][1]['a_Temperture'], $data[$k][1]['a_humidity'], $data[$k][1]['AQ_CO'], 
 									$data[$k][1]['AQ_O3'], $data[$k][1]['AQ_NO2'], $data[$k][1]['AQ_SO2'], $data[$k][1]['AQ_PM2_5'],
 									$data[$k][1]['AQ_PM10'],$data[$k][1]['a_latitude'], $data[$k][1]['a_longitude'],
 									$data[$k][2], $data[$k][0]['SSN']));
@@ -231,12 +237,12 @@ final class SensorManagementModel extends BaseModel
 				//print_r("없음");
 					
 				$sql = "INSERT INTO Realtime_data
-						(ssn, wmac, timestamp, temperature, co_aqi, o3_aqi, no2_aqi, 
+						(ssn, wmac, timestamp, temperature, humidity, co_aqi, o3_aqi, no2_aqi, 
 						, so2_aqi, pm25_aqi, pm10_aqi, lat, lng, insert_time)
-						value (?,'TTTTTT',?,?,?,?,?,?,?,?,?,?,?)";
+						value (?,'TTTTTT',?,?,?,?,?,?,?,?,?,?,?,?)";
 				$sth = $this->db->prepare($sql);
 
-				$sth->execute(array($data[$k][0]['SSN'], $data[$k][1]['a_time'], $data[$k][1]['a_Temperture'], $data[$k][1]['AQ_CO'], 
+				$sth->execute(array($data[$k][0]['SSN'], $data[$k][1]['a_time'], $data[$k][1]['a_Temperture'], $data[$k][1]['a_humidity'], $data[$k][1]['AQ_CO'], 
 							$data[$k][1]['AQ_O3'], $data[$k][1]['AQ_NO2'], $data[$k][1]['AQ_SO2'], $data[$k][1]['AQ_PM2_5'],
 							$data[$k][1]['AQ_PM10'],$data[$k][1]['a_latitude'], $data[$k][1]['a_longitude'],
 							$data[$k][2]));

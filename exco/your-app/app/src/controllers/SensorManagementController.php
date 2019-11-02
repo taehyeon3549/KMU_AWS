@@ -149,15 +149,19 @@ final class SensorManagementController extends BaseController
 		$sensor['no2'] = $request->getParsedBody()['no2'];
 		$sensor['so2'] = $request->getParsedBody()['so2'];
 		$sensor['temperture'] = $request->getParsedBody()['temperture'];
+		$sensor['humidity'] = $request->getParsedBody()['humidity'];
 		$sensor['latitude'] = $request->getParsedBody()['latitude'];
 		$sensor['longitude'] = $request->getParsedBody()['longitude'];
 		$sensor['time'] = $request->getParsedBody()['time'];
 		$sensor['aq_pm2_5'] = $request->getParsedBody()['aq_pm2_5'];
+		$sensor['aq_pm10'] = $request->getParsedBody()['aq_pm10'];
 		$sensor['aq_o3'] = $request->getParsedBody()['aq_o3'];
 		$sensor['aq_co'] = $request->getParsedBody()['aq_co'];
 		$sensor['aq_no2'] = $request->getParsedBody()['aq_no2'];
 		$sensor['aq_so2'] = $request->getParsedBody()['aq_so2'];
 		
+		print_r($sensor);
+
 		if($this->SensorManagementModel->insertAirdata($sensor)){
 			$result['header'] = "success";
 			$result['message'] = "0";
@@ -274,11 +278,12 @@ final class SensorManagementController extends BaseController
 			$date2 = $data[$i]['timestamp'];
 
 			//시간 정하기
-			if(((strtotime($date1) - strtotime($date2)) / 3600) >= 5){
+			if(((strtotime($date1) - strtotime($date2)) / 3600) <= 5){
 				$result['aqi_data_tier_tuples'][$k]['ssn'] = $data[$i]['ssn'];
 				$result['aqi_data_tier_tuples'][$k]['wmac'] = $data[$i]['wmac'];
 				$result['aqi_data_tier_tuples'][$k]['timestamp'] = $data[$i]['timestamp'];
 				$result['aqi_data_tier_tuples'][$k]['temperature'] = $data[$i]['temperature'];
+				$result['aqi_data_tier_tuples'][$k]['humidity'] = $data[$i]['humidity'];
 				$result['aqi_data_tier_tuples'][$k]['co_aqi'] = $data[$i]['co_aqi'];
 				$result['aqi_data_tier_tuples'][$k]['o3_aqi'] = $data[$i]['o3_aqi'];
 				$result['aqi_data_tier_tuples'][$k]['no2_aqi'] = $data[$i]['no2_aqi'];
