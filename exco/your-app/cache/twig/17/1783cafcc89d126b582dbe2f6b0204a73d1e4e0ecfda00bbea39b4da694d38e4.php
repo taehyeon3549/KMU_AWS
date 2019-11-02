@@ -94,26 +94,16 @@ class __TwigTemplate_aafe76df600f41b7c23d367674c9805b29dd99492718c82eb02d24f8162
     };
     // Instantiate markers in the background and pass it back to the json object
     function createMarkers(markerJson) {
-      if (markerJson.message == \"fail\") {
-        console.log(\"데이터 없음, 맵 마크 표시 X\");
-      }
-      else {
-       // console.log(markerJson);
+      
         var length = Object.keys(markerJson).length;
 
         var contentString = [];
         var infowindow = [];
-       // var marker = [];
-        var prevPos = 0;
-
-
+        var prevPos = -1;
 
 
         for (let i = 0; i < length; i++) {
           var sensormark = markerJson[i];
-
-          //ensormark = JSON.parse(`{\${sensormark}}`);
-          //sensormark = JSON.parse(sensormark);
 
           contentString[i] =
             '<div id=\"content\">' +
@@ -185,31 +175,37 @@ class __TwigTemplate_aafe76df600f41b7c23d367674c9805b29dd99492718c82eb02d24f8162
             radius: 100
             //html: \"<span class='pogo_name'>\" + sensormark.name + \"</a></span><br />\" + sensormark.location[0] + \"<br />\"
           });
-   
+
 
 
 
           marker[i].addListener('click', function () {
-            //지금 클릭한 마크 띄우기
-            infowindow[i].open(map, marker[i]);
-            console.log(i);
-            drawStuff(markerJson[i]);
+            if (prevPos == i) {
+              //이전에 클릭된 마크 지우기
+              infowindow[prevPos].close(map, marker[prevPos]);
 
-            //지금 클릭한 마크 색상 바꾸기
-            marker[i].setOptions({
-              strokeColor: '#000000',
-              fillColor: '#000000',
-            });
+              //이전에 클릭된 마크 색상 바꾸기
+              marker[prevPos].setOptions({
+                strokeColor: '#FF0000',
+                fillColor: '#FF0000',
+              });
+              prevPos = -1;
 
-            //이전에 클릭된 마크 지우기
-            infowindow[prevPos].close(map, marker[prevPos]);
+            }
+            else {
+              //지금 클릭한 마크 띄우기
+              infowindow[i].open(map, marker[i]);
+              console.log(i);
+              drawStuff(markerJson[i]);
+              prevPos = i;
 
-            //이전에 클릭된 마크 색상 바꾸기
-            marker[prevPos].setOptions({
-              strokeColor: '#FF0000',
-              fillColor: '#FF0000',
-            });
-            prevPos = i;
+              //지금 클릭한 마크 색상 바꾸기
+              marker[i].setOptions({
+                strokeColor: '#000000',
+                fillColor: '#000000',
+              });
+            }
+
           });
         }
       }
@@ -217,12 +213,12 @@ class __TwigTemplate_aafe76df600f41b7c23d367674c9805b29dd99492718c82eb02d24f8162
 
     //모든 마커 삭제 
     function deleteMarkers() {
-   for (var i = 0; i < marker.length; i++) {
-     marker[i].setMap(null);
-   }
- 
-   marker = [];
-}
+      for (var i = 0; i < marker.length; i++) {
+        marker[i].setMap(null);
+      }
+
+      marker = [];
+    }
 
   </script>
 
@@ -236,71 +232,73 @@ class __TwigTemplate_aafe76df600f41b7c23d367674c9805b29dd99492718c82eb02d24f8162
       if (markerJson == null) {
         var sensormark = markerJson;
         console.log(\"차트 데이터 없음\");
+        document.getElementById(\"dual_x_div\").innerHTML = \"지도에 마커를 클릭해 주세요.\";
 
-        var data = new google.visualization.arrayToDataTable([
-          ['Air Elements', 'Row Data', 'CAI'],
-          ['PM2.5', 0, 0],
-          ['O3', 0, 0],
-          ['CO', 0, 0],
-          ['NO2', 0, 0],
-          ['SO2', 0, 0],
-          ['temperature', 0, 0],
-          ['CAI PM2.5', 0, 0],
-          ['CAI O3', 0, 0],
-          ['CAI CO', 0, 0],
-          ['CAI NO2', 0, 0],
-          ['CAI SO2', 0, 0]
-        ]);
-
-        var options = {
-          //width: 800,
-          chart: {
-            title: 'Historical data Air Quality',
-            subtitle: '현 날짜에 해당하는 데이터 없어서 차트 못그림. 2019-08-11 ~ 2019-08-13 조회 후 맵에 마커 클릭 하면 나옴'
-          },
-          bars: 'horizontal', // Required for Material Bar Charts.
-          series: {
-            0: { axis: 'distance' }, // Bind series 0 to an axis named 'distance'.
-            1: { axis: 'brightness' } // Bind series 1 to an axis named 'brightness'.
-          },
-          axes: {
-            x: {
-              distance: { label: 'parsecs' }, // Bottom x-axis.
-              brightness: { side: 'top', label: 'apparent magnitude' } // Top x-axis.
-            }
-          },
-          animation:{
-            startup: true,
-            duration : 1000,
-            easing: 'lineraz'
-          }
-        };
-
-
-        var chart = new google.charts.Bar(document.getElementById('dual_x_div'));
-        chart.draw(data, options);
+        /*
+                var data = new google.visualization.arrayToDataTable([
+                  ['Air Elements', 'Row Data', 'CAI'],
+                  ['PM2.5', 0, 0],
+                  ['O3', 0, 0],
+                  ['CO', 0, 0],
+                  ['NO2', 0, 0],
+                  ['SO2', 0, 0],
+                  ['temperature', 0, 0],
+                  ['CAI PM2.5', 0, 0],
+                  ['CAI O3', 0, 0],
+                  ['CAI CO', 0, 0],
+                  ['CAI NO2', 0, 0],
+                  ['CAI SO2', 0, 0]
+                ]);
+        
+                var options = {
+                  //width: 800,
+                  chart: {
+                    title: 'Historical data Air Quality',
+                    subtitle: '현 날짜에 해당하는 데이터 없어서 차트 못그림. 2019-08-11 ~ 2019-08-13 조회 후 맵에 마커 클릭 하면 나옴'
+                  },
+                  bars: 'horizontal', // Required for Material Bar Charts.
+                  series: {
+                    0: { axis: 'distance' }, // Bind series 0 to an axis named 'distance'.
+                    1: { axis: 'brightness' } // Bind series 1 to an axis named 'brightness'.
+                  },
+                  axes: {
+                    x: {
+                      distance: { label: 'parsecs' }, // Bottom x-axis.
+                      brightness: { side: 'top', label: 'apparent magnitude' } // Top x-axis.
+                    }
+                  },
+                  animation:{
+                    startup: true,
+                    duration : 1000,
+                    easing: 'lineraz'
+                  }
+                };
+        
+        
+                var chart = new google.charts.Bar(document.getElementById('dual_x_div'));
+                chart.draw(data, options);*/
       }
       else {
         var sensormark = markerJson;
         console.log(sensormark);
 
         var data = new google.visualization.arrayToDataTable([
-          ['Air Elements', 'Row Data', 'AQI'],
+          ['Air Elements', 'Row Data', 'CAI'],
           ['PM2.5', sensormark.PM2_5, 0],
           ['O3', sensormark.O3, 0],
           ['CO', sensormark.CO, 0],
           ['NO2', sensormark.NO2, 0],
           ['SO2', sensormark.SO2, 0],
           ['temperature', sensormark.Temperature, 0],
-          ['AQI PM2.5', 0, sensormark.AQ_PM2_5],
-          ['AQI O3', 0, sensormark.AQ_O3],
-          ['AQI CO', 0, sensormark.AQ_CO],
-          ['AQI NO2', 0, sensormark.AQ_NO2],
-          ['AQI SO2', 0, sensormark.AQ_SO2]
+          ['CAI PM2.5', 0, sensormark.AQ_PM2_5],
+          ['CAI O3', 0, sensormark.AQ_O3],
+          ['CAI CO', 0, sensormark.AQ_CO],
+          ['CAI NO2', 0, sensormark.AQ_NO2],
+          ['CAI SO2', 0, sensormark.AQ_SO2]
         ]);
 
         var options = {
-         // width: 800,
+          // width: 800,
           chart: {
             title: 'Historical data Air Quality',
             subtitle: 'distance on the left, brightness on the right'
@@ -345,10 +343,10 @@ class __TwigTemplate_aafe76df600f41b7c23d367674c9805b29dd99492718c82eb02d24f8162
     }
   </script>
   <nav class=\"navbar navbar-expand navbar-dark bg-dark static-top\">
-      <img src=\"http://teamc-iot.calit2.net/mail_iconn.png\" style=\"height: 48px; width:100px;background-color: #56b275;\">
+    <img src=\"http://teamc-iot.calit2.net/mail_iconn.png\" style=\"height: 48px; width:100px;background-color: #56b275;\">
     <button class=\"btn btn-link btn-sm text-white order-1 order-sm-0\" id=\"sidebarToggle\" href=\"#\">
-        <i class=\"fas fa-bars\"></i>
-      </button>
+      <i class=\"fas fa-bars\"></i>
+    </button>
     <a class=\"navbar-brand mr-1\" href=\"/maps\">Farm-ing</a>
 
 
@@ -371,14 +369,14 @@ class __TwigTemplate_aafe76df600f41b7c23d367674c9805b29dd99492718c82eb02d24f8162
 
         <!-- 회원 아이콘-->
         <div class=\"dropdown-menu dropdown-menu-right\" aria-labelledby=\"userDropdown\">
-          <a style=\"color: black\">Hi, 
+          <a style=\"color: black\">Hi,
             <script>
               var name = sessionStorage.getItem('name');
               document.write(name);
             </script>
           </a>
           <div class=\"dropdown-divider\"></div>
-          <a  style=\"color: black\" class=\"dropdown-item\" data-toggle=\"modal\" data-target=\"#logoutModal\">로그아웃</a>
+          <a style=\"color: black\" class=\"dropdown-item\" data-toggle=\"modal\" data-target=\"#logoutModal\">로그아웃</a>
         </div>
       </li>
     </ul>
@@ -387,11 +385,11 @@ class __TwigTemplate_aafe76df600f41b7c23d367674c9805b29dd99492718c82eb02d24f8162
   <div id=\"wrapper\">
     <!-- Sidebar -->
     <ul class=\"sidebar navbar-nav\">
-        <li class=\"nav-item\">
-            <a class=\"nav-link\" href=\"/maps\">
-              <i class=\"fas fa-fw fa-chart-area\"></i>
-              <span>실시간 데이터 조회</span></a>
-          </li>
+      <li class=\"nav-item\">
+        <a class=\"nav-link\" href=\"/maps\">
+          <i class=\"fas fa-fw fa-chart-area\"></i>
+          <span>실시간 데이터 조회</span></a>
+      </li>
       <li class=\"nav-item active\">
         <a class=\"nav-link\" href=\"/main\">
           <i class=\"fas fa-fw fa-tachometer-alt\"></i>
@@ -411,11 +409,6 @@ class __TwigTemplate_aafe76df600f41b7c23d367674c9805b29dd99492718c82eb02d24f8162
           <a class=\"dropdown-item\" href=\"/change_idcancellation\">회원탈퇴</a>
         </div>
       </li>
-     <!-- <li class=\"nav-item\">
-        <a class=\"nav-link\" href=\"/charts\">
-          <i class=\"fas fa-fw fa-chart-area\"></i>
-          <span>Charts</span></a>
-      </li>-->
 
     </ul>
 
@@ -430,12 +423,13 @@ class __TwigTemplate_aafe76df600f41b7c23d367674c9805b29dd99492718c82eb02d24f8162
           </div>
           <div class=\"card-body\">
             <div>
-                &nbsp;시작일 &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;종료일
+              &nbsp;시작일 &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp;
+              &nbsp; &nbsp;종료일
             </div>
             <div>
-                <input type=\"date\" id=\"start_date\" name=\"start_date\" value=\"2019-11-01\">
-              ~ <input type=\"date\" id=\"end_date\" name =\"end_date\" > &nbsp; &nbsp;<a class=\"btn btn-primary\" name=\"search\"
-              id=\"search\"> <b>조회</b></a> 
+              <input type=\"date\" id=\"start_date\" name=\"start_date\" value=\"2019-11-01\">
+              ~ <input type=\"date\" id=\"end_date\" name=\"end_date\"> &nbsp; &nbsp;<a class=\"btn btn-primary\" name=\"search\"
+                id=\"search\"> <b>조회</b></a>
             </div>
             <div>
 
@@ -443,21 +437,21 @@ class __TwigTemplate_aafe76df600f41b7c23d367674c9805b29dd99492718c82eb02d24f8162
           </div>
         </div>
         <script>
-          var now = new Date(); 
-         // document.getElementById('start_date').valueAsDate = (now.getFullYear()) + \"-\" + now.getMonth() + \"-1\" ;
+          var now = new Date();
+          // document.getElementById('start_date').valueAsDate = (now.getFullYear()) + \"-\" + now.getMonth() + \"-1\" ;
           document.getElementById('end_date').valueAsDate = new Date();
-         // console.log(end_date);    
+         // console.log(end_date);
         </script>
         <script type=\"text/javascript\">
-        
+
           document.getElementById(\"search\").addEventListener('click', function () {
             deleteMarkers();
             var start_date = new Date(\$('input[name = start_date]').val());
             var end_date = new Date(\$('input[name = end_date]').val());
             end_date.setDate(end_date.getDate() + 1);
-            end_date = end_date.toISOString().slice(0,10);
- 
-            start_date = start_date.toISOString().slice(0,10);
+            end_date = end_date.toISOString().slice(0, 10);
+
+            start_date = start_date.toISOString().slice(0, 10);
 
             console.log(start_date);
             console.log(end_date);
@@ -750,26 +744,16 @@ class __TwigTemplate_aafe76df600f41b7c23d367674c9805b29dd99492718c82eb02d24f8162
 /*     };*/
 /*     // Instantiate markers in the background and pass it back to the json object*/
 /*     function createMarkers(markerJson) {*/
-/*       if (markerJson.message == "fail") {*/
-/*         console.log("데이터 없음, 맵 마크 표시 X");*/
-/*       }*/
-/*       else {*/
-/*        // console.log(markerJson);*/
+/*       */
 /*         var length = Object.keys(markerJson).length;*/
 /* */
 /*         var contentString = [];*/
 /*         var infowindow = [];*/
-/*        // var marker = [];*/
-/*         var prevPos = 0;*/
-/* */
-/* */
+/*         var prevPos = -1;*/
 /* */
 /* */
 /*         for (let i = 0; i < length; i++) {*/
 /*           var sensormark = markerJson[i];*/
-/* */
-/*           //ensormark = JSON.parse(`{${sensormark}}`);*/
-/*           //sensormark = JSON.parse(sensormark);*/
 /* */
 /*           contentString[i] =*/
 /*             '<div id="content">' +*/
@@ -841,31 +825,37 @@ class __TwigTemplate_aafe76df600f41b7c23d367674c9805b29dd99492718c82eb02d24f8162
 /*             radius: 100*/
 /*             //html: "<span class='pogo_name'>" + sensormark.name + "</a></span><br />" + sensormark.location[0] + "<br />"*/
 /*           });*/
-/*    */
+/* */
 /* */
 /* */
 /* */
 /*           marker[i].addListener('click', function () {*/
-/*             //지금 클릭한 마크 띄우기*/
-/*             infowindow[i].open(map, marker[i]);*/
-/*             console.log(i);*/
-/*             drawStuff(markerJson[i]);*/
+/*             if (prevPos == i) {*/
+/*               //이전에 클릭된 마크 지우기*/
+/*               infowindow[prevPos].close(map, marker[prevPos]);*/
 /* */
-/*             //지금 클릭한 마크 색상 바꾸기*/
-/*             marker[i].setOptions({*/
-/*               strokeColor: '#000000',*/
-/*               fillColor: '#000000',*/
-/*             });*/
+/*               //이전에 클릭된 마크 색상 바꾸기*/
+/*               marker[prevPos].setOptions({*/
+/*                 strokeColor: '#FF0000',*/
+/*                 fillColor: '#FF0000',*/
+/*               });*/
+/*               prevPos = -1;*/
 /* */
-/*             //이전에 클릭된 마크 지우기*/
-/*             infowindow[prevPos].close(map, marker[prevPos]);*/
+/*             }*/
+/*             else {*/
+/*               //지금 클릭한 마크 띄우기*/
+/*               infowindow[i].open(map, marker[i]);*/
+/*               console.log(i);*/
+/*               drawStuff(markerJson[i]);*/
+/*               prevPos = i;*/
 /* */
-/*             //이전에 클릭된 마크 색상 바꾸기*/
-/*             marker[prevPos].setOptions({*/
-/*               strokeColor: '#FF0000',*/
-/*               fillColor: '#FF0000',*/
-/*             });*/
-/*             prevPos = i;*/
+/*               //지금 클릭한 마크 색상 바꾸기*/
+/*               marker[i].setOptions({*/
+/*                 strokeColor: '#000000',*/
+/*                 fillColor: '#000000',*/
+/*               });*/
+/*             }*/
+/* */
 /*           });*/
 /*         }*/
 /*       }*/
@@ -873,12 +863,12 @@ class __TwigTemplate_aafe76df600f41b7c23d367674c9805b29dd99492718c82eb02d24f8162
 /* */
 /*     //모든 마커 삭제 */
 /*     function deleteMarkers() {*/
-/*    for (var i = 0; i < marker.length; i++) {*/
-/*      marker[i].setMap(null);*/
-/*    }*/
-/*  */
-/*    marker = [];*/
-/* }*/
+/*       for (var i = 0; i < marker.length; i++) {*/
+/*         marker[i].setMap(null);*/
+/*       }*/
+/* */
+/*       marker = [];*/
+/*     }*/
 /* */
 /*   </script>*/
 /* */
@@ -892,71 +882,73 @@ class __TwigTemplate_aafe76df600f41b7c23d367674c9805b29dd99492718c82eb02d24f8162
 /*       if (markerJson == null) {*/
 /*         var sensormark = markerJson;*/
 /*         console.log("차트 데이터 없음");*/
+/*         document.getElementById("dual_x_div").innerHTML = "지도에 마커를 클릭해 주세요.";*/
 /* */
-/*         var data = new google.visualization.arrayToDataTable([*/
-/*           ['Air Elements', 'Row Data', 'CAI'],*/
-/*           ['PM2.5', 0, 0],*/
-/*           ['O3', 0, 0],*/
-/*           ['CO', 0, 0],*/
-/*           ['NO2', 0, 0],*/
-/*           ['SO2', 0, 0],*/
-/*           ['temperature', 0, 0],*/
-/*           ['CAI PM2.5', 0, 0],*/
-/*           ['CAI O3', 0, 0],*/
-/*           ['CAI CO', 0, 0],*/
-/*           ['CAI NO2', 0, 0],*/
-/*           ['CAI SO2', 0, 0]*/
-/*         ]);*/
-/* */
-/*         var options = {*/
-/*           //width: 800,*/
-/*           chart: {*/
-/*             title: 'Historical data Air Quality',*/
-/*             subtitle: '현 날짜에 해당하는 데이터 없어서 차트 못그림. 2019-08-11 ~ 2019-08-13 조회 후 맵에 마커 클릭 하면 나옴'*/
-/*           },*/
-/*           bars: 'horizontal', // Required for Material Bar Charts.*/
-/*           series: {*/
-/*             0: { axis: 'distance' }, // Bind series 0 to an axis named 'distance'.*/
-/*             1: { axis: 'brightness' } // Bind series 1 to an axis named 'brightness'.*/
-/*           },*/
-/*           axes: {*/
-/*             x: {*/
-/*               distance: { label: 'parsecs' }, // Bottom x-axis.*/
-/*               brightness: { side: 'top', label: 'apparent magnitude' } // Top x-axis.*/
-/*             }*/
-/*           },*/
-/*           animation:{*/
-/*             startup: true,*/
-/*             duration : 1000,*/
-/*             easing: 'lineraz'*/
-/*           }*/
-/*         };*/
-/* */
-/* */
-/*         var chart = new google.charts.Bar(document.getElementById('dual_x_div'));*/
-/*         chart.draw(data, options);*/
+/*         /**/
+/*                 var data = new google.visualization.arrayToDataTable([*/
+/*                   ['Air Elements', 'Row Data', 'CAI'],*/
+/*                   ['PM2.5', 0, 0],*/
+/*                   ['O3', 0, 0],*/
+/*                   ['CO', 0, 0],*/
+/*                   ['NO2', 0, 0],*/
+/*                   ['SO2', 0, 0],*/
+/*                   ['temperature', 0, 0],*/
+/*                   ['CAI PM2.5', 0, 0],*/
+/*                   ['CAI O3', 0, 0],*/
+/*                   ['CAI CO', 0, 0],*/
+/*                   ['CAI NO2', 0, 0],*/
+/*                   ['CAI SO2', 0, 0]*/
+/*                 ]);*/
+/*         */
+/*                 var options = {*/
+/*                   //width: 800,*/
+/*                   chart: {*/
+/*                     title: 'Historical data Air Quality',*/
+/*                     subtitle: '현 날짜에 해당하는 데이터 없어서 차트 못그림. 2019-08-11 ~ 2019-08-13 조회 후 맵에 마커 클릭 하면 나옴'*/
+/*                   },*/
+/*                   bars: 'horizontal', // Required for Material Bar Charts.*/
+/*                   series: {*/
+/*                     0: { axis: 'distance' }, // Bind series 0 to an axis named 'distance'.*/
+/*                     1: { axis: 'brightness' } // Bind series 1 to an axis named 'brightness'.*/
+/*                   },*/
+/*                   axes: {*/
+/*                     x: {*/
+/*                       distance: { label: 'parsecs' }, // Bottom x-axis.*/
+/*                       brightness: { side: 'top', label: 'apparent magnitude' } // Top x-axis.*/
+/*                     }*/
+/*                   },*/
+/*                   animation:{*/
+/*                     startup: true,*/
+/*                     duration : 1000,*/
+/*                     easing: 'lineraz'*/
+/*                   }*/
+/*                 };*/
+/*         */
+/*         */
+/*                 var chart = new google.charts.Bar(document.getElementById('dual_x_div'));*/
+/*                 chart.draw(data, options);*//* */
 /*       }*/
 /*       else {*/
 /*         var sensormark = markerJson;*/
 /*         console.log(sensormark);*/
 /* */
 /*         var data = new google.visualization.arrayToDataTable([*/
-/*           ['Air Elements', 'Row Data', 'AQI'],*/
+/*           ['Air Elements', 'Row Data', 'CAI'],*/
 /*           ['PM2.5', sensormark.PM2_5, 0],*/
 /*           ['O3', sensormark.O3, 0],*/
 /*           ['CO', sensormark.CO, 0],*/
 /*           ['NO2', sensormark.NO2, 0],*/
 /*           ['SO2', sensormark.SO2, 0],*/
 /*           ['temperature', sensormark.Temperature, 0],*/
-/*           ['AQI PM2.5', 0, sensormark.AQ_PM2_5],*/
-/*           ['AQI O3', 0, sensormark.AQ_O3],*/
-/*           ['AQI CO', 0, sensormark.AQ_CO],*/
-/*           ['AQI NO2', 0, sensormark.AQ_NO2],*/
-/*           ['AQI SO2', 0, sensormark.AQ_SO2]*/
+/*           ['CAI PM2.5', 0, sensormark.AQ_PM2_5],*/
+/*           ['CAI O3', 0, sensormark.AQ_O3],*/
+/*           ['CAI CO', 0, sensormark.AQ_CO],*/
+/*           ['CAI NO2', 0, sensormark.AQ_NO2],*/
+/*           ['CAI SO2', 0, sensormark.AQ_SO2]*/
 /*         ]);*/
 /* */
 /*         var options = {*/
-/*          // width: 800,*/
+/*           // width: 800,*/
 /*           chart: {*/
 /*             title: 'Historical data Air Quality',*/
 /*             subtitle: 'distance on the left, brightness on the right'*/
@@ -1001,10 +993,10 @@ class __TwigTemplate_aafe76df600f41b7c23d367674c9805b29dd99492718c82eb02d24f8162
 /*     }*/
 /*   </script>*/
 /*   <nav class="navbar navbar-expand navbar-dark bg-dark static-top">*/
-/*       <img src="http://teamc-iot.calit2.net/mail_iconn.png" style="height: 48px; width:100px;background-color: #56b275;">*/
+/*     <img src="http://teamc-iot.calit2.net/mail_iconn.png" style="height: 48px; width:100px;background-color: #56b275;">*/
 /*     <button class="btn btn-link btn-sm text-white order-1 order-sm-0" id="sidebarToggle" href="#">*/
-/*         <i class="fas fa-bars"></i>*/
-/*       </button>*/
+/*       <i class="fas fa-bars"></i>*/
+/*     </button>*/
 /*     <a class="navbar-brand mr-1" href="/maps">Farm-ing</a>*/
 /* */
 /* */
@@ -1027,14 +1019,14 @@ class __TwigTemplate_aafe76df600f41b7c23d367674c9805b29dd99492718c82eb02d24f8162
 /* */
 /*         <!-- 회원 아이콘-->*/
 /*         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">*/
-/*           <a style="color: black">Hi, */
+/*           <a style="color: black">Hi,*/
 /*             <script>*/
 /*               var name = sessionStorage.getItem('name');*/
 /*               document.write(name);*/
 /*             </script>*/
 /*           </a>*/
 /*           <div class="dropdown-divider"></div>*/
-/*           <a  style="color: black" class="dropdown-item" data-toggle="modal" data-target="#logoutModal">로그아웃</a>*/
+/*           <a style="color: black" class="dropdown-item" data-toggle="modal" data-target="#logoutModal">로그아웃</a>*/
 /*         </div>*/
 /*       </li>*/
 /*     </ul>*/
@@ -1043,11 +1035,11 @@ class __TwigTemplate_aafe76df600f41b7c23d367674c9805b29dd99492718c82eb02d24f8162
 /*   <div id="wrapper">*/
 /*     <!-- Sidebar -->*/
 /*     <ul class="sidebar navbar-nav">*/
-/*         <li class="nav-item">*/
-/*             <a class="nav-link" href="/maps">*/
-/*               <i class="fas fa-fw fa-chart-area"></i>*/
-/*               <span>실시간 데이터 조회</span></a>*/
-/*           </li>*/
+/*       <li class="nav-item">*/
+/*         <a class="nav-link" href="/maps">*/
+/*           <i class="fas fa-fw fa-chart-area"></i>*/
+/*           <span>실시간 데이터 조회</span></a>*/
+/*       </li>*/
 /*       <li class="nav-item active">*/
 /*         <a class="nav-link" href="/main">*/
 /*           <i class="fas fa-fw fa-tachometer-alt"></i>*/
@@ -1067,11 +1059,6 @@ class __TwigTemplate_aafe76df600f41b7c23d367674c9805b29dd99492718c82eb02d24f8162
 /*           <a class="dropdown-item" href="/change_idcancellation">회원탈퇴</a>*/
 /*         </div>*/
 /*       </li>*/
-/*      <!-- <li class="nav-item">*/
-/*         <a class="nav-link" href="/charts">*/
-/*           <i class="fas fa-fw fa-chart-area"></i>*/
-/*           <span>Charts</span></a>*/
-/*       </li>-->*/
 /* */
 /*     </ul>*/
 /* */
@@ -1086,12 +1073,13 @@ class __TwigTemplate_aafe76df600f41b7c23d367674c9805b29dd99492718c82eb02d24f8162
 /*           </div>*/
 /*           <div class="card-body">*/
 /*             <div>*/
-/*                 &nbsp;시작일 &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;종료일*/
+/*               &nbsp;시작일 &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp;*/
+/*               &nbsp; &nbsp;종료일*/
 /*             </div>*/
 /*             <div>*/
-/*                 <input type="date" id="start_date" name="start_date" value="2019-11-01">*/
-/*               ~ <input type="date" id="end_date" name ="end_date" > &nbsp; &nbsp;<a class="btn btn-primary" name="search"*/
-/*               id="search"> <b>조회</b></a> */
+/*               <input type="date" id="start_date" name="start_date" value="2019-11-01">*/
+/*               ~ <input type="date" id="end_date" name="end_date"> &nbsp; &nbsp;<a class="btn btn-primary" name="search"*/
+/*                 id="search"> <b>조회</b></a>*/
 /*             </div>*/
 /*             <div>*/
 /* */
@@ -1099,21 +1087,21 @@ class __TwigTemplate_aafe76df600f41b7c23d367674c9805b29dd99492718c82eb02d24f8162
 /*           </div>*/
 /*         </div>*/
 /*         <script>*/
-/*           var now = new Date(); */
-/*          // document.getElementById('start_date').valueAsDate = (now.getFullYear()) + "-" + now.getMonth() + "-1" ;*/
+/*           var now = new Date();*/
+/*           // document.getElementById('start_date').valueAsDate = (now.getFullYear()) + "-" + now.getMonth() + "-1" ;*/
 /*           document.getElementById('end_date').valueAsDate = new Date();*/
-/*          // console.log(end_date);    */
+/*          // console.log(end_date);*/
 /*         </script>*/
 /*         <script type="text/javascript">*/
-/*         */
+/* */
 /*           document.getElementById("search").addEventListener('click', function () {*/
 /*             deleteMarkers();*/
 /*             var start_date = new Date($('input[name = start_date]').val());*/
 /*             var end_date = new Date($('input[name = end_date]').val());*/
 /*             end_date.setDate(end_date.getDate() + 1);*/
-/*             end_date = end_date.toISOString().slice(0,10);*/
-/*  */
-/*             start_date = start_date.toISOString().slice(0,10);*/
+/*             end_date = end_date.toISOString().slice(0, 10);*/
+/* */
+/*             start_date = start_date.toISOString().slice(0, 10);*/
 /* */
 /*             console.log(start_date);*/
 /*             console.log(end_date);*/

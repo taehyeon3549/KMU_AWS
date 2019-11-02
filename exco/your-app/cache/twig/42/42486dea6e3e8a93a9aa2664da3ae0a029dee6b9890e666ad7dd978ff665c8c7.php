@@ -157,6 +157,10 @@ class __TwigTemplate_989ee3a49e37c0d41887f039c1fb82da98460089bc51ff9a29acba9bc0b
           '<th> Temperature </th>' +
           '<th>' + sensormark['temperature'] + '</th>' +
           '</tr>' +
+          '<tr>' +
+          '<th> Humidity </th>' +
+          '<th>' + sensormark['humidity'] + '</th>' +
+          '</tr>' +
           '</tbody>' +
           '</table>' +
           '</div>' +
@@ -331,7 +335,7 @@ class __TwigTemplate_989ee3a49e37c0d41887f039c1fb82da98460089bc51ff9a29acba9bc0b
                 <thead>
                   <tr>
                     <th width=\"100px\">원소</th>
-                    <th width=\"200px\">CAI DATA</th>
+                    <th width=\"150px\">CAI DATA</th>
                   </tr>
                   <tr >
                     <th>O3</th>
@@ -360,6 +364,10 @@ class __TwigTemplate_989ee3a49e37c0d41887f039c1fb82da98460089bc51ff9a29acba9bc0b
                   <tr>
                     <th>Temperature</th>
                     <th id=\"tem\"></th>
+                  </tr>
+                  <tr>
+                    <th>Humidity</th>
+                    <th id=\"Humidity\"></th>
                   </tr>
                   <tr>
                       <td  colspan=\"2\"><img src=\"http://13.125.112.70/cai3.png\"></td>
@@ -409,7 +417,9 @@ class __TwigTemplate_989ee3a49e37c0d41887f039c1fb82da98460089bc51ff9a29acba9bc0b
             else {
               num = chartdata;
               console.log(num);
+              clearTimeout(chart_settime);
               chart_re();
+              
               i = 0
             }
           }
@@ -439,7 +449,8 @@ class __TwigTemplate_989ee3a49e37c0d41887f039c1fb82da98460089bc51ff9a29acba9bc0b
           data.addColumn('number', 'CAI_SO2');
           data.addColumn('number', 'CAI_PM2.5');
           data.addColumn('number', 'CAI_PM10');
-          data.addColumn('number', 'temperature');
+          data.addColumn('number', 'Temperature');
+          data.addColumn('number', 'Humidity');
 
           var dataRow = [];
           var x = 0;
@@ -451,7 +462,7 @@ class __TwigTemplate_989ee3a49e37c0d41887f039c1fb82da98460089bc51ff9a29acba9bc0b
           }
           for (x; x <= i; x++) {
             var c_data = temp_data[x];
-            dataRow = [new Date(c_data.timestamp), c_data.o3_aqi, c_data.co_aqi, c_data.no2_aqi, c_data.so2_aqi, c_data.pm25_aqi, c_data.pm10_aqi, c_data.temperature];
+            dataRow = [new Date(c_data.timestamp), c_data.o3_aqi, c_data.co_aqi, c_data.no2_aqi, c_data.so2_aqi, c_data.pm25_aqi, c_data.pm10_aqi, c_data.temperature,c_data.humidity];
             data.addRow(dataRow);
           }
 
@@ -461,11 +472,11 @@ class __TwigTemplate_989ee3a49e37c0d41887f039c1fb82da98460089bc51ff9a29acba9bc0b
             isStacked: 'percent',
             focusTarget: 'category',
             height: 500,
-            width: 800,
-            legend: { position: \"top\", textStyle: { fontSize: 12 } },
+            width: 820,
+            legend: { position: \"top\", textStyle: { fontSize: 11 } },
             pointSize: 5,
             chartArea: {'width': '90%', 'height': '80%'},
-            tooltip: { textStyle: { fontSize: 12 }, showColorCode: true, trigger: 'both' },
+            tooltip: { textStyle: { fontSize: 11 }, showColorCode: true, trigger: 'both' },
             hAxis: {
               format: chartDateformat, gridlines: {
                 count: chartLineCount, units: {
@@ -600,6 +611,10 @@ class __TwigTemplate_989ee3a49e37c0d41887f039c1fb82da98460089bc51ff9a29acba9bc0b
           else if (table_data.pm10_aqi <= 251) {
             PM10.style.color = \"#ff0000\";
           }
+
+          var Humidity = document.getElementById('Humidity');
+          var text = table_data.humidity;
+          Humidity.innerHTML = text;
 
           var TEM = document.getElementById('tem');
           var text = table_data.temperature;
@@ -853,6 +868,10 @@ class __TwigTemplate_989ee3a49e37c0d41887f039c1fb82da98460089bc51ff9a29acba9bc0b
 /*           '<th> Temperature </th>' +*/
 /*           '<th>' + sensormark['temperature'] + '</th>' +*/
 /*           '</tr>' +*/
+/*           '<tr>' +*/
+/*           '<th> Humidity </th>' +*/
+/*           '<th>' + sensormark['humidity'] + '</th>' +*/
+/*           '</tr>' +*/
 /*           '</tbody>' +*/
 /*           '</table>' +*/
 /*           '</div>' +*/
@@ -1027,7 +1046,7 @@ class __TwigTemplate_989ee3a49e37c0d41887f039c1fb82da98460089bc51ff9a29acba9bc0b
 /*                 <thead>*/
 /*                   <tr>*/
 /*                     <th width="100px">원소</th>*/
-/*                     <th width="200px">CAI DATA</th>*/
+/*                     <th width="150px">CAI DATA</th>*/
 /*                   </tr>*/
 /*                   <tr >*/
 /*                     <th>O3</th>*/
@@ -1056,6 +1075,10 @@ class __TwigTemplate_989ee3a49e37c0d41887f039c1fb82da98460089bc51ff9a29acba9bc0b
 /*                   <tr>*/
 /*                     <th>Temperature</th>*/
 /*                     <th id="tem"></th>*/
+/*                   </tr>*/
+/*                   <tr>*/
+/*                     <th>Humidity</th>*/
+/*                     <th id="Humidity"></th>*/
 /*                   </tr>*/
 /*                   <tr>*/
 /*                       <td  colspan="2"><img src="http://13.125.112.70/cai3.png"></td>*/
@@ -1105,7 +1128,9 @@ class __TwigTemplate_989ee3a49e37c0d41887f039c1fb82da98460089bc51ff9a29acba9bc0b
 /*             else {*/
 /*               num = chartdata;*/
 /*               console.log(num);*/
+/*               clearTimeout(chart_settime);*/
 /*               chart_re();*/
+/*               */
 /*               i = 0*/
 /*             }*/
 /*           }*/
@@ -1135,7 +1160,8 @@ class __TwigTemplate_989ee3a49e37c0d41887f039c1fb82da98460089bc51ff9a29acba9bc0b
 /*           data.addColumn('number', 'CAI_SO2');*/
 /*           data.addColumn('number', 'CAI_PM2.5');*/
 /*           data.addColumn('number', 'CAI_PM10');*/
-/*           data.addColumn('number', 'temperature');*/
+/*           data.addColumn('number', 'Temperature');*/
+/*           data.addColumn('number', 'Humidity');*/
 /* */
 /*           var dataRow = [];*/
 /*           var x = 0;*/
@@ -1147,7 +1173,7 @@ class __TwigTemplate_989ee3a49e37c0d41887f039c1fb82da98460089bc51ff9a29acba9bc0b
 /*           }*/
 /*           for (x; x <= i; x++) {*/
 /*             var c_data = temp_data[x];*/
-/*             dataRow = [new Date(c_data.timestamp), c_data.o3_aqi, c_data.co_aqi, c_data.no2_aqi, c_data.so2_aqi, c_data.pm25_aqi, c_data.pm10_aqi, c_data.temperature];*/
+/*             dataRow = [new Date(c_data.timestamp), c_data.o3_aqi, c_data.co_aqi, c_data.no2_aqi, c_data.so2_aqi, c_data.pm25_aqi, c_data.pm10_aqi, c_data.temperature,c_data.humidity];*/
 /*             data.addRow(dataRow);*/
 /*           }*/
 /* */
@@ -1157,11 +1183,11 @@ class __TwigTemplate_989ee3a49e37c0d41887f039c1fb82da98460089bc51ff9a29acba9bc0b
 /*             isStacked: 'percent',*/
 /*             focusTarget: 'category',*/
 /*             height: 500,*/
-/*             width: 800,*/
-/*             legend: { position: "top", textStyle: { fontSize: 12 } },*/
+/*             width: 820,*/
+/*             legend: { position: "top", textStyle: { fontSize: 11 } },*/
 /*             pointSize: 5,*/
 /*             chartArea: {'width': '90%', 'height': '80%'},*/
-/*             tooltip: { textStyle: { fontSize: 12 }, showColorCode: true, trigger: 'both' },*/
+/*             tooltip: { textStyle: { fontSize: 11 }, showColorCode: true, trigger: 'both' },*/
 /*             hAxis: {*/
 /*               format: chartDateformat, gridlines: {*/
 /*                 count: chartLineCount, units: {*/
@@ -1296,6 +1322,10 @@ class __TwigTemplate_989ee3a49e37c0d41887f039c1fb82da98460089bc51ff9a29acba9bc0b
 /*           else if (table_data.pm10_aqi <= 251) {*/
 /*             PM10.style.color = "#ff0000";*/
 /*           }*/
+/* */
+/*           var Humidity = document.getElementById('Humidity');*/
+/*           var text = table_data.humidity;*/
+/*           Humidity.innerHTML = text;*/
 /* */
 /*           var TEM = document.getElementById('tem');*/
 /*           var text = table_data.temperature;*/
