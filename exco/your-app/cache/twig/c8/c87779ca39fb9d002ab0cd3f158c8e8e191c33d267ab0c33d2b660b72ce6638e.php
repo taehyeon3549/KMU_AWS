@@ -34,6 +34,12 @@ class __TwigTemplate_240ac3e3b79fd730d48ece11f9ef5b46ee4d5728d0093834f1b15951b7e
 
   <!-- Custom styles for this template-->
   <link href=\"css/sb-admin.css\" rel=\"stylesheet\">
+  <style>
+      body {
+        background-image: url(\"http://13.125.112.70/main.png\");
+        background-size: 100% 100%;
+      }
+    </style>
 
 </head>
 
@@ -148,6 +154,12 @@ class __TwigTemplate_240ac3e3b79fd730d48ece11f9ef5b46ee4d5728d0093834f1b15951b7e
 /* */
 /*   <!-- Custom styles for this template-->*/
 /*   <link href="css/sb-admin.css" rel="stylesheet">*/
+/*   <style>*/
+/*       body {*/
+/*         background-image: url("http://13.125.112.70/main.png");*/
+/*         background-size: 100% 100%;*/
+/*       }*/
+/*     </style>*/
 /* */
 /* </head>*/
 /* */

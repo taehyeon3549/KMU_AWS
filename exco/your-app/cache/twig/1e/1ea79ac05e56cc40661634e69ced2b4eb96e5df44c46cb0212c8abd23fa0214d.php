@@ -34,19 +34,27 @@ class __TwigTemplate_7c7fa7cea38cd491fbc0c6de1c5461c7c9d7bddeee63302dec4107377aa
 
   <!-- Custom styles for this template-->
   <link href=\"css/sb-admin.css\" rel=\"stylesheet\">
+  <style>
+      body{
+        background-image: url(\"http://13.125.112.70/main.png\");
+        background-size: 100% 100%;
+      }
+      </style>
 
 </head>
 
-<body class=\"bg-dark\">
+<body class=\"bg-main\">
   <div class=\"container\">
-    <div class=\"card card-login mx-auto mt-5\" style=\"border-color: #01E1A5;\">
-      <img src=\"http://teamc-iot.calit2.net/mail_iconn.png\" style=\"height: 200px;background-color: #01dea5;\">
-    </div>
     <div class=\"card card-login mx-auto mt-5\" style=\"margin-top: 5px;\">
-      <div class=\"card-header\">회원가입</div>
+        <div  style=\"border-color: #ffffff;\">
+            <img src=\"http://13.125.112.70/mail_iconn.png\" style=\"max-width: 100%; height: auto;\">
+            <img src=\"http://13.125.112.70/main_text.png\" style=\"max-width: 100%; height: auto;\">
+         
+        </div>
       <div class=\"card-body\">
         <div class=\"text-center mb-4\">
-          <p>우리는 당신의 이메일 주소로 인증 URL을 보냈습니다! 가입 이메일을 확인하세요.</p>
+          <h4>회원가입</h4>
+          <p>우리는 당신의 이메일로 인증 URL을 보냈습니다! 가입 이메일을 확인하세요.</p>
         </div>
         <form>
           <div class=\"form-group\">
@@ -98,19 +106,27 @@ class __TwigTemplate_7c7fa7cea38cd491fbc0c6de1c5461c7c9d7bddeee63302dec4107377aa
 /* */
 /*   <!-- Custom styles for this template-->*/
 /*   <link href="css/sb-admin.css" rel="stylesheet">*/
+/*   <style>*/
+/*       body{*/
+/*         background-image: url("http://13.125.112.70/main.png");*/
+/*         background-size: 100% 100%;*/
+/*       }*/
+/*       </style>*/
 /* */
 /* </head>*/
 /* */
-/* <body class="bg-dark">*/
+/* <body class="bg-main">*/
 /*   <div class="container">*/
-/*     <div class="card card-login mx-auto mt-5" style="border-color: #01E1A5;">*/
-/*       <img src="http://teamc-iot.calit2.net/mail_iconn.png" style="height: 200px;background-color: #01dea5;">*/
-/*     </div>*/
 /*     <div class="card card-login mx-auto mt-5" style="margin-top: 5px;">*/
-/*       <div class="card-header">회원가입</div>*/
+/*         <div  style="border-color: #ffffff;">*/
+/*             <img src="http://13.125.112.70/mail_iconn.png" style="max-width: 100%; height: auto;">*/
+/*             <img src="http://13.125.112.70/main_text.png" style="max-width: 100%; height: auto;">*/
+/*          */
+/*         </div>*/
 /*       <div class="card-body">*/
 /*         <div class="text-center mb-4">*/
-/*           <p>우리는 당신의 이메일 주소로 인증 URL을 보냈습니다! 가입 이메일을 확인하세요.</p>*/
+/*           <h4>회원가입</h4>*/
+/*           <p>우리는 당신의 이메일로 인증 URL을 보냈습니다! 가입 이메일을 확인하세요.</p>*/
 /*         </div>*/
 /*         <form>*/
 /*           <div class="form-group">*/

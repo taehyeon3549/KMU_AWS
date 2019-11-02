@@ -129,7 +129,7 @@ class __TwigTemplate_aafe76df600f41b7c23d367674c9805b29dd99492718c82eb02d24f8162
             '<tr>' +
             '<th>원소</th>' +
             '<th>측정값</th>' +
-            '<th>AQI</th>' +
+            '<th>CAI</th>' +
             '</tr>' +
             '</thead>' +
             '<tbody>' +
@@ -238,18 +238,18 @@ class __TwigTemplate_aafe76df600f41b7c23d367674c9805b29dd99492718c82eb02d24f8162
         console.log(\"차트 데이터 없음\");
 
         var data = new google.visualization.arrayToDataTable([
-          ['Air Elements', 'Row Data', 'AQI'],
+          ['Air Elements', 'Row Data', 'CAI'],
           ['PM2.5', 0, 0],
           ['O3', 0, 0],
           ['CO', 0, 0],
           ['NO2', 0, 0],
           ['SO2', 0, 0],
           ['temperature', 0, 0],
-          ['AQI PM2.5', 0, 0],
-          ['AQI O3', 0, 0],
-          ['AQI CO', 0, 0],
-          ['AQI NO2', 0, 0],
-          ['AQI SO2', 0, 0]
+          ['CAI PM2.5', 0, 0],
+          ['CAI O3', 0, 0],
+          ['CAI CO', 0, 0],
+          ['CAI NO2', 0, 0],
+          ['CAI SO2', 0, 0]
         ]);
 
         var options = {
@@ -345,7 +345,7 @@ class __TwigTemplate_aafe76df600f41b7c23d367674c9805b29dd99492718c82eb02d24f8162
     }
   </script>
   <nav class=\"navbar navbar-expand navbar-dark bg-dark static-top\">
-    <img src=\"http://13.125.112.70/mail_iconn.png\" style=\"height: 48px; width:100px;background-color: #56b275;\">
+      <img src=\"http://teamc-iot.calit2.net/mail_iconn.png\" style=\"height: 48px; width:100px;background-color: #56b275;\">
     <button class=\"btn btn-link btn-sm text-white order-1 order-sm-0\" id=\"sidebarToggle\" href=\"#\">
         <i class=\"fas fa-bars\"></i>
       </button>
@@ -433,7 +433,7 @@ class __TwigTemplate_aafe76df600f41b7c23d367674c9805b29dd99492718c82eb02d24f8162
                 &nbsp;시작일 &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;종료일
             </div>
             <div>
-                <input type=\"date\" id=\"start_date\" name=\"start_date\" value=\"2019-10-01\">
+                <input type=\"date\" id=\"start_date\" name=\"start_date\" value=\"2019-11-01\">
               ~ <input type=\"date\" id=\"end_date\" name =\"end_date\" > &nbsp; &nbsp;<a class=\"btn btn-primary\" name=\"search\"
               id=\"search\"> <b>조회</b></a> 
             </div>
@@ -512,7 +512,7 @@ class __TwigTemplate_aafe76df600f41b7c23d367674c9805b29dd99492718c82eb02d24f8162
           </div>
           <div class=\"card-body\">
             <!-- 차트 그림은 이거 복붙-->
-            <div id=\"dual_x_div\" style=\"width: 1500px; height: 500px; margin-left: 60px;\"></div>
+            <div id=\"dual_x_div\" style=\"width: 1100px; height: 500px; margin-left: 60px;\"></div>
           </div>
         </div>
 
@@ -785,7 +785,7 @@ class __TwigTemplate_aafe76df600f41b7c23d367674c9805b29dd99492718c82eb02d24f8162
 /*             '<tr>' +*/
 /*             '<th>원소</th>' +*/
 /*             '<th>측정값</th>' +*/
-/*             '<th>AQI</th>' +*/
+/*             '<th>CAI</th>' +*/
 /*             '</tr>' +*/
 /*             '</thead>' +*/
 /*             '<tbody>' +*/
@@ -894,18 +894,18 @@ class __TwigTemplate_aafe76df600f41b7c23d367674c9805b29dd99492718c82eb02d24f8162
 /*         console.log("차트 데이터 없음");*/
 /* */
 /*         var data = new google.visualization.arrayToDataTable([*/
-/*           ['Air Elements', 'Row Data', 'AQI'],*/
+/*           ['Air Elements', 'Row Data', 'CAI'],*/
 /*           ['PM2.5', 0, 0],*/
 /*           ['O3', 0, 0],*/
 /*           ['CO', 0, 0],*/
 /*           ['NO2', 0, 0],*/
 /*           ['SO2', 0, 0],*/
 /*           ['temperature', 0, 0],*/
-/*           ['AQI PM2.5', 0, 0],*/
-/*           ['AQI O3', 0, 0],*/
-/*           ['AQI CO', 0, 0],*/
-/*           ['AQI NO2', 0, 0],*/
-/*           ['AQI SO2', 0, 0]*/
+/*           ['CAI PM2.5', 0, 0],*/
+/*           ['CAI O3', 0, 0],*/
+/*           ['CAI CO', 0, 0],*/
+/*           ['CAI NO2', 0, 0],*/
+/*           ['CAI SO2', 0, 0]*/
 /*         ]);*/
 /* */
 /*         var options = {*/
@@ -1001,7 +1001,7 @@ class __TwigTemplate_aafe76df600f41b7c23d367674c9805b29dd99492718c82eb02d24f8162
 /*     }*/
 /*   </script>*/
 /*   <nav class="navbar navbar-expand navbar-dark bg-dark static-top">*/
-/*     <img src="http://13.125.112.70/mail_iconn.png" style="height: 48px; width:100px;background-color: #56b275;">*/
+/*       <img src="http://teamc-iot.calit2.net/mail_iconn.png" style="height: 48px; width:100px;background-color: #56b275;">*/
 /*     <button class="btn btn-link btn-sm text-white order-1 order-sm-0" id="sidebarToggle" href="#">*/
 /*         <i class="fas fa-bars"></i>*/
 /*       </button>*/
@@ -1089,7 +1089,7 @@ class __TwigTemplate_aafe76df600f41b7c23d367674c9805b29dd99492718c82eb02d24f8162
 /*                 &nbsp;시작일 &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;종료일*/
 /*             </div>*/
 /*             <div>*/
-/*                 <input type="date" id="start_date" name="start_date" value="2019-10-01">*/
+/*                 <input type="date" id="start_date" name="start_date" value="2019-11-01">*/
 /*               ~ <input type="date" id="end_date" name ="end_date" > &nbsp; &nbsp;<a class="btn btn-primary" name="search"*/
 /*               id="search"> <b>조회</b></a> */
 /*             </div>*/
@@ -1168,7 +1168,7 @@ class __TwigTemplate_aafe76df600f41b7c23d367674c9805b29dd99492718c82eb02d24f8162
 /*           </div>*/
 /*           <div class="card-body">*/
 /*             <!-- 차트 그림은 이거 복붙-->*/
-/*             <div id="dual_x_div" style="width: 1500px; height: 500px; margin-left: 60px;"></div>*/
+/*             <div id="dual_x_div" style="width: 1100px; height: 500px; margin-left: 60px;"></div>*/
 /*           </div>*/
 /*         </div>*/
 /* */

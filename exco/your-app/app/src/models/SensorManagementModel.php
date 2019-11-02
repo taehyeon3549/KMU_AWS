@@ -276,9 +276,9 @@ final class SensorManagementModel extends BaseModel
 		$str = explode('_', $sensor['sensor_name']);
 
 		if($str[0] == "Air"){
-			$sql = "SELECT * FROM Air_Sensor_value WHERE a_ssn = ? and a_time >= ? and a_time < ? ORDER BY a_no DESC";
+			$sql = "SELECT * FROM Air_Sensor_value WHERE a_ssn = ? and a_time >= ? and a_time <= ? ORDER BY a_no DESC";
 		}else{
-			$sql = "SELECT * FROM Polar_Sensor_value WHERE p_ssn = ? and p_time >= ? and p_time < ? ORDER BY p_no DESC";
+			$sql = "SELECT * FROM Polar_Sensor_value WHERE p_ssn = ? and p_time >= ? and p_time <= ? ORDER BY p_no DESC";
 		}
 		$sth = $this->db->prepare($sql);
 
@@ -335,22 +335,27 @@ final class SensorManagementModel extends BaseModel
 		// 		where a_time >= ? and a_time < ? and a_latitude like ? and a_longitude like ?
 		// 		group by a_latitude, a_longitude;
 		// 		";
-		
-		//2019-10-27 between으로 변경 성철
-		
-		$sql = "SELECT *, max(AQ_PM2_5) as AQ_PM2_5, MAX(AQ_O3) as AQ_O3, MAX(AQ_CO) as AQ_CO, MAX(AQ_NO2) as AQ_NO2, MAX(AQ_SO2) as AQ_SO2
-		FROM Air_Sensor_value where a_time between ? and ? and a_latitude like ? and a_longitude like ? group by a_latitude, a_longitude;";
-		
+	
+		//print_r("\n SSN는 : ".$val['ssn']."\n");
+		//print_r("시작날짜 : ".$val['date']."\n");
+		//print_r("끝 날짜 : ".$val['tomorrow']."\n");
+
+		$sql = "SELECT * , max(a.AQ_PM2_5) as AQ_PM2_5, MAX(a.AQ_O3) as AQ_O3, MAX(a.AQ_CO) as AQ_CO, MAX(a.AQ_NO2) as AQ_NO2, MAX(a.AQ_SO2) as AQ_SO2
+				from (select *
+						from Air_Sensor_value
+						where a_time between ? and ? 
+					)AS a
+				where a_ssn = ?";
+
 		$sth = $this->db->prepare($sql);
 
-		$sth->execute(array($val['date'], $val['tomorrow'], $val['lati'], $val['longi']));
+		$sth->execute(array($val['date'], $val['tomorrow'], $val['ssn']));
 
 		$result = $sth->fetchAll();
-
-		//print_r(array($val['date'], $val['tomorrow'], $val['lati'], $val['longi']));
-
-		//print_r($result);
 		
+		//print_r($result);
+		//print_r("끝");
+
 		return $result;
 	}
 

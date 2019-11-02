@@ -83,7 +83,8 @@ class __TwigTemplate_989ee3a49e37c0d41887f039c1fb82da98460089bc51ff9a29acba9bc0b
 
       \$.ajax({
         method: \"GET\",
-        url: \"http://somnium.me:8089/aqi_simulator_v_1_0\",
+        url: \"http://somnium.me:8089/aqi_simulator_v_1_0\", //준희형
+    //  url :\"http://13.125.112.70/Realdata\", // 태현
         dataType: \"json\"
       }).done(function (data) {
         createMarkersTest(data);
@@ -124,45 +125,37 @@ class __TwigTemplate_989ee3a49e37c0d41887f039c1fb82da98460089bc51ff9a29acba9bc0b
           '<thead>' +
           '<tr>' +
           '<th>원소</th>' +
-          '<th>측정값</th>' +
           '<th>CAI</th>' +
           '</tr>' +
           '</thead>' +
           '<tbody>' +
           '<tr>' +
           '<th> O3 </th>' +
-          '<th>' + \"temp\" + '</th>' +
           '<th id = \"aq\">' + sensormark['o3_aqi'] + '</th>' +
           '</tr>' +
           '<tr>' +
           '<th> CO </th>' +
-          '<th>' + \"temp\" + '</th>' +
           '<th id = \"aq\">' + sensormark['co_aqi'] + '</th>' +
           '</tr>' +
           '<tr>' +
           '<th> NO2 </th>' +
-          '<th>' + \"temp\" + '</th>' +
           '<th id = \"aq\">' + sensormark['no2_aqi'] + '</th>' +
           '</tr>' +
           '<tr>' +
           '<th> SO2 </th>' +
-          '<th>' + \"temp\" + '</th>' +
           '<th id = \"aq\">' + sensormark['so2_aqi'] + '</th>' +
           '</tr>' +
           '<tr>' +
           '<th> PM2.5 </th>' +
-          '<th>' + \"temp\" + '</th>' +
           '<th id = \"aq\">' + sensormark['pm25_aqi'] + '</th>' +
           '</tr>' +
           '<tr>' +
           '<th> PM10 </th>' +
-          '<th>' + \"temp\" + '</th>' +
           '<th id = \"aq\">' + sensormark['pm10_aqi'] + '</th>' +
           '</tr>' +
           '<tr>' +
           '<th> Temperature </th>' +
           '<th>' + sensormark['temperature'] + '</th>' +
-          '<th>-</th>' +
           '</tr>' +
           '</tbody>' +
           '</table>' +
@@ -333,7 +326,7 @@ class __TwigTemplate_989ee3a49e37c0d41887f039c1fb82da98460089bc51ff9a29acba9bc0b
         <div class=\"card-body\">
           <div id=\"chart_div\" style=\"float:left;\"></div>
           <div class=\"table-responsive2\" style=\" float: right; margin-top: 20px;margin-right: 30px;\">
-              <table class=\"table table-bordered\" id=\"dataTable\" width=\"500px\" cellspacing=\"0\"
+              <table class=\"table table-bordered\" id=\"dataTable\" cellspacing=\"0\"
                 style=\"text-align: center;\">
                 <thead>
                   <tr>
@@ -386,8 +379,9 @@ class __TwigTemplate_989ee3a49e37c0d41887f039c1fb82da98460089bc51ff9a29acba9bc0b
         // 차트 새로고침 통신 함수
         function chart_re() {
           \$.ajax({
-            method: \"GET\",
-            url: \"http://somnium.me:8089/aqi_simulator_v_1_0\",
+            method: \"GET\", 
+            url: \"http://somnium.me:8089/aqi_simulator_v_1_0\",  //준희형
+        //   url :\"http://13.125.112.70/Realdata\", // 태현
             dataType: \"json\"
           }).done(function (data) {
             aqi_chart(data);
@@ -449,15 +443,15 @@ class __TwigTemplate_989ee3a49e37c0d41887f039c1fb82da98460089bc51ff9a29acba9bc0b
 
           var dataRow = [];
           var x = 0;
-          if (i < 9) {
+          if (i < 7) {
             x = 0;
           }
           else {
-            x = i - 9;
+            x = i - 7;
           }
           for (x; x <= i; x++) {
             var c_data = temp_data[x];
-            dataRow = [new Date(c_data.timestamp), c_data.o3_aqi, c_data.co_aqi, c_data.no2_aqi, 20, c_data.pm25_aqi, c_data.pm10_aqi, c_data.temperature];
+            dataRow = [new Date(c_data.timestamp), c_data.o3_aqi, c_data.co_aqi, c_data.no2_aqi, c_data.so2_aqi, c_data.pm25_aqi, c_data.pm10_aqi, c_data.temperature];
             data.addRow(dataRow);
           }
 
@@ -467,9 +461,10 @@ class __TwigTemplate_989ee3a49e37c0d41887f039c1fb82da98460089bc51ff9a29acba9bc0b
             isStacked: 'percent',
             focusTarget: 'category',
             height: 500,
-            width: 1200,
-            legend: { position: \"top\", textStyle: { fontSize: 13 } },
+            width: 800,
+            legend: { position: \"top\", textStyle: { fontSize: 12 } },
             pointSize: 5,
+            chartArea: {'width': '90%', 'height': '80%'},
             tooltip: { textStyle: { fontSize: 12 }, showColorCode: true, trigger: 'both' },
             hAxis: {
               format: chartDateformat, gridlines: {
@@ -784,7 +779,8 @@ class __TwigTemplate_989ee3a49e37c0d41887f039c1fb82da98460089bc51ff9a29acba9bc0b
 /* */
 /*       $.ajax({*/
 /*         method: "GET",*/
-/*         url: "http://somnium.me:8089/aqi_simulator_v_1_0",*/
+/*         url: "http://somnium.me:8089/aqi_simulator_v_1_0", //준희형*/
+/*     //  url :"http://13.125.112.70/Realdata", // 태현*/
 /*         dataType: "json"*/
 /*       }).done(function (data) {*/
 /*         createMarkersTest(data);*/
@@ -825,45 +821,37 @@ class __TwigTemplate_989ee3a49e37c0d41887f039c1fb82da98460089bc51ff9a29acba9bc0b
 /*           '<thead>' +*/
 /*           '<tr>' +*/
 /*           '<th>원소</th>' +*/
-/*           '<th>측정값</th>' +*/
 /*           '<th>CAI</th>' +*/
 /*           '</tr>' +*/
 /*           '</thead>' +*/
 /*           '<tbody>' +*/
 /*           '<tr>' +*/
 /*           '<th> O3 </th>' +*/
-/*           '<th>' + "temp" + '</th>' +*/
 /*           '<th id = "aq">' + sensormark['o3_aqi'] + '</th>' +*/
 /*           '</tr>' +*/
 /*           '<tr>' +*/
 /*           '<th> CO </th>' +*/
-/*           '<th>' + "temp" + '</th>' +*/
 /*           '<th id = "aq">' + sensormark['co_aqi'] + '</th>' +*/
 /*           '</tr>' +*/
 /*           '<tr>' +*/
 /*           '<th> NO2 </th>' +*/
-/*           '<th>' + "temp" + '</th>' +*/
 /*           '<th id = "aq">' + sensormark['no2_aqi'] + '</th>' +*/
 /*           '</tr>' +*/
 /*           '<tr>' +*/
 /*           '<th> SO2 </th>' +*/
-/*           '<th>' + "temp" + '</th>' +*/
 /*           '<th id = "aq">' + sensormark['so2_aqi'] + '</th>' +*/
 /*           '</tr>' +*/
 /*           '<tr>' +*/
 /*           '<th> PM2.5 </th>' +*/
-/*           '<th>' + "temp" + '</th>' +*/
 /*           '<th id = "aq">' + sensormark['pm25_aqi'] + '</th>' +*/
 /*           '</tr>' +*/
 /*           '<tr>' +*/
 /*           '<th> PM10 </th>' +*/
-/*           '<th>' + "temp" + '</th>' +*/
 /*           '<th id = "aq">' + sensormark['pm10_aqi'] + '</th>' +*/
 /*           '</tr>' +*/
 /*           '<tr>' +*/
 /*           '<th> Temperature </th>' +*/
 /*           '<th>' + sensormark['temperature'] + '</th>' +*/
-/*           '<th>-</th>' +*/
 /*           '</tr>' +*/
 /*           '</tbody>' +*/
 /*           '</table>' +*/
@@ -1034,7 +1022,7 @@ class __TwigTemplate_989ee3a49e37c0d41887f039c1fb82da98460089bc51ff9a29acba9bc0b
 /*         <div class="card-body">*/
 /*           <div id="chart_div" style="float:left;"></div>*/
 /*           <div class="table-responsive2" style=" float: right; margin-top: 20px;margin-right: 30px;">*/
-/*               <table class="table table-bordered" id="dataTable" width="500px" cellspacing="0"*/
+/*               <table class="table table-bordered" id="dataTable" cellspacing="0"*/
 /*                 style="text-align: center;">*/
 /*                 <thead>*/
 /*                   <tr>*/
@@ -1087,8 +1075,9 @@ class __TwigTemplate_989ee3a49e37c0d41887f039c1fb82da98460089bc51ff9a29acba9bc0b
 /*         // 차트 새로고침 통신 함수*/
 /*         function chart_re() {*/
 /*           $.ajax({*/
-/*             method: "GET",*/
-/*             url: "http://somnium.me:8089/aqi_simulator_v_1_0",*/
+/*             method: "GET", */
+/*             url: "http://somnium.me:8089/aqi_simulator_v_1_0",  //준희형*/
+/*         //   url :"http://13.125.112.70/Realdata", // 태현*/
 /*             dataType: "json"*/
 /*           }).done(function (data) {*/
 /*             aqi_chart(data);*/
@@ -1150,15 +1139,15 @@ class __TwigTemplate_989ee3a49e37c0d41887f039c1fb82da98460089bc51ff9a29acba9bc0b
 /* */
 /*           var dataRow = [];*/
 /*           var x = 0;*/
-/*           if (i < 9) {*/
+/*           if (i < 7) {*/
 /*             x = 0;*/
 /*           }*/
 /*           else {*/
-/*             x = i - 9;*/
+/*             x = i - 7;*/
 /*           }*/
 /*           for (x; x <= i; x++) {*/
 /*             var c_data = temp_data[x];*/
-/*             dataRow = [new Date(c_data.timestamp), c_data.o3_aqi, c_data.co_aqi, c_data.no2_aqi, 20, c_data.pm25_aqi, c_data.pm10_aqi, c_data.temperature];*/
+/*             dataRow = [new Date(c_data.timestamp), c_data.o3_aqi, c_data.co_aqi, c_data.no2_aqi, c_data.so2_aqi, c_data.pm25_aqi, c_data.pm10_aqi, c_data.temperature];*/
 /*             data.addRow(dataRow);*/
 /*           }*/
 /* */
@@ -1168,9 +1157,10 @@ class __TwigTemplate_989ee3a49e37c0d41887f039c1fb82da98460089bc51ff9a29acba9bc0b
 /*             isStacked: 'percent',*/
 /*             focusTarget: 'category',*/
 /*             height: 500,*/
-/*             width: 1200,*/
-/*             legend: { position: "top", textStyle: { fontSize: 13 } },*/
+/*             width: 800,*/
+/*             legend: { position: "top", textStyle: { fontSize: 12 } },*/
 /*             pointSize: 5,*/
+/*             chartArea: {'width': '90%', 'height': '80%'},*/
 /*             tooltip: { textStyle: { fontSize: 12 }, showColorCode: true, trigger: 'both' },*/
 /*             hAxis: {*/
 /*               format: chartDateformat, gridlines: {*/

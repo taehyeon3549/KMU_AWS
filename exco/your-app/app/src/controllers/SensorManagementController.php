@@ -336,11 +336,13 @@ final class SensorManagementController extends BaseController
 					$result['message'][$i]['co'] = $data[$i]['a_CO'];
 					$result['message'][$i]['no2'] = $data[$i]['a_NO2'];
 					$result['message'][$i]['so2'] = $data[$i]['a_SO2'];
+					$result['message'][$i]['humidity'] = $data[$i]['a_humidity'];
 					$result['message'][$i]['temperture'] = $data[$i]['a_Temperture'];
 					$result['message'][$i]['latitude'] = $data[$i]['a_latitude'];
 					$result['message'][$i]['longitude'] = $data[$i]['a_longitude'];
 					$result['message'][$i]['time'] = $data[$i]['a_time'];
 					$result['message'][$i]['aq_pm2_5'] = $data[$i]['AQ_PM2_5'];
+					$result['message'][$i]['aq_pm10'] = $data[$i]['AQ_PM10'];
 					$result['message'][$i]['aq_o3'] = $data[$i]['AQ_O3'];
 					$result['message'][$i]['aq_co'] = $data[$i]['AQ_CO'];
 					$result['message'][$i]['aq_no2'] = $data[$i]['AQ_NO2'];
@@ -400,6 +402,7 @@ final class SensorManagementController extends BaseController
 		$val['date'] =$request->getParsedBody()['date'];	//입력
 		$val['tomorrow'] = $request->getParsedBody()['tomorrow'];	//입력	
 
+		//유저에 해당하는 센서 모두 들고 오기
 		$result1 = $this->SensorManagementModel->getSensorByusn($usn);
 		$sensor_num = count($result1);
 
@@ -409,65 +412,49 @@ final class SensorManagementController extends BaseController
 		for($i = 0; $i< $sensor_num; $i++){
 			$sensor_loc = $this->SensorManagementModel->location($result1[$i]['SSN']);
 
+			//값이 비어있는 ssn은 제외 시키고
 			if($sensor_loc != null){
 				$val['lati'] = $sensor_loc['a_latitude'];	//입력
 				$val['longi'] = $sensor_loc['a_longitude'];	//입력
+				$val['ssn'] = $result1[$i]['SSN'];
+				
 
 				//echo("AQI 가져옴");
 				//print_r($val);		//입력값 정상
+				
 				$value = $this->SensorManagementModel->getAQI($val)[0];
 
-				
-				if($value != null){
-					$r_ssn = $value['a_ssn'];
-					$a_PM_2_5 = $value['a_PM2_5'];
-					$a_O3 = $value['a_O3'];
-					$a_CO = $value['a_CO'];
-					$a_NO2 = $value['a_NO2'];
-					$a_SO2 = $value['a_SO2'];
-					$a_Temperature = $value['a_Temperture'];
-					
-					$AQ_PM2_5 = $value['AQ_PM2_5'];
-					$AQ_O3 = $value['AQ_O3'];
-					$AQ_CO= $value['AQ_CO'];
-					$AQ_NO2= $value['AQ_NO2'];
-					$AQ_SO2= $value['AQ_SO2'];
-
-					$result[$i]['r_ssn'] = $r_ssn;
-					$result[$i]['PM2_5'] = $a_PM_2_5;
-					$result[$i]['O3'] = $a_O3;
-					$result[$i]['CO'] = $a_CO;
-					$result[$i]['NO2'] = $a_NO2;
-					$result[$i]['SO2'] = $a_SO2;
-					$result[$i]['Temperature'] = $a_Temperature;
-					
-					
-					
-					
-					
+				if($value['a_ssn'] != null){
+					$result[$i]['r_ssn'] = $value['a_ssn'];
+					$result[$i]['PM2_5'] = $value['a_PM2_5'];
+					$result[$i]['O3'] = $value['a_O3'];
+					$result[$i]['CO'] = $value['a_CO'];
+					$result[$i]['NO2'] = $value['a_NO2'];
+					$result[$i]['SO2'] = $value['a_SO2'];
+					$result[$i]['Temperature'] = $value['a_Temperture'];
+					$result[$i]['humidity'] = $value['a_humidity'];
 					$result[$i]['latitude'] = $value['a_latitude'];
 					$result[$i]['longitude'] = $value['a_longitude'];
-					$result[$i]['AQ_PM2_5'] = $AQ_PM2_5;
-					$result[$i]['AQ_CO'] = $AQ_CO;
-					$result[$i]['AQ_O3'] = $AQ_O3;
-					$result[$i]['AQ_NO2'] = $AQ_NO2;
-					$result[$i]['AQ_SO2'] = $AQ_SO2;
-
-					//print_r($result[0]['latitude']);
-
-				}else{
-					$result['message'] = "fail";
-					$result['result'] = "1";
+					$result[$i]['AQ_PM2_5'] = $value['AQ_PM2_5'];
+					$result[$i]['AQ_PM2_5'] = $value['AQ_PM10'];
+					$result[$i]['AQ_CO'] = $value['AQ_CO'];
+					$result[$i]['AQ_O3'] = $value['AQ_O3'];
+					$result[$i]['AQ_NO2'] = $value['AQ_NO2'];
+					$result[$i]['AQ_SO2'] = $value['AQ_SO2'];
+					
 				}
+				
 			}				
-			}			
-
+		}			
 		return $response->withStatus(200)
 		->withHeader('Content-Type', 'application/json')
 		->write(json_encode($result, JSON_NUMERIC_CHECK));
 		// return $request->getParsedBody()['usn'];
+		
+		
 	}
 
+	/*
 	//getAQI
 	public function getAQI(Request $request, Response $response, $args)
 	{
@@ -503,7 +490,7 @@ final class SensorManagementController extends BaseController
 		->withHeader('Content-Type', 'application/json')
 		->write(json_encode($result, JSON_NUMERIC_CHECK));
 	}
-
+*/
 	//getAQI
 	public function getAQI__(Request $request, Response $response, $args)
 	{

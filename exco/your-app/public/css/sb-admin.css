@@ -2007,7 +2007,7 @@ pre code {
 
 .table-responsive2 {
   display: block;
-  width: 400px;
+  width: auto;
   overflow-x: auto;
   -webkit-overflow-scrolling: touch;
 }

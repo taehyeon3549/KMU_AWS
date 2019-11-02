@@ -113,7 +113,7 @@ class __TwigTemplate_d14d65f01c58b3720dde430a5f9a2cd1aa7849bb81840cf56ce3b78549b
           <a class=\"d-block small mt-3\" href=\"/register_email\">지금 가입하시겠습니까??</a>
         </div>
         <div class=\"text-left\">
-          <a class=\"d-block small mt-3\" href=\"/\">로그인 하시겠습니까??></a>
+          <a class=\"d-block small mt-3\" href=\"/\">로그인 하시겠습니까??</a>
         </div>
       </div>
     </div>
@@ -238,7 +238,7 @@ class __TwigTemplate_d14d65f01c58b3720dde430a5f9a2cd1aa7849bb81840cf56ce3b78549b
 /*           <a class="d-block small mt-3" href="/register_email">지금 가입하시겠습니까??</a>*/
 /*         </div>*/
 /*         <div class="text-left">*/
-/*           <a class="d-block small mt-3" href="/">로그인 하시겠습니까??></a>*/
+/*           <a class="d-block small mt-3" href="/">로그인 하시겠습니까??</a>*/
 /*         </div>*/
 /*       </div>*/
 /*     </div>*/

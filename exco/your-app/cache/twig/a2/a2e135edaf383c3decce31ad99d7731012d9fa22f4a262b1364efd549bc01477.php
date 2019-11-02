@@ -42,7 +42,12 @@ class __TwigTemplate_39bed4abda6a040347657946f96b97d801e7b670c5d49b4bf82472a28dd
   <script src=\"http://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js\"></script>
 
 
-
+  <style>
+      body {
+        background-image: url(\"http://13.125.112.70/main.png\");
+        background-size: 100% 100%;
+      }
+    </style>
 
 </head>
 
@@ -55,7 +60,7 @@ class __TwigTemplate_39bed4abda6a040347657946f96b97d801e7b670c5d49b4bf82472a28dd
           <div class=\"form-group\">
             <div class=\"form-label-group\">
               <input type=\"email\" name= \"email\" id=\"inputEmail\" class=\"form-control\" placeholder=\"Email address\" required=\"required\" value=";
-        // line 39
+        // line 44
         echo twig_escape_filter($this->env, (isset($context["email"]) ? $context["email"] : null), "html", null, true);
         echo ">
               <?php
@@ -215,7 +220,7 @@ class __TwigTemplate_39bed4abda6a040347657946f96b97d801e7b670c5d49b4bf82472a28dd
 
     public function getDebugInfo()
     {
-        return array (  59 => 39,  19 => 1,);
+        return array (  64 => 44,  19 => 1,);
     }
 }
 /* <html lang="en">*/
@@ -244,7 +249,12 @@ class __TwigTemplate_39bed4abda6a040347657946f96b97d801e7b670c5d49b4bf82472a28dd
 /*   <script src="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>*/
 /* */
 /* */
-/* */
+/*   <style>*/
+/*       body {*/
+/*         background-image: url("http://13.125.112.70/main.png");*/
+/*         background-size: 100% 100%;*/
+/*       }*/
+/*     </style>*/
 /* */
 /* </head>*/
 /* */

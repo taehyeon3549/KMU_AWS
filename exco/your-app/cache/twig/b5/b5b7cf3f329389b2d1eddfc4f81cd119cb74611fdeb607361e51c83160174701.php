@@ -46,17 +46,18 @@ class __TwigTemplate_580b9942e00b8ac7662fcb608a9774a3664b4ee2e6bc624a9c4c2352226
 <body class=\"bg-main\">
   <div class=\"container\">
     <div class=\"card card-login mx-auto mt-5\" style=\"margin-top: 5px;\">
-     <!-- <div class=\"card-header\">회원가입</div>-->
+      <!-- <div class=\"card-header\">회원가입</div>-->
       <div style=\"border-color: #ffffff;\">
         <img src=\"http://13.125.112.70/mail_iconn.png\" style=\"max-width: 100%; height: auto;\">
         <img src=\"http://13.125.112.70/main_text.png\" style=\"max-width: 100%; height: auto;\">
 
       </div>
       <div class=\"card-body\">
-        <div class=\"mb-4\">
-          <P style=\"text-align: center;\"><b>회원가입</b></P>
-          <p style=\"text-align: center;\">중복 확인을 위해서 이메일 주소를 입력하세요.</p>
+        <div class=\"text-center mb-4\">
+          <h4>회원가입</h4>
+          <p>중복 확인을 위해서 이메일 주소를 입력하세요.</p>
         </div>
+
         <form>
           <div class=\"form-group\">
           </div>
@@ -103,7 +104,7 @@ class __TwigTemplate_580b9942e00b8ac7662fcb608a9774a3664b4ee2e6bc624a9c4c2352226
 
 
         <div class=\"text-left\">
-          <a class=\"d-block small mt-3\" href=\"/\">로그인 하시겠습니까??></a>
+          <a class=\"d-block small mt-3\" href=\"/\">로그인 하시겠습니까??</a>
         </div>
         <div class=\"text-left\">
           <a class=\"d-block small\" href=\"/forgot-password\">비밀번호를 잊으셨나요??</a>
@@ -164,17 +165,18 @@ class __TwigTemplate_580b9942e00b8ac7662fcb608a9774a3664b4ee2e6bc624a9c4c2352226
 /* <body class="bg-main">*/
 /*   <div class="container">*/
 /*     <div class="card card-login mx-auto mt-5" style="margin-top: 5px;">*/
-/*      <!-- <div class="card-header">회원가입</div>-->*/
+/*       <!-- <div class="card-header">회원가입</div>-->*/
 /*       <div style="border-color: #ffffff;">*/
 /*         <img src="http://13.125.112.70/mail_iconn.png" style="max-width: 100%; height: auto;">*/
 /*         <img src="http://13.125.112.70/main_text.png" style="max-width: 100%; height: auto;">*/
 /* */
 /*       </div>*/
 /*       <div class="card-body">*/
-/*         <div class="mb-4">*/
-/*           <P style="text-align: center;"><b>회원가입</b></P>*/
-/*           <p style="text-align: center;">중복 확인을 위해서 이메일 주소를 입력하세요.</p>*/
+/*         <div class="text-center mb-4">*/
+/*           <h4>회원가입</h4>*/
+/*           <p>중복 확인을 위해서 이메일 주소를 입력하세요.</p>*/
 /*         </div>*/
+/* */
 /*         <form>*/
 /*           <div class="form-group">*/
 /*           </div>*/
@@ -221,7 +223,7 @@ class __TwigTemplate_580b9942e00b8ac7662fcb608a9774a3664b4ee2e6bc624a9c4c2352226
 /* */
 /* */
 /*         <div class="text-left">*/
-/*           <a class="d-block small mt-3" href="/">로그인 하시겠습니까??></a>*/
+/*           <a class="d-block small mt-3" href="/">로그인 하시겠습니까??</a>*/
 /*         </div>*/
 /*         <div class="text-left">*/
 /*           <a class="d-block small" href="/forgot-password">비밀번호를 잊으셨나요??</a>*/
