@@ -268,7 +268,7 @@ final class SensorManagementController extends BaseController
 		//print_r($data);
 
 		//결과값
-		$result['aqi_data_tier_tuples'] = [];
+		$result['aqi_data_tier_tuples'] = null;
 
 		$k = 0;
 
@@ -292,9 +292,9 @@ final class SensorManagementController extends BaseController
 				$result['aqi_data_tier_tuples'][$k]['pm10_aqi'] = $data[$i]['pm10_aqi'];
 				$result['aqi_data_tier_tuples'][$k]['lat'] = $data[$i]['lat'];
 				$result['aqi_data_tier_tuples'][$k]['lng'] = $data[$i]['lng'];
-			}
 
-			$k += 1;
+				$k += 1;
+			}
 		}
 
 		$k = 0;
@@ -305,7 +305,60 @@ final class SensorManagementController extends BaseController
 		->withHeader('Content-Type', 'application/json')
 		->write(json_encode($result, JSON_NUMERIC_CHECK));
 	}
+	/*
+	//2019-10-27
+	// 수정	
+	//RealData	
+	public function Realdata(Request $request, Response $response, $args)
+	{
+		$senosr = [];
 
+		$sensor['ssn'] = $request->getParsedBody()['ssn'];
+		$sensor['sensor_name'] = $request->getParsedBody()['sensor_name'];
+
+		$data = $this->SensorManagementModel->Realdata($sensor);
+		
+		//print_r($data);
+
+		//결과값
+		$result1['aqi_data_tier_tuples'] = [];
+		//$result = [];
+		$k = 0;
+
+		//갱신 시간과 삽입 시간의 차이가 5시간 이상인 값들은 제외하고 반환
+		for($i = 0; $i < count($data); $i++){
+			$date1 = $data[$i]['insert_time'];
+			$date2 = $data[$i]['timestamp'];
+
+			//시간 정하기
+			if(((strtotime($date1) - strtotime($date2)) / 3600) <= 5){
+				$result1['aqi_data_tier_tuples'][$k]['ssn'] = $data[$i]['ssn'];
+				$result1['aqi_data_tier_tuples'][$k]['wmac'] = $data[$i]['wmac'];
+				$result1['aqi_data_tier_tuples'][$k]['timestamp'] = $data[$i]['timestamp'];
+				$result1['aqi_data_tier_tuples'][$k]['temperature'] = $data[$i]['temperature'];
+				$result1['aqi_data_tier_tuples'][$k]['humidity'] = $data[$i]['humidity'];
+				$result1['aqi_data_tier_tuples'][$k]['co_aqi'] = $data[$i]['co_aqi'];
+				$result1['aqi_data_tier_tuples'][$k]['o3_aqi'] = $data[$i]['o3_aqi'];
+				$result1['aqi_data_tier_tuples'][$k]['no2_aqi'] = $data[$i]['no2_aqi'];
+				$result1['aqi_data_tier_tuples'][$k]['so2_aqi'] = $data[$i]['so2_aqi'];
+				$result1['aqi_data_tier_tuples'][$k]['pm25_aqi'] = $data[$i]['pm25_aqi'];
+				$result1['aqi_data_tier_tuples'][$k]['pm10_aqi'] = $data[$i]['pm10_aqi'];
+				$result1['aqi_data_tier_tuples'][$k]['lat'] = $data[$i]['lat'];
+				$result1['aqi_data_tier_tuples'][$k]['lng'] = $data[$i]['lng'];
+			}
+
+			$k += 1;
+		}
+
+		$k = 0;
+
+		//print_r($result1);
+
+		return $response->withStatus(200)
+		->withHeader('Content-Type', 'application/json')
+		->write(json_encode($result1, JSON_NUMERIC_CHECK));
+	}
+*/
 	//////////////////////////////////////////////////////////////
 
 	//showHistodata	
