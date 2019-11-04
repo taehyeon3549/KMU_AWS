@@ -459,6 +459,10 @@ final class SensorManagementController extends BaseController
 		$result1 = $this->SensorManagementModel->getSensorByusn($usn);
 		$sensor_num = count($result1);
 
+		//결과값 찍어낼 index
+		$location_index = 0;
+
+		//print_r($sensor_num); 
 		//$sensor_loc;
 
 		//각 센서 의 usn을 이용하여 위치값을 가져오고
@@ -467,6 +471,8 @@ final class SensorManagementController extends BaseController
 
 			//값이 비어있는 ssn은 제외 시키고
 			if($sensor_loc != null){
+				//print_r("갯수");
+
 				$val['lati'] = $sensor_loc['a_latitude'];	//입력
 				$val['longi'] = $sensor_loc['a_longitude'];	//입력
 				$val['ssn'] = $result1[$i]['SSN'];
@@ -478,27 +484,32 @@ final class SensorManagementController extends BaseController
 				$value = $this->SensorManagementModel->getAQI($val)[0];
 
 				if($value['a_ssn'] != null){
-					$result[$i]['r_ssn'] = $value['a_ssn'];
-					$result[$i]['PM2_5'] = $value['a_PM2_5'];
-					$result[$i]['O3'] = $value['a_O3'];
-					$result[$i]['CO'] = $value['a_CO'];
-					$result[$i]['NO2'] = $value['a_NO2'];
-					$result[$i]['SO2'] = $value['a_SO2'];
-					$result[$i]['Temperature'] = $value['a_Temperture'];
-					$result[$i]['humidity'] = $value['a_humidity'];
-					$result[$i]['latitude'] = $value['a_latitude'];
-					$result[$i]['longitude'] = $value['a_longitude'];
-					$result[$i]['AQ_PM2_5'] = $value['AQ_PM2_5'];
-					$result[$i]['AQ_PM2_5'] = $value['AQ_PM10'];
-					$result[$i]['AQ_CO'] = $value['AQ_CO'];
-					$result[$i]['AQ_O3'] = $value['AQ_O3'];
-					$result[$i]['AQ_NO2'] = $value['AQ_NO2'];
-					$result[$i]['AQ_SO2'] = $value['AQ_SO2'];
+					$result[$location_index]['r_ssn'] = $value['a_ssn'];
+					$result[$location_index]['PM2_5'] = $value['a_PM2_5'];
+					$result[$location_index]['O3'] = $value['a_O3'];
+					$result[$location_index]['CO'] = $value['a_CO'];
+					$result[$location_index]['NO2'] = $value['a_NO2'];
+					$result[$location_index]['SO2'] = $value['a_SO2'];
+					$result[$location_index]['Temperature'] = $value['a_Temperture'];
+					$result[$location_index]['humidity'] = $value['a_humidity'];
+					$result[$location_index]['latitude'] = $value['a_latitude'];
+					$result[$location_index]['longitude'] = $value['a_longitude'];
+					$result[$location_index]['AQ_PM2_5'] = $value['AQ_PM2_5'];
+					$result[$location_index]['AQ_PM2_5'] = $value['AQ_PM10'];
+					$result[$location_index]['AQ_CO'] = $value['AQ_CO'];
+					$result[$location_index]['AQ_O3'] = $value['AQ_O3'];
+					$result[$location_index]['AQ_NO2'] = $value['AQ_NO2'];
+					$result[$location_index]['AQ_SO2'] = $value['AQ_SO2'];
 					
+					$location_index  += 1;
 				}
 				
 			}				
-		}			
+		}
+		
+		//location_index 초기화
+		$location_index = 0;
+		
 		return $response->withStatus(200)
 		->withHeader('Content-Type', 'application/json')
 		->write(json_encode($result, JSON_NUMERIC_CHECK));

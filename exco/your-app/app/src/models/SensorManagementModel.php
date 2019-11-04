@@ -431,6 +431,8 @@ final class SensorManagementModel extends BaseModel
 
 		$result = $sth->fetchAll();
 		
+		//print_r($result[0]);
+
 		return $result[0];
 	}
 
