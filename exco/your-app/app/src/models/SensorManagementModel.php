@@ -270,7 +270,116 @@ final class SensorManagementModel extends BaseModel
 
 		return $result;
 	}
+	/*
+	//RealData 2019-10-27
+	//show realData
+	public function Realdata($sensor){
+		//ssn 다 가져오기
+		$sql = "SELECT SSN FROM Sensor GROUP BY SSN ASC";
+		$sth = $this->db->prepare($sql);
+		$sth->execute();
+		$result = $sth->fetchAll();
 
+		$ssn = [];
+		$data = [];		//data는 이중 배열
+
+		//ssn 배열에 넣음
+		for($i = 0; $i < count($result); $i++){
+			$ssn[$i] = $result[$i];	
+		}		
+
+		//ssn에 해당하는 AIR 값들 불러와서 Realtime data 에 넣어주기
+		//ssn, wmac, timestamp, a_humidity, temperature, co_aqi, o3_aqi, no2_aqi, pm25_aqi, pm10_aqi, lat, lng, insert_time
+		// insert_time 는 입력하는 시간때
+		$sql = "SELECT a_time, a_Temperture, a_humidity, AQ_CO, AQ_O3, AQ_NO2, AQ_SO2, AQ_PM2_5, AQ_PM10, a_latitude, a_longitude 
+				FROM `teamc-2019summer`.Air_Sensor_value WHERE a_ssn = ? GROUP BY a_time DESC LIMIT 1";
+		$sth = $this->db->prepare($sql);
+		
+		for($i = 0; $i < count($ssn); $i++){			
+			$sth->execute(array($ssn[$i]['SSN']));
+			$result = $sth->fetchAll();
+			
+			
+			//반환 받는 값이 비었는지 있는지 체크
+			if($result != NULL){
+				//$data 에 ssn과 결과 값을 넣음
+				//0: ssn, 1: 쿼리결과, 3: realtime table 삽입시간
+				$data[$i][0] = $ssn[$i];
+				$data[$i][1] = $result[0];
+				$data[$i][2] = date("Y-m-d H:i:s");
+			}
+			
+		}
+		//자료 출력 완료
+		//print_r($data);
+
+		//Realtime_data 테이블에 자료 입력
+		//조건 ssn에 해당하는 값이 이미 있는가 체크 하여 있으면, 수정
+		//없다면 삽입
+		$sql = "SELECT ssn FROM Realtime_data GROUP BY ssn ASC";
+		$sth = $this->db->prepare($sql);
+		$sth->execute();
+		$result = $sth->fetchAll();
+
+		$k = 0;
+
+		while($k<count($data)){
+			if(($result[$k]['ssn'] - $data[$k][0]['SSN']) == 0){
+				//갱신
+				//print_r("있음");
+					
+				$sql = "UPDATE Realtime_data SET wmac = 'TTTTTT', timestamp = ?, temperature = ?, humidity = ?, co_aqi = ?, o3_aqi = ?, 
+						no2_aqi = ?, so2_aqi = ?, pm25_aqi = ?, pm10_aqi = ?, lat = ?, lng = ?, insert_time = ?
+						WHERE ssn = ?";
+				$sth = $this->db->prepare($sql);
+					
+				$sth->execute(array($data[$k][1]['a_time'], $data[$k][1]['a_Temperture'], $data[$k][1]['a_humidity'], $data[$k][1]['AQ_CO'], 
+									$data[$k][1]['AQ_O3'], $data[$k][1]['AQ_NO2'], $data[$k][1]['AQ_SO2'], $data[$k][1]['AQ_PM2_5'],
+									$data[$k][1]['AQ_PM10'],$data[$k][1]['a_latitude'], $data[$k][1]['a_longitude'],
+									$data[$k][2], $data[$k][0]['SSN']));
+			}else{
+				//삽입
+				//print_r("없음");
+					
+				$sql = "INSERT INTO Realtime_data
+						(ssn, wmac, timestamp, temperature, humidity, co_aqi, o3_aqi, no2_aqi, 
+						, so2_aqi, pm25_aqi, pm10_aqi, lat, lng, insert_time)
+						values (?,'TTTTTT',?,?,?,?,?,?,?,?,?,?,?,?)";
+				$sth = $this->db->prepare($sql);
+
+				//print_r(array($data[$k]));
+
+				
+				$sth->execute(array($data[$k][0]['SSN'], $data[$k][1]['a_time'], $data[$k][1]['a_Temperture'], $data[$k][1]['a_humidity'], $data[$k][1]['AQ_CO'], 
+							$data[$k][1]['AQ_O3'], $data[$k][1]['AQ_NO2'], $data[$k][1]['AQ_SO2'], $data[$k][1]['AQ_PM2_5'],
+							$data[$k][1]['AQ_PM10'],$data[$k][1]['a_latitude'], $data[$k][1]['a_longitude'],
+							$data[$k][2]));
+				
+
+				// result 갱신
+				$sql = "SELECT ssn FROM Realtime_data GROUP BY ssn ASC";
+				$sth = $this->db->prepare($sql);
+				$sth->execute();
+				$result = $sth->fetchAll();				
+			}
+
+			$k += 1;
+		}		
+
+		//최종 결과 반환
+		$sql = "SELECT * FROM Realtime_data";
+		$sth = $this->db->prepare($sql);				
+		$sth->execute();
+		$result = $sth->fetchAll();
+
+		//초기화
+		$k = 0;	
+
+		//print_r($result);
+
+		return $result;
+	}
+*/
 	//show histodata
 	public function showHistodata($sensor){
 		$str = explode('_', $sensor['sensor_name']);
