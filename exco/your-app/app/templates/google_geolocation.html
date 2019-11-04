@@ -31,7 +31,7 @@
       var options = {
         //Center : QI(Calit2)
         center: { lat: 35.866, lng: 128.5986 }, // 대구
-      //center: { lat: 32.8826247, lng: -117.2367698 },  // ucsd
+      // center: { lat: 32.8826247, lng: -117.2367698 },  // ucsd
         zoom: 15,
         mapTypeId: google.maps.MapTypeId.TERRAIN
       }
@@ -48,12 +48,11 @@
 
       $.ajax({
         method: "GET",
-        // url: "http://somnium.me:8089/aqi_simulator_v_1_0", //준희형
-       url :"http://13.125.112.70/Realdata", // 태현
+         url: "http://somnium.me:8089/aqi_simulator_v_1_0", //준희형
+     // url :"http://13.125.112.70/Realdata", // 태현
         dataType: "json"
       }).done(function (data) {
         createMarkersTest(data);
-       // console.log(data.aqi_data_tier_tuples);
         //drawStuff(data); 
       }).fail((msg) => {
         console.log(msg);
@@ -65,7 +64,6 @@
     var marker = []; // 마커지우기 위해서 전역변수 선언
     //Jack test
     function createMarkersTest(markerJson) {
-      console.log(markerJson);
 
       deleteMarkers();  // 지도에 모든 마커 지움, setTimeOurt으로 리프래쉬 할때 마커 안지우면 계속 겹쳐서 생성 됨
 
@@ -355,8 +353,8 @@
         function chart_re() {
           $.ajax({
             method: "GET", 
-           // url: "http://somnium.me:8089/aqi_simulator_v_1_0",  //준희형
-          url :"http://13.125.112.70/Realdata", // 태현
+            url: "http://somnium.me:8089/aqi_simulator_v_1_0",  //준희형
+         // url :"http://13.125.112.70/Realdata", // 태현
             dataType: "json"
           }).done(function (data) {
             aqi_chart(data);
@@ -400,7 +398,7 @@
         function aqi_chart(chartdata) {
           //console.log(num);
           //날짜형식 변경하고 싶으시면 이 부분 수정하세요.
-          var chartDateformat = 'yyyy-MM-dd-hh:mm:ss';
+          var chartDateformat = 'yyyy-MM-dd-hh:mm';
           //라인차트의 라인 수
           var chartLineCount = 10;
 
@@ -409,7 +407,6 @@
           var data = new google.visualization.DataTable();
           console.log(temp_data[i]);
 
-         
           data.addColumn('date', '날짜');
           data.addColumn('number', 'CAI_O3');
           data.addColumn('number', 'CAI_CO');
@@ -428,16 +425,12 @@
           else {
             x = i - 7;
           }
-         
           for (x; x <= i; x++) {
             var c_data = temp_data[x];
-            var xDate = new Date(c_data.timestamp);
-            xDate.setSeconds(xDate.getSeconds() + x);
-          //  console.log(xDate);
-            dataRow = [xDate, c_data.o3_aqi, c_data.co_aqi, c_data.no2_aqi, c_data.so2_aqi, c_data.pm25_aqi, c_data.pm10_aqi, c_data.temperature,c_data.humidity];
+            dataRow = [new Date(c_data.timestamp), c_data.o3_aqi, c_data.co_aqi, c_data.no2_aqi, c_data.so2_aqi, c_data.pm25_aqi, c_data.pm10_aqi, c_data.temperature,c_data.humidity];
             data.addRow(dataRow);
           }
-        
+
           i++;
 
           var options = {

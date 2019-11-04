@@ -94,12 +94,14 @@ class __TwigTemplate_aafe76df600f41b7c23d367674c9805b29dd99492718c82eb02d24f8162
     };
     // Instantiate markers in the background and pass it back to the json object
     function createMarkers(markerJson) {
-      
+      {
+        // console.log(markerJson);
         var length = Object.keys(markerJson).length;
 
         var contentString = [];
         var infowindow = [];
         var prevPos = -1;
+        var prevPos2 = 0;
 
 
         for (let i = 0; i < length; i++) {
@@ -152,6 +154,11 @@ class __TwigTemplate_aafe76df600f41b7c23d367674c9805b29dd99492718c82eb02d24f8162
             '<th> Temperature </th>' +
             '<th>' + sensormark['Temperature'] + '</th>' +
             '<th>-</th>' +
+            '<tr>' +
+            '<th> Humidity </th>' +
+            '<th>' + sensormark['humidity'] + '</th>' +
+            '<th>-</th>' +
+            '</tr>' +
             '</tr>' +
             '</tbody>' +
             '</table>' +
@@ -180,32 +187,57 @@ class __TwigTemplate_aafe76df600f41b7c23d367674c9805b29dd99492718c82eb02d24f8162
 
 
           marker[i].addListener('click', function () {
-            if (prevPos == i) {
-              //이전에 클릭된 마크 지우기
-              infowindow[prevPos].close(map, marker[prevPos]);
+            if (length == 1) {
+              if (prevPos == i) {
+                //이전에 클릭된 마크 지우기
+                infowindow[prevPos].close(map, marker[prevPos]);
 
-              //이전에 클릭된 마크 색상 바꾸기
-              marker[prevPos].setOptions({
-                strokeColor: '#FF0000',
-                fillColor: '#FF0000',
-              });
-              prevPos = -1;
+                //이전에 클릭된 마크 색상 바꾸기
+                marker[prevPos].setOptions({
+                  strokeColor: '#FF0000',
+                  fillColor: '#FF0000',
+                });
+                prevPos = -1;
+
+              }
+              else {
+                //지금 클릭한 마크 띄우기
+                infowindow[i].open(map, marker[i]);
+                //console.log(i);
+                drawStuff(markerJson[i]);
+                prevPos = i;
+
+                //지금 클릭한 마크 색상 바꾸기
+                marker[i].setOptions({
+                  strokeColor: '#000000',
+                  fillColor: '#000000',
+                });
+              }
 
             }
             else {
-              //지금 클릭한 마크 띄우기
               infowindow[i].open(map, marker[i]);
-              console.log(i);
+              //클릭한 마커에 해당하는 차트 생성위해서 인덱스 넘김
+              //console.log(i);
               drawStuff(markerJson[i]);
-              prevPos = i;
+              //console.log(\"2번\");
 
               //지금 클릭한 마크 색상 바꾸기
               marker[i].setOptions({
                 strokeColor: '#000000',
                 fillColor: '#000000',
               });
-            }
 
+              //이전에 클릭된 마크 지우기
+              infowindow[prevPos2].close(map, marker[prevPos2]);
+
+              //이전에 클릭된 마크 색상 바꾸기
+              marker[prevPos2].setOptions({
+                strokeColor: '#FF0000',
+                fillColor: '#FF0000',
+              });
+              prevPos2 = i;
+            }
           });
         }
       }
@@ -289,7 +321,8 @@ class __TwigTemplate_aafe76df600f41b7c23d367674c9805b29dd99492718c82eb02d24f8162
           ['CO', sensormark.CO, 0],
           ['NO2', sensormark.NO2, 0],
           ['SO2', sensormark.SO2, 0],
-          ['temperature', sensormark.Temperature, 0],
+          ['Temperature', sensormark.Temperature, 0],
+          ['Humidity', sensormark.humidity, 0],
           ['CAI PM2.5', 0, sensormark.AQ_PM2_5],
           ['CAI O3', 0, sensormark.AQ_O3],
           ['CAI CO', 0, sensormark.AQ_CO],
@@ -744,12 +777,14 @@ class __TwigTemplate_aafe76df600f41b7c23d367674c9805b29dd99492718c82eb02d24f8162
 /*     };*/
 /*     // Instantiate markers in the background and pass it back to the json object*/
 /*     function createMarkers(markerJson) {*/
-/*       */
+/*       {*/
+/*         // console.log(markerJson);*/
 /*         var length = Object.keys(markerJson).length;*/
 /* */
 /*         var contentString = [];*/
 /*         var infowindow = [];*/
 /*         var prevPos = -1;*/
+/*         var prevPos2 = 0;*/
 /* */
 /* */
 /*         for (let i = 0; i < length; i++) {*/
@@ -802,6 +837,11 @@ class __TwigTemplate_aafe76df600f41b7c23d367674c9805b29dd99492718c82eb02d24f8162
 /*             '<th> Temperature </th>' +*/
 /*             '<th>' + sensormark['Temperature'] + '</th>' +*/
 /*             '<th>-</th>' +*/
+/*             '<tr>' +*/
+/*             '<th> Humidity </th>' +*/
+/*             '<th>' + sensormark['humidity'] + '</th>' +*/
+/*             '<th>-</th>' +*/
+/*             '</tr>' +*/
 /*             '</tr>' +*/
 /*             '</tbody>' +*/
 /*             '</table>' +*/
@@ -830,32 +870,57 @@ class __TwigTemplate_aafe76df600f41b7c23d367674c9805b29dd99492718c82eb02d24f8162
 /* */
 /* */
 /*           marker[i].addListener('click', function () {*/
-/*             if (prevPos == i) {*/
-/*               //이전에 클릭된 마크 지우기*/
-/*               infowindow[prevPos].close(map, marker[prevPos]);*/
+/*             if (length == 1) {*/
+/*               if (prevPos == i) {*/
+/*                 //이전에 클릭된 마크 지우기*/
+/*                 infowindow[prevPos].close(map, marker[prevPos]);*/
 /* */
-/*               //이전에 클릭된 마크 색상 바꾸기*/
-/*               marker[prevPos].setOptions({*/
-/*                 strokeColor: '#FF0000',*/
-/*                 fillColor: '#FF0000',*/
-/*               });*/
-/*               prevPos = -1;*/
+/*                 //이전에 클릭된 마크 색상 바꾸기*/
+/*                 marker[prevPos].setOptions({*/
+/*                   strokeColor: '#FF0000',*/
+/*                   fillColor: '#FF0000',*/
+/*                 });*/
+/*                 prevPos = -1;*/
+/* */
+/*               }*/
+/*               else {*/
+/*                 //지금 클릭한 마크 띄우기*/
+/*                 infowindow[i].open(map, marker[i]);*/
+/*                 //console.log(i);*/
+/*                 drawStuff(markerJson[i]);*/
+/*                 prevPos = i;*/
+/* */
+/*                 //지금 클릭한 마크 색상 바꾸기*/
+/*                 marker[i].setOptions({*/
+/*                   strokeColor: '#000000',*/
+/*                   fillColor: '#000000',*/
+/*                 });*/
+/*               }*/
 /* */
 /*             }*/
 /*             else {*/
-/*               //지금 클릭한 마크 띄우기*/
 /*               infowindow[i].open(map, marker[i]);*/
-/*               console.log(i);*/
+/*               //클릭한 마커에 해당하는 차트 생성위해서 인덱스 넘김*/
+/*               //console.log(i);*/
 /*               drawStuff(markerJson[i]);*/
-/*               prevPos = i;*/
+/*               //console.log("2번");*/
 /* */
 /*               //지금 클릭한 마크 색상 바꾸기*/
 /*               marker[i].setOptions({*/
 /*                 strokeColor: '#000000',*/
 /*                 fillColor: '#000000',*/
 /*               });*/
-/*             }*/
 /* */
+/*               //이전에 클릭된 마크 지우기*/
+/*               infowindow[prevPos2].close(map, marker[prevPos2]);*/
+/* */
+/*               //이전에 클릭된 마크 색상 바꾸기*/
+/*               marker[prevPos2].setOptions({*/
+/*                 strokeColor: '#FF0000',*/
+/*                 fillColor: '#FF0000',*/
+/*               });*/
+/*               prevPos2 = i;*/
+/*             }*/
 /*           });*/
 /*         }*/
 /*       }*/
@@ -939,7 +1004,8 @@ class __TwigTemplate_aafe76df600f41b7c23d367674c9805b29dd99492718c82eb02d24f8162
 /*           ['CO', sensormark.CO, 0],*/
 /*           ['NO2', sensormark.NO2, 0],*/
 /*           ['SO2', sensormark.SO2, 0],*/
-/*           ['temperature', sensormark.Temperature, 0],*/
+/*           ['Temperature', sensormark.Temperature, 0],*/
+/*           ['Humidity', sensormark.humidity, 0],*/
 /*           ['CAI PM2.5', 0, sensormark.AQ_PM2_5],*/
 /*           ['CAI O3', 0, sensormark.AQ_O3],*/
 /*           ['CAI CO', 0, sensormark.AQ_CO],*/

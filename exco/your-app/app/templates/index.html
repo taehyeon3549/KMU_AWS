@@ -19,26 +19,23 @@
 
   <!-- Custom styles for this template-->
   <link href="css/sb-admin.css" rel="stylesheet">
-
-  
-<script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
-
-<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-
   <script>
 
     var today = new Date();
     today.setDate(today.getDate());
     today = today.toISOString().slice(0, 10);
 
-    var today_add = new Date()
-    today_add.setDate(today_add.getDate() + 1);
-    today_add = today_add.toISOString().slice(0, 10);
+    var tomorrow = new Date()
+    tomorrow.setDate(tomorrow.getDate() + 1);
+    tomorrow = tomorrow.toISOString().slice(0, 10);
 
     sessionStorage['today'] = today;
-    sessionStorage['today_add'] = today_add;
+    sessionStorage['tomorrow'] = tomorrow;
 
   </script>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+  <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
   <script type="text/javascript">
     // Set a global variable for map
     var map;
@@ -49,60 +46,49 @@
     function initMap() {
       var options = {
         //Center : QI(Calit2)
-        center: { lat: 35.866, lng: 128.5986 }, // 대구
-      //  center: { lat: 32.8826247, lng: -117.2367698 },
+        center: { lat: 32.8826247, lng: -117.2367698 },
         zoom: 15,
         mapTypeId: google.maps.MapTypeId.TERRAIN
       }
+
+
       map = new google.maps.Map(document.getElementById("map_canvas"), options);
-     
-    //  var json = JSON.stringify({ usn : usn , date : today, tomorrow : tomorrow});
-
-      $.ajax({
-        type: 'POST',
-        url :"http://13.125.112.70/location", 
-        dataType : "json",
-        data: {
-           "usn" : usn,
-           "date" : today,
-           "tomorrow" : today_add 
-        },
-        success : function (data){
-          alert(data );
-        },
-        error : function (data){
-          alert("실패" +data);
-        }
-        
-      }).done(function (data) {
-        createMarkers(data);
-       // console.log(data);
-        console.log("조회");
-      }).fail((data) => {
-        console.log(data +"실패");
-      });
-
-    }
 
       // Create markers into DOM
-     
+      var json = null;
+
+      $.ajax({
+        method: "POST",
+        url: "/location",
+        data: {
+          usn: usn,
+          date: today,
+          tomorrow: tomorrow
+        }
+      }).done(function (msg) {
+        createMarkers(msg);
+        // drawStuff(msg);
+        console.log(msg);
+      }).fail((msg) => {
+        console.log(msg);
+      });
+      //setTimeout(initMap,1000);
+    };
     // Instantiate markers in the background and pass it back to the json object
     function createMarkers(markerJson) {
       {
-       // console.log("ddddd");
-        
+        // console.log(markerJson);
         var length = Object.keys(markerJson).length;
 
         var contentString = [];
         var infowindow = [];
         var prevPos = -1;
-        var prevPos2 = 1;
+        var prevPos2 = 0;
 
 
-        for (let i = 1; i <= length; i++) {
+        for (let i = 0; i < length; i++) {
           var sensormark = markerJson[i];
-          console.log("함수안" + markerJson[i]);
-          console.log(length);
+
           contentString[i] =
             '<div id="content">' +
             '<div id="showupAQI">' +
@@ -241,8 +227,7 @@
 
     //모든 마커 삭제 
     function deleteMarkers() {
-      for (var i = 1; i < marker.length; i++) {
-        console.log(marker.length);
+      for (var i = 0; i < marker.length; i++) {
         marker[i].setMap(null);
       }
 
@@ -263,6 +248,49 @@
         console.log("차트 데이터 없음");
         document.getElementById("dual_x_div").innerHTML = "지도에 마커를 클릭해 주세요.";
 
+        /*
+                var data = new google.visualization.arrayToDataTable([
+                  ['Air Elements', 'Row Data', 'CAI'],
+                  ['PM2.5', 0, 0],
+                  ['O3', 0, 0],
+                  ['CO', 0, 0],
+                  ['NO2', 0, 0],
+                  ['SO2', 0, 0],
+                  ['temperature', 0, 0],
+                  ['CAI PM2.5', 0, 0],
+                  ['CAI O3', 0, 0],
+                  ['CAI CO', 0, 0],
+                  ['CAI NO2', 0, 0],
+                  ['CAI SO2', 0, 0]
+                ]);
+        
+                var options = {
+                  //width: 800,
+                  chart: {
+                    title: 'Historical data Air Quality',
+                    subtitle: '현 날짜에 해당하는 데이터 없어서 차트 못그림. 2019-08-11 ~ 2019-08-13 조회 후 맵에 마커 클릭 하면 나옴'
+                  },
+                  bars: 'horizontal', // Required for Material Bar Charts.
+                  series: {
+                    0: { axis: 'distance' }, // Bind series 0 to an axis named 'distance'.
+                    1: { axis: 'brightness' } // Bind series 1 to an axis named 'brightness'.
+                  },
+                  axes: {
+                    x: {
+                      distance: { label: 'parsecs' }, // Bottom x-axis.
+                      brightness: { side: 'top', label: 'apparent magnitude' } // Top x-axis.
+                    }
+                  },
+                  animation:{
+                    startup: true,
+                    duration : 1000,
+                    easing: 'lineraz'
+                  }
+                };
+        
+        
+                var chart = new google.charts.Bar(document.getElementById('dual_x_div'));
+                chart.draw(data, options);*/
       }
       else {
         var sensormark = markerJson;
@@ -425,9 +453,9 @@
         </div>
         <script>
           var now = new Date();
-        
+          // document.getElementById('start_date').valueAsDate = (now.getFullYear()) + "-" + now.getMonth() + "-1" ;
           document.getElementById('end_date').valueAsDate = new Date();
-
+         // console.log(end_date);
         </script>
         <script type="text/javascript">
 
@@ -435,37 +463,33 @@
             deleteMarkers();
             var start_date = new Date($('input[name = start_date]').val());
             var end_date = new Date($('input[name = end_date]').val());
-            start_date = start_date.toISOString().slice(0, 10);
             end_date.setDate(end_date.getDate() + 1);
             end_date = end_date.toISOString().slice(0, 10);
+
+            start_date = start_date.toISOString().slice(0, 10);
 
             console.log(start_date);
             console.log(end_date);
 
+            //alert(end_date);
 
             $.ajax({
               method: "POST",
               url: "/location",
-              dataType : 'json',
-              data: { 
-                "usn" : usn,
-                "date" : start_date,
-                "tomorrow" : end_date
-              },
-              success : function(data){
-                alert(data +"성공");
-                console.log(data);
-              },
-              error : function(data){
-                alert(data);
+              data: {
+                usn: usn,
+                date: start_date,
+                tomorrow: end_date
+                /*date: "2019-08-11",
+                tomorrow: "2019-08-13"*/
               }
-            }).done(function (data) {
-              createMarkers(data);
+            }).done(function (msg) {
+              createMarkers(msg);
               //drawStuff(msg);
-              console.log(data);
+              console.log(msg);
               console.log("변경");
-            }).fail((data) => {
-              console.log(data);
+            }).fail((msg) => {
+              console.log(msg);
             });
 
 

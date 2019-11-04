@@ -48,7 +48,8 @@ class __TwigTemplate_989ee3a49e37c0d41887f039c1fb82da98460089bc51ff9a29acba9bc0b
     function initMap() {
       var options = {
         //Center : QI(Calit2)
-        center: { lat: 35.866, lng: 128.5986 },
+        center: { lat: 35.866, lng: 128.5986 }, // 대구
+      // center: { lat: 32.8826247, lng: -117.2367698 },  // ucsd
         zoom: 15,
         mapTypeId: google.maps.MapTypeId.TERRAIN
       }
@@ -62,29 +63,11 @@ class __TwigTemplate_989ee3a49e37c0d41887f039c1fb82da98460089bc51ff9a29acba9bc0b
     function map_test() {
       // Create markers into DOM
       var json = null;
-      /*\$.ajax({
-        'async': false,
-        'global': false,
-        //롱디 레티 들고오는 링크
-        'url': \"/getGPS\",
-        'dataType': \"json\",
-        'success': function (data) {
-          createMarkers(data);
-        }
-      });*/
-
-      //기존
-      /*\$.ajax({
-        method: \"GET\",
-        url : \"/getGPS\"
-      }).done(function(data){
-        createMarkers(data);
-      });*/
 
       \$.ajax({
         method: \"GET\",
-        url: \"http://somnium.me:8089/aqi_simulator_v_1_0\", //준희형
-    //  url :\"http://13.125.112.70/Realdata\", // 태현
+         url: \"http://somnium.me:8089/aqi_simulator_v_1_0\", //준희형
+     // url :\"http://13.125.112.70/Realdata\", // 태현
         dataType: \"json\"
       }).done(function (data) {
         createMarkersTest(data);
@@ -389,7 +372,7 @@ class __TwigTemplate_989ee3a49e37c0d41887f039c1fb82da98460089bc51ff9a29acba9bc0b
           \$.ajax({
             method: \"GET\", 
             url: \"http://somnium.me:8089/aqi_simulator_v_1_0\",  //준희형
-        //   url :\"http://13.125.112.70/Realdata\", // 태현
+         // url :\"http://13.125.112.70/Realdata\", // 태현
             dataType: \"json\"
           }).done(function (data) {
             aqi_chart(data);
@@ -759,7 +742,8 @@ class __TwigTemplate_989ee3a49e37c0d41887f039c1fb82da98460089bc51ff9a29acba9bc0b
 /*     function initMap() {*/
 /*       var options = {*/
 /*         //Center : QI(Calit2)*/
-/*         center: { lat: 35.866, lng: 128.5986 },*/
+/*         center: { lat: 35.866, lng: 128.5986 }, // 대구*/
+/*       // center: { lat: 32.8826247, lng: -117.2367698 },  // ucsd*/
 /*         zoom: 15,*/
 /*         mapTypeId: google.maps.MapTypeId.TERRAIN*/
 /*       }*/
@@ -773,29 +757,11 @@ class __TwigTemplate_989ee3a49e37c0d41887f039c1fb82da98460089bc51ff9a29acba9bc0b
 /*     function map_test() {*/
 /*       // Create markers into DOM*/
 /*       var json = null;*/
-/*       /*$.ajax({*/
-/*         'async': false,*/
-/*         'global': false,*/
-/*         //롱디 레티 들고오는 링크*/
-/*         'url': "/getGPS",*/
-/*         'dataType': "json",*/
-/*         'success': function (data) {*/
-/*           createMarkers(data);*/
-/*         }*/
-/*       });*//* */
-/* */
-/*       //기존*/
-/*       /*$.ajax({*/
-/*         method: "GET",*/
-/*         url : "/getGPS"*/
-/*       }).done(function(data){*/
-/*         createMarkers(data);*/
-/*       });*//* */
 /* */
 /*       $.ajax({*/
 /*         method: "GET",*/
-/*         url: "http://somnium.me:8089/aqi_simulator_v_1_0", //준희형*/
-/*     //  url :"http://13.125.112.70/Realdata", // 태현*/
+/*          url: "http://somnium.me:8089/aqi_simulator_v_1_0", //준희형*/
+/*      // url :"http://13.125.112.70/Realdata", // 태현*/
 /*         dataType: "json"*/
 /*       }).done(function (data) {*/
 /*         createMarkersTest(data);*/
@@ -1100,7 +1066,7 @@ class __TwigTemplate_989ee3a49e37c0d41887f039c1fb82da98460089bc51ff9a29acba9bc0b
 /*           $.ajax({*/
 /*             method: "GET", */
 /*             url: "http://somnium.me:8089/aqi_simulator_v_1_0",  //준희형*/
-/*         //   url :"http://13.125.112.70/Realdata", // 태현*/
+/*          // url :"http://13.125.112.70/Realdata", // 태현*/
 /*             dataType: "json"*/
 /*           }).done(function (data) {*/
 /*             aqi_chart(data);*/
